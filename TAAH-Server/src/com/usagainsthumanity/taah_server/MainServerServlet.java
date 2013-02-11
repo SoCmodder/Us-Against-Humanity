@@ -13,6 +13,7 @@ public class MainServerServlet extends Application{
 	public synchronized Restlet createInboundRoot() {
 	// Create a router Restlet that routes each call to a new Resource
 	Router router = new Router(getContext());
+	router.attach("/apikey", APIJSONResource.class);
 	router.attach("/user", UserJSONResource.class);
 	router.attach("/user/{userId}", UserDataJSONResource.class);
 	router.attach("/game", GameJSONResource.class);

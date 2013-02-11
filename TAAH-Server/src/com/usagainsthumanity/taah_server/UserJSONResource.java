@@ -8,10 +8,12 @@ import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 
+import com.google.appengine.api.datastore.DatastoreService;
+
 public class UserJSONResource extends ServerResource{
 
 	@Get("json")
-	public String handleGet() {
+	public String getEmail() {
 		try{
 			//TODO All of the things
 			String email = getQuery().getValues("email");
