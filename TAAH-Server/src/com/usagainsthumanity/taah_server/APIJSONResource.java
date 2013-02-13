@@ -1,6 +1,8 @@
 package com.usagainsthumanity.taah_server;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,6 +16,13 @@ import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
+import com.google.appengine.api.urlfetch.HTTPHeader;
+import com.google.appengine.api.urlfetch.HTTPMethod;
+import com.google.appengine.api.urlfetch.HTTPRequest;
+import com.google.appengine.api.urlfetch.HTTPResponse;
+import com.google.appengine.api.urlfetch.URLFetchService;
+import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
+import com.usagainsthumanity.taah_model.UserInfo;
 import com.usagainsthumanity.taah_model.UserKey;
 
 public class APIJSONResource extends ServerResource {
@@ -48,8 +57,32 @@ public class APIJSONResource extends ServerResource {
 		return null;
 	}
 
-	private void createUserInfo(UserKey userKey) {
-		// TODO Auto-generated method stub
-		
+	private UserInfo createUserInfo(UserKey userKey) {
+		URL url;
+		try {
+			url = new URL("https://www.googleapis.com/oauth2/v2/userinfo");
+			HTTPRequest req = new HTTPRequest( url, HTTPMethod.GET);
+			HTTPHeader head = new HTTPHeader("Authorization", "OAuth " + userKey.getToken());
+			req.setHeader(head);
+			 URLFetchService fetcher = URLFetchServiceFactory.getURLFetchService();
+			HTTPResponse hr = fetcher.fetch(req);
+			if(hr.getResponseCode() == 200){
+				String jsonString = new String(hr.getContent());
+				System.out.println(jsonString);
+				JSONObject json = new JSONObject(jsonString);
+				return new UserInfo(userKey.getUserID(), json.getString("given_name"), json.getString("family_name"), json.getString("picture"), json.getString("email"));				
+				
+			}
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

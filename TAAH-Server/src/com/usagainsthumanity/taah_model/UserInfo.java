@@ -7,10 +7,11 @@ import javax.persistence.Id;
 public class UserInfo {
 	
 	@Id
-	private Integer userID;
+	private Long userID;
 	private String firstName;
 	private String lastName;
 	private String profilePicture;
+	private String email;
 	
 	
 	/**
@@ -18,20 +19,22 @@ public class UserInfo {
 	 * @param firstName
 	 * @param lastName
 	 * @param profilePicture
+	 * @param email 
 	 */
-	public UserInfo(Integer userID, String firstName, String lastName,
-			String profilePicture) {
+	public UserInfo(Long userID, String firstName, String lastName,
+			String profilePicture, String email) {
 		this.userID = userID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.profilePicture = profilePicture;
+		this.email = email;
 	}
 
 
 	/**
 	 * @return the userID
 	 */
-	public Integer getUserID() {
+	public Long getUserID() {
 		return userID;
 	}
 
@@ -39,7 +42,7 @@ public class UserInfo {
 	/**
 	 * @param userID the userID to set
 	 */
-	public void setUserID(Integer userID) {
+	public void setUserID(Long userID) {
 		this.userID = userID;
 	}
 
@@ -89,6 +92,16 @@ public class UserInfo {
 	 */
 	public void setProfilePicture(String profilePicture) {
 		this.profilePicture = profilePicture;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 
