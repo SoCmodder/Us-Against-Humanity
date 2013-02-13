@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class GamePlayers {
+public class GameUsers {
 
 	@Id
 	private Integer gameID;
@@ -13,7 +13,7 @@ public class GamePlayers {
 	 * @param gameID
 	 * @param userID
 	 */
-	public GamePlayers(Integer gameID, Integer userID) {
+	public GameUsers(Integer gameID, Integer userID) {
 		this.gameID = gameID;
 		this.userID = userID;
 	}

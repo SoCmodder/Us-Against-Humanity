@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.EntityManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.ext.json.JsonRepresentation;
@@ -12,6 +14,8 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
+
+import com.usagainsthumanity.taah_model.Game;
 
 public class GameJSONResource extends ServerResource {
 	
@@ -79,8 +83,12 @@ public class GameJSONResource extends ServerResource {
 		JsonRepresentation tempJSON = new JsonRepresentation(entity);
 		JSONObject json = tempJSON.getJsonObject();
 		if(json.has("userId") && json.has("slots") && json.has("private") && json.has("CardsToWin")){
+			Game game = new Game(json.getLong("userId"), json.getLong("slots"), json.getLong("CardsToWin"), json.getBoolean("private"));
+			EntityManager em = EMFService.get().createEntityManager();
+			em.persist(game);
+			em.close();			
 			JSONObject returnable = new JSONObject();
-			json.put("GameId", new Random().nextInt());
+			json.put("GameId", game.getGameID());
 			JsonRepresentation jsonRep = new JsonRepresentation(json);
 			return jsonRep.getText();
 		}else{

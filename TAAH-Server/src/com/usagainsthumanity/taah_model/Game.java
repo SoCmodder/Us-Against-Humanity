@@ -10,15 +10,15 @@ public class Game {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer gameID;
-	private Integer hostID;
-	private Integer Slots;
-	private Integer PointsToWin;
+	private Long gameID;
+	private Long hostID;
+	private Long Slots;
+	private Long PointsToWin;
 	private Boolean Private;
-	private Integer State;
-	private Integer UserTurn;
-	private Integer Winner;
-	private Integer CurrentBlack;
+	private Long State;
+	private Long UserTurn;
+	private Long Winner;
+	private Long CurrentBlack;
 	/**
 	 * @param hostID
 	 * @param slots
@@ -29,52 +29,47 @@ public class Game {
 	 * @param winner
 	 * @param currentBlack
 	 */
-	public Game(Integer hostID, Integer slots, Integer pointsToWin,
-			Boolean private1, Integer state, Integer userTurn, Integer winner,
-			Integer currentBlack) {
+	public Game(Long hostID, Long slots, Long pointsToWin,
+			Boolean private1) {
 		this.hostID = hostID;
 		Slots = slots;
 		PointsToWin = pointsToWin;
 		Private = private1;
-		State = state;
-		UserTurn = userTurn;
-		Winner = winner;
-		CurrentBlack = currentBlack;
 	}
 	/**
 	 * @return the hostID
 	 */
-	public Integer getHostID() {
+	public Long getHostID() {
 		return hostID;
 	}
 	/**
 	 * @param hostID the hostID to set
 	 */
-	public void setHostID(Integer hostID) {
+	public void setHostID(Long hostID) {
 		this.hostID = hostID;
 	}
 	/**
 	 * @return the slots
 	 */
-	public Integer getSlots() {
+	public Long getSlots() {
 		return Slots;
 	}
 	/**
 	 * @param slots the slots to set
 	 */
-	public void setSlots(Integer slots) {
+	public void setSlots(Long slots) {
 		Slots = slots;
 	}
 	/**
 	 * @return the pointsToWin
 	 */
-	public Integer getPointsToWin() {
+	public Long getPointsToWin() {
 		return PointsToWin;
 	}
 	/**
 	 * @param pointsToWin the pointsToWin to set
 	 */
-	public void setPointsToWin(Integer pointsToWin) {
+	public void setPointsToWin(Long pointsToWin) {
 		PointsToWin = pointsToWin;
 	}
 	/**
@@ -92,55 +87,55 @@ public class Game {
 	/**
 	 * @return the state
 	 */
-	public Integer getState() {
+	public Long getState() {
 		return State;
 	}
 	/**
 	 * @param state the state to set
 	 */
-	public void setState(Integer state) {
+	public void setState(Long state) {
 		State = state;
 	}
 	/**
 	 * @return the userTurn
 	 */
-	public Integer getUserTurn() {
+	public Long getUserTurn() {
 		return UserTurn;
 	}
 	/**
 	 * @param userTurn the userTurn to set
 	 */
-	public void setUserTurn(Integer userTurn) {
+	public void setUserTurn(Long userTurn) {
 		UserTurn = userTurn;
 	}
 	/**
 	 * @return the winner
 	 */
-	public Integer getWinner() {
+	public Long getWinner() {
 		return Winner;
 	}
 	/**
 	 * @param winner the winner to set
 	 */
-	public void setWinner(Integer winner) {
+	public void setWinner(Long winner) {
 		Winner = winner;
 	}
 	/**
 	 * @return the currentBlack
 	 */
-	public Integer getCurrentBlack() {
+	public Long getCurrentBlack() {
 		return CurrentBlack;
 	}
 	/**
 	 * @param currentBlack the currentBlack to set
 	 */
-	public void setCurrentBlack(Integer currentBlack) {
+	public void setCurrentBlack(Long currentBlack) {
 		CurrentBlack = currentBlack;
 	}
 	/**
 	 * @return the gameID
 	 */
-	public Integer getGameID() {
+	public Long getGameID() {
 		return gameID;
 	}
 	
