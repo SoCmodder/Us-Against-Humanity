@@ -16,6 +16,7 @@ public class UserDataJSONResource extends ServerResource {
 		try{
 			//TODO All of the things
 			String userID = (String)this.getRequestAttributes().get("userId");
+			
 			JSONObject json = new JSONObject();
 			json.put("name", userID); 
 
