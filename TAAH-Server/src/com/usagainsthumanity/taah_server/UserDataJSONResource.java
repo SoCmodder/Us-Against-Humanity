@@ -24,7 +24,7 @@ public class UserDataJSONResource extends ServerResource {
 			//TODO All of the things
 			String userID = (String)this.getRequestAttributes().get("userId");
 			EntityManager em = EMFService.get().createEntityManager();
-			Query q = em.createQuery("select u from UserInfo u where e.userID = :userID");
+			Query q = em.createQuery("select u from UserInfo u where u.userID = :userID");
 			q.setParameter("userID", userID);
 			List<UserInfo> users = q.getResultList();
 			if(users.size() == 1){
