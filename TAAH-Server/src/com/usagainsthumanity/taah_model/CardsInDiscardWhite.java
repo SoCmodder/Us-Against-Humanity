@@ -17,7 +17,11 @@ public class CardsInDiscardWhite {
 		this.gameID = gameID;
 		this.cardID = cardID;
 	}
-	/**
+
+    public CardsInDiscardWhite() {
+    }
+
+    /**
 	 * @return the gameID
 	 */
 	public Integer getGameID() {

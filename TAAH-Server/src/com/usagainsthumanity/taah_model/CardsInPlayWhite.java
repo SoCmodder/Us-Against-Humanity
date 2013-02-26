@@ -20,7 +20,11 @@ public class CardsInPlayWhite {
 		this.userID = userID;
 		this.cardID = cardID;
 	}
-	/**
+
+    public CardsInPlayWhite() {
+    }
+
+    /**
 	 * @return the gameID
 	 */
 	public Integer getGameID() {

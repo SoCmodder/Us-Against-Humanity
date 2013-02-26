@@ -30,8 +30,11 @@ public class UserInfo {
 		this.email = email;
 	}
 
+    public UserInfo() {
+    }
 
-	/**
+
+    /**
 	 * @return the userID
 	 */
 	public Long getUserID() {

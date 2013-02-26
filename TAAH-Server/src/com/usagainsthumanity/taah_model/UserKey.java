@@ -41,8 +41,11 @@ public class UserKey {
 		APIKey = Base64.encodeBase64URLSafeString(data);
 		
 	}
-	
-	public String getToken() {
+
+    public UserKey() {
+    }
+
+    public String getToken() {
 		return Token;
 	}
 

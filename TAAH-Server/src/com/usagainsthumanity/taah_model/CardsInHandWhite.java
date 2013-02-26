@@ -22,7 +22,10 @@ public class CardsInHandWhite {
 		this.cardID = cardID;
 	}
 
-	/**
+    public CardsInHandWhite() {
+    }
+
+    /**
 	 * @return the gameID
 	 */
 	public Integer getGameID() {

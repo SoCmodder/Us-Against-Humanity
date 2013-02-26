@@ -17,7 +17,11 @@ public class GameInvite {
 		this.gameID = gameID;
 		this.userID = userID;
 	}
-	/**
+
+    public GameInvite() {
+    }
+
+    /**
 	 * @return the gameID
 	 */
 	public Integer getGameID() {

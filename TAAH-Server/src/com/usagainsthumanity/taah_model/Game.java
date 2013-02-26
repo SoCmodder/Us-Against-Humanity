@@ -19,16 +19,11 @@ public class Game {
 	private Long UserTurn;
 	private Long Winner;
 	private Long CurrentBlack;
-	/**
-	 * @param hostID
-	 * @param slots
-	 * @param pointsToWin
-	 * @param private1
-	 * @param state
-	 * @param userTurn
-	 * @param winner
-	 * @param currentBlack
-	 */
+
+    public Game(){
+
+    }
+
 	public Game(Long hostID, Long slots, Long pointsToWin,
 			Boolean private1) {
 		this.hostID = hostID;

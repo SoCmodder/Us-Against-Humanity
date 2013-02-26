@@ -17,7 +17,11 @@ public class CardBlack {
 		this.cardID = cardID;
 		this.cardText = cardText;
 	}
-	/**
+
+    public CardBlack() {
+    }
+
+    /**
 	 * @return the cardID
 	 */
 	public Integer getCardID() {

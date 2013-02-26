@@ -9,6 +9,10 @@ public class CardWhite {
 	@Id
 	private Integer cardID;
 	private String Description;
+
+    public CardWhite(){
+
+    }
 	
 	/**
 	 * @param cardID

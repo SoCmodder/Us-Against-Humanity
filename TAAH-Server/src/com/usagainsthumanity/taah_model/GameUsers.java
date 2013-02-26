@@ -17,8 +17,11 @@ public class GameUsers {
 		this.gameID = gameID;
 		this.userID = userID;
 	}
-	
-	/**
+
+    public GameUsers() {
+    }
+
+    /**
 	 * @return the gameID
 	 */
 	public Integer getGameID() {

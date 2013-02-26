@@ -26,7 +26,10 @@ public class GameLast {
 		this.WinningBlack = WinningBlack;
 	}
 
-	/**
+    public GameLast() {
+    }
+
+    /**
 	 * @return the gameID
 	 */
 	public Long getGameID() {

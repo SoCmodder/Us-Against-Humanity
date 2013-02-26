@@ -20,7 +20,11 @@ public class CardsBlackWon {
 		this.userID = userID;
 		this.cardID = cardID;
 	}
-	/**
+
+    public CardsBlackWon() {
+    }
+
+    /**
 	 * @return the gameID
 	 */
 	public Integer getGameID() {
