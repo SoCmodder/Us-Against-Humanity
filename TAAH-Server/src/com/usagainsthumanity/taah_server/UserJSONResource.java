@@ -23,7 +23,7 @@ public class UserJSONResource extends ServerResource{
 			//TODO All of the things
 			String email = getQuery().getValues("email");
 			EntityManager em = EMFService.get().createEntityManager();
-			Query q = em.createQuery("select u from UserInfo u where e.email = :email");
+			Query q = em.createQuery("select u from UserInfo u where u.email = :email");
 			q.setParameter("email", email);
 			List<UserInfo> users = q.getResultList();
 			if(users.size() == 1){
