@@ -29,7 +29,7 @@ public class GameUserJSONResource extends ServerResource {
 			Query q = em.createQuery("select g from GameUsers g where g.gameID = :gameID");
 			q.setParameter("gameID", gameID);
 			List<GameUsers> gameUsers = q.getResultList();
-			List<Integer> Users = new LinkedList<Integer>();
+			List<Long> Users = new LinkedList<Long>();
 			for(GameUsers gameUserList : gameUsers) {
 				Users.add(gameUserList.getUserID());
 			}
