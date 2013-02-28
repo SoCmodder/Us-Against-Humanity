@@ -31,23 +31,22 @@ public class GameDataJSONResource extends ServerResource {
 			List<GameUsers> gameUsers = q.getResultList();
 			List<Long> Scores = new LinkedList<Long>();
 			List<Long> IDS = new LinkedList<Long>();
+			List<Boolean> HasPlayed = new LinkedList<Boolean>();
 			for(GameUsers resultList : gameUsers) {
-				// Loops through all gameUsers and gets their userIDs and scores
+				// Loops through all gameUsers and gets their userIDs, scores, and whether they have played
 				IDS.add(resultList.getUserID());
 				Scores.add(resultList.getScore());
+				HasPlayed.add(resultList.getHasPlayed());
 			}
-			// Not sure what this is supposed to be
-			List<Long> HasPlayed = new LinkedList<Long>();
-			//HasPlayed.add(1);
 			json.put("Scores", Scores);
 			json.put("IDs", IDS);
+			json.put("HasPlayed", HasPlayed);
 			q = em.createQuery("select g from Game g where g.gameID = :gameID");
 			q.setParameter("gameID", gameID);
 			List<Game> game = new LinkedList<Game>();
 			game = q.getResultList();
 			json.put("CardsToWin", game.get(0).getPointsToWin());
 			json.put("PlayerTurn", game.get(0).getUserTurn());
-			json.put("HasPlayed", HasPlayed);
 			JsonRepresentation jsonRep = new JsonRepresentation(json);
 			return jsonRep.getText();
 			
@@ -58,12 +57,29 @@ public class GameDataJSONResource extends ServerResource {
 	}
 	
 	@Delete
-	public void deleteGame(){
-		Integer gameID = Integer.parseInt((String)this.getRequestAttributes().get("gameId"));
-		if(gameID == 1337){
-			//Example of game already started 
-			throw new ResourceException(409);
-		}else if(gameID == 80085){
+	public void deleteGame() {
+		Long gameID = Long.parseLong((String)this.getRequestAttributes().get("gameID"));
+		Long userID = Long.parseLong((String)this.getRequestAttributes().get("userID"));
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select g from Game g where g.gameID = :gameID");
+		q.setParameter("gameID", gameID);
+		List<Game> game = new LinkedList<Game>();
+		game = q.getResultList(); // Should only be one of these
+		if(game.get(0).getHostID() == userID) {
+			if(game.get(0).getState() == 0) { // Delete game and gameusers
+				q = em.createQuery("select g from GameUsers g where g.gameID = :gameID");
+				q.setParameter("gameID",gameID);
+				List<GameUsers> gameUsers = new LinkedList<GameUsers>();
+				for(GameUsers resultList : gameUsers) { // Remove all users from the game
+					em.remove(resultList);
+				}
+				em.remove(game.get(0)); // Remove the game
+			}
+			else {
+				//Example of game already started
+				throw new ResourceException(409);
+			}
+		}else {
 			//Example of user is not the host
 			throw new ResourceException(401);
 		}
