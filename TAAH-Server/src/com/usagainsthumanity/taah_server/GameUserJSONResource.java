@@ -16,12 +16,13 @@ import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import com.usagainsthumanity.taah_model.GameUsers;
+import com.usagainsthumanity.taah_model.Game;
 
 public class GameUserJSONResource extends ServerResource {
 
 	@Get("json")
 	public String getUsers(){
-		Integer gameID = Integer.parseInt((String)this.getRequestAttributes().get("gameID"));
+		Long gameID = Long.parseLong((String)this.getRequestAttributes().get("gameID"));
 		try{
 			// Need to check if they game doesn't exist and return it still
 			JSONObject json = new JSONObject();
@@ -44,22 +45,40 @@ public class GameUserJSONResource extends ServerResource {
 
 	@Put
 	public void putUser(Representation entity) throws IOException{
-		// Didn't implement this because I'm not sure how to add users to the game
-		Integer gameID = Integer.parseInt((String)this.getRequestAttributes().get("gameId"));
+		Long gameID = Long.parseLong((String)this.getRequestAttributes().get("gameID"));
+		Long userID = Long.parseLong((String)this.getRequestAttributes().get("userID"));
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q1 = em.createQuery("select g from Game g where g.gameID = :gameID");
+		q1.setParameter("gameID",gameID);
+		List<Game> game = new LinkedList<Game>();
+		game = q1.getResultList();
+		Query q2 = em.createQuery("select g from GameUsers g where g.gameID = :gameID");
+		q2.setParameter("gameID",gameID);
+		List<GameUsers> gameUsers = new LinkedList<GameUsers>();
+		gameUsers = q2.getResultList();
 		try{
-			System.out.println(entity.getText());
+			/* Not sure what these are for, Add them back if you know their significance.
+			System.out.println(entity.getText()); 
 			JsonRepresentation tempJSON = new JsonRepresentation(entity);
-			JSONObject json = tempJSON.getJsonObject();
-			if(json.getInt("UserID") == 1111){
+			JSONObject json = tempJSON.getJsonObject(); */
+			if(game.get(0).getSlots() == gameUsers.size()) {
 				throw new ResourceException(402, "Game is full", "Game is full", "www.google.com");
-			}else if(json.getInt("UserID") == 2222){
+			}else if(game.get(0).getState() != 0) {
 				throw new ResourceException(401);
-			}else if(json.getInt("UserID") == 3333){
+			}
+			Boolean inGame = Boolean.FALSE;
+			for(GameUsers resultList : gameUsers) {
+				if(resultList.getUserID() == userID)
+					inGame = Boolean.TRUE;
+			}
+			if(inGame) {
 				throw new ResourceException(409);
+			}else {
+				GameUsers newUser = new GameUsers(gameID, userID, new Long(0), Boolean.FALSE);
+				em.persist(newUser);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-
 }
