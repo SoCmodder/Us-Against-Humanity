@@ -1,5 +1,9 @@
 package com.usagainsthumanity.taah_model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 import javax.persistence.Entity;
@@ -8,11 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.apache.commons.codec.binary.Base64;
-
-import com.google.appengine.api.oauth.OAuthRequestException;
-import com.google.appengine.api.oauth.OAuthService;
-import com.google.appengine.api.oauth.OAuthServiceFactory;
-import com.google.appengine.api.users.User;
 
 
 
@@ -23,29 +22,38 @@ public class UserKey {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userID;
+	private byte[] salt;
 	private String Token;
 	private String APIKey;
-	
-	public UserKey(String token) {
+
+	public UserKey(String token){
 		Token = token;
-		Random r = new Random(System.currentTimeMillis());
-		byte[] data = new byte[27];
-		for(int i = 0; i < 27; i++){
-			Integer b = r.nextInt();
-			data[i] = (byte) (b.byteValue() >> 8);
-			i++;
-			data[i] = (byte) (b.byteValue() >> 2);
-			i++;
-			data[i] = (byte) (b.byteValue() >> 4);
+		SecureRandom sr = new SecureRandom();
+		byte[] tokenbytes;
+		try {
+			tokenbytes = token.getBytes("UTF-8");
+
+			salt = new byte[tokenbytes.length];
+			sr.nextBytes(salt);
+			byte[] hashbytes = new byte[tokenbytes.length + salt.length];
+
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(hashbytes);
+			byte[] digest = md.digest();
+			APIKey = Base64.encodeBase64URLSafeString(digest);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}		
-		APIKey = Base64.encodeBase64URLSafeString(data);
-		
 	}
 
-    public UserKey() {
-    }
+	public UserKey() {
+	}
 
-    public String getToken() {
+	public String getToken() {
 		return Token;
 	}
 
@@ -60,6 +68,6 @@ public class UserKey {
 	public String getAPIKey() {
 		return APIKey;
 	}
-	
-	
+
+
 }

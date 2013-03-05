@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,23 +22,19 @@ public class GameJSONResource extends ServerResource {
 	@Get("json")
 	public String getGames(){
 		//Figure out what we are doing
-		if(getQuery().getValues("userID") != null){
+		if(getQuery().getValues("userId") != null){
 			try{
 				JSONObject json = new JSONObject();
-				Integer userID = Integer.parseInt(getQuery().getValues("userID"));
-				EntityManager em = EMFService.get().createEntityManager();
-				Query q = em.createQuery("select g from Game g where g.hostID = :userID and g.Private = :Private");
-				q.setParameter("userID", userID);
-				q.setParameter("Private", Boolean.FALSE); // Not sure if searching for host should find private games, if not, when can they search for private games?
-				List<Game> games = q.getResultList();
-				List<Long> gameIDs = new LinkedList<Long>();
-				List<Long> Slots = new LinkedList<Long>(); // Using a long seems like overkill
-				for(Game resultList : games){
-					gameIDs.add(resultList.getGameID());
-					Slots.add(resultList.getSlots());
-				}
-				json.put("GameIDs", gameIDs); // Is it possible to return a Game rather than splitting them up? (Seems more efficient if you could do this)
-				json.put("Slots", Slots);
+				List<Integer> gameIDs = new LinkedList<Integer>();
+				gameIDs.add(1);
+				gameIDs.add(2);
+				gameIDs.add(3);
+				List<Integer> Slots = new LinkedList<Integer>();
+				Slots.add(2);
+				Slots.add(5);
+				Slots.add(9);
+				json.put("GameIDs", gameIDs);
+				json.put("Slots", Slots); 
 
 				JsonRepresentation jsonRep = new JsonRepresentation(json);
 
@@ -47,17 +42,11 @@ public class GameJSONResource extends ServerResource {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-		}else if(getQuery().getValues("gameID") != null){
+		}else if(getQuery().getValues("gameId") != null){
 			try{
 				JSONObject json = new JSONObject();
-				Integer gameID = Integer.parseInt(getQuery().getValues("gameID"));
-				EntityManager em = EMFService.get().createEntityManager();
-				Query q = em.createQuery("select g from Game g where g.gameID = :gameID and g.Private = :Private");
-				q.setParameter("gameID", gameID);
-				q.setParameter("Private", Boolean.FALSE);
-				Game game = (Game)q.getSingleResult();
-				json.put("Host", game.getHostID());
-				json.put("Slots", game.getSlots());
+				json.put("Host", 69691337);
+				json.put("Slots", 1234);
 				JsonRepresentation jsonRep = new JsonRepresentation(json);
 
 				return jsonRep.getText();
@@ -67,21 +56,16 @@ public class GameJSONResource extends ServerResource {
 		}else{
 			try{
 				JSONObject json = new JSONObject();
-				EntityManager em = EMFService.get().createEntityManager();
-				Query q = em.createQuery("select g from Game g where g.Private = :Private");
-				q.setParameter("Private", Boolean.FALSE);
-				List<Game> games = q.getResultList();
-				List<Long> gameIDs = new LinkedList<Long>();
-				List<Long> Slots = new LinkedList<Long>();
-				List<Long> PointsToWin = new LinkedList<Long>(); // Using a long seems like overkill
-				for(Game resultList : games){
-					gameIDs.add(resultList.getGameID());
-					Slots.add(resultList.getSlots());
-					PointsToWin.add(resultList.getPointsToWin());
-				}
-				json.put("GameIDs", gameIDs); // Is it possible to put a Game rather than having the server split them up? (seems more efficient if it could do this)
-				json.put("Slots", Slots);
-				json.put("PointsToWin", PointsToWin);
+				List<Integer> gameIDs = new LinkedList<Integer>();
+				gameIDs.add(1);
+				gameIDs.add(2);
+				gameIDs.add(3);
+				List<Integer> Slots = new LinkedList<Integer>();
+				Slots.add(2);
+				Slots.add(5);
+				Slots.add(9);
+				json.put("GameIDs", gameIDs);
+				json.put("Slots", Slots); 
 
 				JsonRepresentation jsonRep = new JsonRepresentation(json);
 
