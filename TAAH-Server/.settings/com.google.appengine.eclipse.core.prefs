@@ -1,8 +1,0 @@
-eclipse.preferences.version=1
-filesCopiedToWebInfLib=appengine-api-labs.jar|appengine-endpoints.jar|appengine-jsr107cache-1.7.4.jar|jsr107cache-1.1.jar|appengine-api-1.0-sdk-1.7.4.jar|asm-4.0.jar|datanucleus-api-jdo-3.1.1.jar|datanucleus-api-jpa-3.1.1.jar|datanucleus-appengine-2.1.1.jar|datanucleus-core-3.1.1.jar|geronimo-jpa_2.0_spec-1.0.jar|jdo-api-3.0.1.jar|jta-1.1.jar
-gaeDatanucleusVersion=v2
-gaeHrdEnabled=true
-gaeIsEclipseDefaultInstPath=true
-googleCloudSqlEnabled=false
-localDevMySqlEnabled=true
-ormEnhancementInclusions=src/com/usagainsthumanity/taah_model/CardBlack.java|src/com/usagainsthumanity/taah_model/CardsBlackWon.java|src/com/usagainsthumanity/taah_model/CardsInDiscardWhite.java|src/com/usagainsthumanity/taah_model/CardsInHandWhite.java|src/com/usagainsthumanity/taah_model/CardsInPlayWhite.java|src/com/usagainsthumanity/taah_model/CardWhite.java|src/com/usagainsthumanity/taah_model/Game.java|src/com/usagainsthumanity/taah_model/GameInvite.java|src/com/usagainsthumanity/taah_model/GamePlayers.java|src/com/usagainsthumanity/taah_model/UserInfo.java|src/com/usagainsthumanity/taah_model/UserKey.java|src/com/usagainsthumanity/taah_model/UserStats.java
