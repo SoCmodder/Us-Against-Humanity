@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  host_id: 1
+  slots: 1
+  points_to_win: 1
+  private: false
+  state: 1
+  user_turn: 1
+  winner: 1
+  current_black: 1
+
+two:
+  host_id: 1
+  slots: 1
+  points_to_win: 1
+  private: false
+  state: 1
+  user_turn: 1
+  winner: 1
+  current_black: 1

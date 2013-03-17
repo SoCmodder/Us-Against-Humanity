@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  userstat_id: 1
+  whitecard_id: 1
+
+two:
+  userstat_id: 1
+  whitecard_id: 1
