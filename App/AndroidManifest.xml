@@ -19,6 +19,8 @@
                 android:label="Welcome"
                 android:noHistory="true">
         </activity>
-        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".RegisterActivity"
+                  android:label="@string/title_activity_register"
+                  android:noHistory="true"/>
     </application>
 </manifest> 

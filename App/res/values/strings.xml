@@ -7,5 +7,9 @@
     <string name="welcome_title">Welcome</string>
     <string name="welcome_text">Welcome To Us Against Humanity</string>
     <string name="register">Register</string>
+    <string name="user_name">Username</string>
+    <string name="user_password_confirmation">Password Confirmation</string>
+    <string name="register_disclaimer">Disclaimer Message goes here, yo.</string>
+    <string name="title_activity_register">Username</string>
 
 </resources>
