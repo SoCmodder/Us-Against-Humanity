@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Us-Against-Humanity-App</string>
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="login">Login</string>
+
+</resources>
