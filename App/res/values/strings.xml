@@ -4,5 +4,8 @@
     <string name="user_email">Email</string>
     <string name="user_password">Password</string>
     <string name="login">Login</string>
+    <string name="welcome_title">Welcome</string>
+    <string name="welcome_text">Welcome Text</string>
+    <string name="register">Register</string>
 
 </resources>

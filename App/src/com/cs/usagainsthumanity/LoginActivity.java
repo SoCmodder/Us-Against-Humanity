@@ -23,12 +23,13 @@ import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Mitch Miller
+ * User: SoCmodder
  * Date: 3/7/13
  * Time: 4:50 PM
  */
 public class LoginActivity extends Activity {
 
+    //This needs to be changed...obviously
     private final static String LOGIN_API_ENDPOINT_URL = "http://10.0.2.2:3000/api/v1/sessions.json";
     private SharedPreferences mPreferences;
     private String mUserEmail;

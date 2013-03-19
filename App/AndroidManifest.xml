@@ -14,5 +14,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"/>
+        <activity
+                android:name=".WelcomeActivity"
+                android:label="Welcome"
+                android:noHistory="true">
+        </activity>
+        <activity android:name=".RegisterActivity"/>
     </application>
 </manifest> 
