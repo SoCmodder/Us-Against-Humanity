@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Us-Against-Humanity-App</string>
+    <string name="app_name">Us-Against-Humanity</string>
     <string name="user_email">Email</string>
     <string name="user_password">Password</string>
     <string name="login">Login</string>
     <string name="welcome_title">Welcome</string>
-    <string name="welcome_text">Welcome Text</string>
+    <string name="welcome_text">Welcome To Us Against Humanity</string>
     <string name="register">Register</string>
 
 </resources>
