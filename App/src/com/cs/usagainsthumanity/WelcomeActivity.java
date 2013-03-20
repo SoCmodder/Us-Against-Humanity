@@ -33,7 +33,7 @@ public class WelcomeActivity extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // Existing Account, load login view
+                        // Existing Account, load activity_login view
                         Intent intent = new Intent(WelcomeActivity.this,
                                 LoginActivity.class);
                         startActivityForResult(intent, 0);
