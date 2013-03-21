@@ -32,20 +32,22 @@ TAAHServer::Application.routes.draw do
       put 'games/:id' => 'games#adduser', :as => 'adduser_game' #Tested-complete
       #Remove user from game
       delete 'games/:id/users/:user_id' =>  'games#removeuser', :as => 'deleteuser_game' #Tested-complete
-      #Plays card from user's hand
-      #put 'games/:id/whitecard/:card_id' => 'games#playwhite', :as => 'playcard_game'
+      #Plays card(s) from user's hand
+      put 'games/:id/whitecard' => 'games#playwhite'  
       #Gets all submitted cards
       #get 'games/:id/white' => 'games#getsubmitted', :as => 'whitecard_game'
       #Submittes the winning card
       #put 'games/:id/winningcard' => 'games#winningcard', :as => 'winningcard_game'
       #Gets the black card for the round
-      #get 'games/:id/blackcard' => 'games#blackcard', :as => 'blackcard_game'
-      #Gets the user's hand
-      #get 'games/:id/users/:user_id/whitecards' => 'games#gethand', :as => 'hand_game'
+      get 'games/:id/blackcard' => 'games#blackcard' #Tested-complete
+      #Gets the current user's hand
+      get 'games/:id/hand' => 'games#gethand' #Tested-complete
       #Gets the user's won black card
       #get 'games/:id/users/:user_id/blackcards' => 'games#getwon', :as => 'won_game'
       #Gets the users score
       #get 'games/:id/score' => 'games#score', :as => 'score_game'
+      #Gets information on previous round
+      #get 'game/:id/last_round' => 'games#lastround'
 
 
     end
