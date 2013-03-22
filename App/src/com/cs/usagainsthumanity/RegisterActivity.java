@@ -23,13 +23,12 @@ import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Development
+ * User: SoCmodder
  * Date: 3/19/13
  * Time: 2:53 PM
- * To change this template use File | Settings | File Templates.
  */
 public class RegisterActivity extends Activity {
-    private final static String REGISTER_API_ENDPOINT_URL = "http://10.0.2.2:3000/api/v1/registrations";
+    private final static String REGISTER_API_ENDPOINT_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/registrations";
     private SharedPreferences mPreferences;
     private String mUserEmail;
     private String mUserName;

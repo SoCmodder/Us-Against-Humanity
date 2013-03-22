@@ -11,13 +11,12 @@ import android.widget.Toast;
 import com.savagelook.android.UrlJsonAsyncTask;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends Activity {
     //TODO: change this later
-    private static final String TASKS_URL = "http://10.0.2.2:3000/api/v1/tasks.json";
+    private static final String TASKS_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/tasks.json";
 
     private SharedPreferences mPreferences;
 

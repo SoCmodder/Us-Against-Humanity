@@ -12,5 +12,6 @@
     <string name="register_disclaimer">Disclaimer Message goes here, yo.</string>
     <string name="title_activity_register">Username</string>
     <string name="title_activity_login">Username</string>
+    <string name="home_icon_title">Home</string>
 
 </resources>

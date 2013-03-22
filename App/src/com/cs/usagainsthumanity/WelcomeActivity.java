@@ -10,7 +10,6 @@ import android.view.View;
  * User: SoCmodder
  * Date: 3/19/13
  * Time: 2:48 PM
- * To change this template use File | Settings | File Templates.
  */
 public class WelcomeActivity extends Activity {
     @Override
