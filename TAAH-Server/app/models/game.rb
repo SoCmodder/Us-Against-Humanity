@@ -1,10 +1,12 @@
 class Game < ActiveRecord::Base
   belongs_to :user
   has_many :gameusers
-  has_many :whitecardindiscards
-  has_many :whitecardsinplays
-  has_one :blackcard
-  has_many :blackcardwons
+  has_many :whitecardindeck
+  has_many :whitecardinhand
+  has_many :whitecardinplay
+  has_many :whitecardindiscard
+  has_many :blackcardindeck
+  has_many :blackcardwon
 
   attr_accessible :points_to_win, :private, :slots
 
@@ -15,6 +17,24 @@ class Game < ActiveRecord::Base
   def start!
   	update_column(:state, 1)
   	update_column(:user_turn, 0)
+    @allcards = Whitecard.all.map(&:id)
+    @allcards.each do |card|
+      self.whitecardindeck.create(:whitecard_id => card)
+    end
+    @allcards = Blackcard.all.map(&:id)
+    @allcards.each do |card|
+      self.blackcardindeck.create(:blackcard_id => card)
+    end
+    self.gameusers.each do |gameuser|
+      hand = self.whitecardindeck.all.sample(7)
+      hand.each do |card|
+        self.whitecardinhand.create(:gameuser_id => gameuser.id, :whitecard_id => card.whitecard_id)
+        card.destroy
+      end
+    end
+
+    self.dealBlackCard!
+    
   end
 
   def next!
@@ -35,6 +55,14 @@ class Game < ActiveRecord::Base
       end
     end
   end       
+
+  def dealBlackCard!
+    @blackcard = self.blackcardindeck.all.sample(1).first
+    update_column(:current_black, @blackcard.blackcard_id)
+    @blackcard.destroy
+  end
+
+
 
 
 

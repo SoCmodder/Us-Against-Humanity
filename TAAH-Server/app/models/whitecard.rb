@@ -1,4 +1,3 @@
 class Whitecard < ActiveRecord::Base
-	has_many :whiteinhand
-  
+  attr_accessible :text
 end

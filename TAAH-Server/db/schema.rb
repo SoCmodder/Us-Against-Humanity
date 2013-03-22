@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314133151) do
+ActiveRecord::Schema.define(:version => 20130319200002) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -46,8 +46,14 @@ ActiveRecord::Schema.define(:version => 20130314133151) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "blackcardindecks", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "blackcard_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "blackcards", :force => true do |t|
-    t.string   "title"
     t.string   "text"
     t.integer  "numwhite"
     t.datetime "created_at", :null => false
@@ -56,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20130314133151) do
 
   create_table "blackcardwons", :force => true do |t|
     t.integer  "game_id"
-    t.integer  "user_id"
+    t.integer  "gameuser_id"
     t.integer  "blackcard_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
@@ -132,34 +138,40 @@ ActiveRecord::Schema.define(:version => 20130314133151) do
     t.datetime "updated_at",   :null => false
   end
 
-  create_table "whitecardindiscards", :force => true do |t|
-    t.integer  "whitecard_id"
+  create_table "whitecardindecks", :force => true do |t|
     t.integer  "game_id"
+    t.integer  "whitecard_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "whitecardindiscards", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "whitecard_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "whitecardinhands", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "whitecard_id"
+    t.integer  "gameuser_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
   create_table "whitecardinplays", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "whitecard_id"
     t.integer  "game_id"
+    t.integer  "whitecard_id"
+    t.integer  "gameuser_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
   create_table "whitecards", :force => true do |t|
-    t.string   "title"
     t.string   "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "whiteinhands", :force => true do |t|
-    t.integer  "game_id"
-    t.integer  "user_id"
-    t.integer  "whitecard_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
   end
 
 end

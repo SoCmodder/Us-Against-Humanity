@@ -1,6 +1,7 @@
 class Gameuser < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
+  has_many :whitecardinhand
   attr_accessible :game_id, :user_id
 
   def leave!

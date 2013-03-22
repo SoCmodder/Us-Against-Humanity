@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  text: MyString
-  numwhite: 1
+  game_id: 1
+  blackcard_id: 1
 
 two:
-  text: MyString
-  numwhite: 1
+  game_id: 1
+  blackcard_id: 1

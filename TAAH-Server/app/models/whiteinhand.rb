@@ -1,7 +1,10 @@
 class Whiteinhand < ActiveRecord::Base
-
-	belongs_to :whitecard
-	belongs_to :user
 	belongs_to :game
-  attr_accessible :game_id, :user_id, :whitecard_id
+	belongs_to :gameuser
+	belongs_to :whitecard
+	
+  attr_accessible :game_id, :gameuser_id, :whitecard_id
+  validates :game_id, :presence => true
+  validates :gameuser_id, :presence => true
+  validates :whitecard_id, :presence => true
 end
