@@ -33,21 +33,23 @@ TAAHServer::Application.routes.draw do
       #Remove user from game
       delete 'games/:id/users/:user_id' =>  'games#removeuser', :as => 'deleteuser_game' #Tested-complete
       #Plays card(s) from user's hand
-      put 'games/:id/whitecard' => 'games#playwhite'  
+      put 'games/:id/whitecard' => 'games#playwhite'  #Tested-complete
       #Gets all submitted cards
-      #get 'games/:id/white' => 'games#getsubmitted', :as => 'whitecard_game'
+      get 'games/:id/all_white' => 'games#getsubmitted' #Tested-complete
       #Submittes the winning card
-      #put 'games/:id/winningcard' => 'games#winningcard', :as => 'winningcard_game'
+      put 'games/:id/winningcard' => 'games#winningcard' #Tested-complete
       #Gets the black card for the round
       get 'games/:id/blackcard' => 'games#blackcard' #Tested-complete
       #Gets the current user's hand
       get 'games/:id/hand' => 'games#gethand' #Tested-complete
       #Gets the user's won black card
-      #get 'games/:id/users/:user_id/blackcards' => 'games#getwon', :as => 'won_game'
+      get 'games/:id/users/:user_id/blackcards' => 'games#getwon' #Tested-complete
       #Gets the users score
-      #get 'games/:id/score' => 'games#score', :as => 'score_game'
+      get 'games/:id/score' => 'games#score' #Tested-complete
       #Gets information on previous round
-      #get 'game/:id/last_round' => 'games#lastround'
+      get 'games/:id/last_round' => 'games#lastround' #Tested-complete
+      #Gets all the previous turns for a game
+      get 'games/:id/history' => 'games#history' #Tested-complete
 
 
     end

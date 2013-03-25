@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  gamelast_id: 
+  whitecard_id: 1
+  gameuser_id: 1
+
+two:
+  gamelast_id: 
+  whitecard_id: 1
+  gameuser_id: 1
