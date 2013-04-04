@@ -16,7 +16,7 @@ import java.util.List;
 
 public class HomeActivity extends Activity {
     //TODO: change this later
-    private static final String TASKS_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/tasks.json";
+    private static final String TASKS_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games.json";
 
     private SharedPreferences mPreferences;
 
@@ -45,7 +45,7 @@ public class HomeActivity extends Activity {
 
     private void loadTasksFromAPI(String url) {
         GetTasksTask getTasksTask = new GetTasksTask(HomeActivity.this);
-        getTasksTask.setMessageLoading("Loading tasks...");
+        getTasksTask.setMessageLoading("Loading games...");
         getTasksTask.execute(url);
     }
 
@@ -57,12 +57,12 @@ public class HomeActivity extends Activity {
         @Override
         protected void onPostExecute(JSONObject json) {
             try {
-                JSONArray jsonTasks = json.getJSONObject("data").getJSONArray("tasks");
+                JSONArray jsonTasks = json.getJSONArray("games");
                 int length = jsonTasks.length();
                 List<String> tasksTitles = new ArrayList<String>(length);
 
                 for (int i = 0; i < length; i++) {
-                    tasksTitles.add(jsonTasks.getJSONObject(i).getString("title"));
+                    tasksTitles.add(String.valueOf(jsonTasks.getJSONObject(i).getInt("id")));
                 }
 
                 ListView tasksListView = (ListView) findViewById (R.id.tasks_list_view);
