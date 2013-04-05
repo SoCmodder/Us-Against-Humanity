@@ -19,7 +19,7 @@ TAAHServer::Application.routes.draw do
 
       #User paths
       #Returns all user information
-      get 'users/:id/find' => 'users#find', :as => 'find_user' #Tested-complete
+      get 'users/:id' => 'users#find', :as => 'find_user' #Tested-complete
       #Returns the user_id
       get 'users' => 'users#email' #Tested-complete
       #Gets the user's stats
@@ -28,6 +28,8 @@ TAAHServer::Application.routes.draw do
       #Game paths
       #Creates game
       post 'games' => 'games#create' #Tested-complete
+      
+      get 'games' => 'games#find'
       #Add current user to game
       put 'games/:id' => 'games#adduser', :as => 'adduser_game' #Tested-complete
       #Remove user from game

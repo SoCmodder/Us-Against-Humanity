@@ -31,6 +31,33 @@ class Api::V1::GamesController < ApplicationController
    	end
   end
 
+  def find
+    @critera = params[:find]
+    if(@critera == "open")
+      @gameids = Gameuser.find(:all, :conditions => ['user_id != ?', current_user.id]).map(&:game_id).uniq
+      @games = Game.find(:all, :conditions => { :id => @gameids, :state => nil}, :select => "id, slots, user_id") 
+      render :status => 200,
+             :json => { :success => true,
+                        :data => {:games => @games }}
+    elsif(@critera == "in")
+      @gameids = Gameuser.find_all_by_user_id(current_user.id).map(&:game_id)
+      @games = Game.find(:all, :conditions => { :id => @gameids}, :select => "id, slots, user_id") 
+      render :status => 200,
+             :json => { :success => true,
+                        :data => {:games => @games }}
+    elsif(@critera == "host")
+      @games = Game.find(:all, :conditions => { :user_id => current_user.id}, :select => "id, slots, user_id") 
+      render :status => 200,
+             :json => { :success => true,
+                        :data => {:games => @games }}
+    else 
+      render :status => 404,
+             :json => { :success => false,
+                        :info => @critera,
+                        :data => {} }
+    end
+  end
+
   def adduser
     @game = Game.find(params[:id])
     if @game      
@@ -153,6 +180,9 @@ class Api::V1::GamesController < ApplicationController
               card.destroy
             end
           end
+          render :status => 200,
+                 :json => { :success => true, 
+                            :data => { } }
         else
           render :status => :unprocessable_entity,
                             :json => { :success => false,
@@ -223,6 +253,9 @@ class Api::V1::GamesController < ApplicationController
         else
           @game.next!
         end
+        render :status => 200,
+               :json => { :success => true,
+                          :data => { } }
       end
       render :status => 200,
              :json => { :success => true, 
