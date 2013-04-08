@@ -1,10 +1,11 @@
 package com.cs.usagainsthumanity;
 
-import android.app.Activity;
-import android.os.Bundle;
-import com.cs.usagainsthumanity.Objects.Game;
-
 import java.util.List;
+
+import android.os.Bundle;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.cs.usagainsthumanity.Objects.Game;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,7 +13,7 @@ import java.util.List;
  * Date: 4/3/13
  * Time: 8:17 AM
  */
-public class OpenGamesActivity extends Activity {
+public class OpenGamesActivity extends SherlockActivity {
 
     private List<Game> gameList;
 

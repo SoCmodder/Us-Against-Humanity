@@ -8,13 +8,15 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
 import com.savagelook.android.UrlJsonAsyncTask;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends SherlockActivity {
     //TODO: change this later
     private static final String TASKS_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games.json";
 

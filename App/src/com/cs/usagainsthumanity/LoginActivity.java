@@ -1,15 +1,7 @@
 package com.cs.usagainsthumanity;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-import com.savagelook.android.UrlJsonAsyncTask;
+import java.io.IOException;
+
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
@@ -19,7 +11,17 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.savagelook.android.UrlJsonAsyncTask;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,7 +29,7 @@ import java.io.IOException;
  * Date: 3/7/13
  * Time: 4:50 PM
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends SherlockActivity {
 
     //This needs to be changed...obviously
     private final static String LOGIN_API_ENDPOINT_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/sessions.json";

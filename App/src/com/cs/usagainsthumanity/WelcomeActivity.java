@@ -1,9 +1,10 @@
 package com.cs.usagainsthumanity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.actionbarsherlock.app.SherlockActivity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +12,7 @@ import android.view.View;
  * Date: 3/19/13
  * Time: 2:48 PM
  */
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends SherlockActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
