@@ -4,5 +4,28 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <EditText android:id="@+id/pts_to_win"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:hint="Point to Win"
+              android:inputType="number"/>
+    <EditText android:id="@+id/max_players"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:hint="Max Players"
+              android:inputType="number"/>
+    <CheckBox android:id="@+id/privacy_checkbox"
+              android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:checked="false"/>
+        <TextView android:id="@+id/privacy_textview"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Game is Open"/>
+    <Button android:id="@+id/submit_new_game_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Create Game"/>
 
 </LinearLayout>
