@@ -27,6 +27,7 @@ import com.savagelook.android.UrlJsonAsyncTask;
  * Time: 8:17 AM
  */
 public class OpenGamesActivity extends SherlockListActivity {
+    int totalGames;
 
     
     private SharedPreferences mPreferences;
@@ -67,6 +68,9 @@ public class OpenGamesActivity extends SherlockListActivity {
 			return true;
 		case R.id.create:
 			Toast.makeText(this, "Needs to be implemented", Toast.LENGTH_SHORT).show();
+            //Start a new intent to go to the game creation page.
+            Intent gameCreation = new Intent(OpenGamesActivity.this, CreateGameActivity.class);
+            startActivity(gameCreation);
 			return true;
 			
 		case R.id.refresh:
@@ -93,6 +97,7 @@ public class OpenGamesActivity extends SherlockListActivity {
 
                 for (int i = 0; i < length; i++) {
                     tasksTitles.add(new Game(jsonTasks.getJSONObject(i)));
+                    totalGames++;
                 }
 
                 getListView().setAdapter(new GameArrayAdapter(OpenGamesActivity.this, tasksTitles));
