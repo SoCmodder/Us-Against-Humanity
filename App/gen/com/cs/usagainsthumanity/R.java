@@ -920,7 +920,8 @@ containing a value of this type.
         public static final int ic_action_add=0x7f02006f;
         public static final int ic_action_find=0x7f020070;
         public static final int ic_action_profile=0x7f020071;
-        public static final int icon=0x7f020072;
+        public static final int ic_action_refresh=0x7f020072;
+        public static final int icon=0x7f020073;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040022;
@@ -963,6 +964,7 @@ containing a value of this type.
         public static final int abs__title=0x7f04001b;
         public static final int abs__titleDivider=0x7f04001c;
         public static final int abs__up=0x7f04000b;
+        public static final int create=0x7f040044;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040027;
         public static final int find=0x7f040042;
@@ -1024,11 +1026,13 @@ containing a value of this type.
         public static final int activity_register=0x7f030019;
         public static final int activity_welcome=0x7f03001a;
         public static final int game_list_item=0x7f03001b;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001c;
-        public static final int sherlock_spinner_item=0x7f03001d;
+        public static final int game_list_view=0x7f03001c;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001d;
+        public static final int sherlock_spinner_item=0x7f03001e;
     }
     public static final class menu {
         public static final int activity_home=0x7f0b0000;
+        public static final int activity_open_games=0x7f0b0001;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 

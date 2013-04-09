@@ -245,7 +245,8 @@ int drawable abs__textfield_searchview_right_holo_light 0x7f02006e
 int drawable ic_action_add 0x7f02006f
 int drawable ic_action_find 0x7f020070
 int drawable ic_action_profile 0x7f020071
-int drawable icon 0x7f020072
+int drawable ic_action_refresh 0x7f020072
+int drawable icon 0x7f020073
 int id abs__action_bar 0x7f040022
 int id abs__action_bar_container 0x7f040021
 int id abs__action_bar_subtitle 0x7f040011
@@ -286,6 +287,7 @@ int id abs__textButton 0x7f040013
 int id abs__title 0x7f04001b
 int id abs__titleDivider 0x7f04001c
 int id abs__up 0x7f04000b
+int id create 0x7f040044
 int id disableHome 0x7f040009
 int id edit_query 0x7f040027
 int id find 0x7f040042
@@ -343,9 +345,11 @@ int layout activity_login 0x7f030018
 int layout activity_register 0x7f030019
 int layout activity_welcome 0x7f03001a
 int layout game_list_item 0x7f03001b
-int layout sherlock_spinner_dropdown_item 0x7f03001c
-int layout sherlock_spinner_item 0x7f03001d
+int layout game_list_view 0x7f03001c
+int layout sherlock_spinner_dropdown_item 0x7f03001d
+int layout sherlock_spinner_item 0x7f03001e
 int menu activity_home 0x7f0b0000
+int menu activity_open_games 0x7f0b0001
 int string abs__action_bar_home_description 0x7f090000
 int string abs__action_bar_up_description 0x7f090001
 int string abs__action_menu_overflow_description 0x7f090002

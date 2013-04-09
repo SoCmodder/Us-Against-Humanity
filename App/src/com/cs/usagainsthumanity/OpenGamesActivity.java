@@ -8,11 +8,15 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.cs.usagainsthumanity.Objects.Game;
 import com.savagelook.android.UrlJsonAsyncTask;
 
@@ -32,6 +36,7 @@ public class OpenGamesActivity extends SherlockListActivity {
         super.onCreate(savedInstanceState);
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
         getSupportActionBar().setHomeButtonEnabled(true);
+        setContentView(R.layout.game_list_view);
         loadOpenGames(GAME_URL);
     }
     
@@ -41,6 +46,37 @@ public class OpenGamesActivity extends SherlockListActivity {
         getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
         getTasksTask.execute(url);
     }
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.activity_open_games, menu);
+		return true;
+	}
+
+	public boolean onPrepareOptionsMenu(Menu menu){
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		
+		case R.id.homeAsUp:
+			finish();
+			return true;
+		case R.id.create:
+			Toast.makeText(this, "Needs to be implemented", Toast.LENGTH_SHORT).show();
+			return true;
+			
+		case R.id.refresh:
+			loadOpenGames(GAME_URL);
+			return true;
+		default:
+			return false;
+
+		}
+	}
 
     private class GetTasksTask extends UrlJsonAsyncTask {
         public GetTasksTask(Context context) {

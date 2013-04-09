@@ -33,6 +33,7 @@ public class HomeActivity extends SherlockListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+        setContentView(R.layout.game_list_view);
     }
     
     @Override
@@ -57,7 +58,10 @@ public class HomeActivity extends SherlockListActivity {
 		case R.id.find:
 			Intent intent = new Intent(HomeActivity.this, OpenGamesActivity.class);
             startActivityForResult(intent, 0);
-
+            return true;
+		case R.id.refresh:
+			 loadTasksFromAPI(TASKS_URL);
+			 return true;
 		default:
 			return false;
 

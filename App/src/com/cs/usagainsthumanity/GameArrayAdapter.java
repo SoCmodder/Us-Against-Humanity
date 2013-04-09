@@ -53,7 +53,9 @@ public class GameArrayAdapter extends BaseAdapter {
 		TextView ptw = (TextView) v.findViewById(R.id.ptw);
 		ptw.setText(String.valueOf(game.getPointsToWin()));
 		TextView state = (TextView) v.findViewById(R.id.state);
-		state.setText(game.getState() == 0 ? "Open" : game.getState() == 1 ? "In Progress" : "Ended" );
+		int gameState = game.getState();
+		state.setText(gameState == 0 ? "Open" : gameState == 1 ? "In Progress" : "Ended" );
+		//state.setTextColor(gameState == 0? android.R.color.white : gameState == 1? android.R.color.holo_green_light: android.R.color.holo_red_light); 
 		return v;
 
 	}

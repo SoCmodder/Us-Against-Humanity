@@ -11,6 +11,8 @@
         android:orderInCategory="2"
         android:icon="@drawable/ic_action_find"></item>
     <item android:id="@+id/refresh"
-          android:title="@string/home_icon_title"
+          android:orderInCategory="3"
+          android:title="Refresh"
+          android:icon="@drawable/ic_action_refresh"
           android:showAsAction="ifRoom"/>
 </menu>
