@@ -242,7 +242,10 @@ int drawable abs__textfield_searchview_holo_dark 0x7f02006b
 int drawable abs__textfield_searchview_holo_light 0x7f02006c
 int drawable abs__textfield_searchview_right_holo_dark 0x7f02006d
 int drawable abs__textfield_searchview_right_holo_light 0x7f02006e
-int drawable icon 0x7f02006f
+int drawable ic_action_add 0x7f02006f
+int drawable ic_action_find 0x7f020070
+int drawable ic_action_profile 0x7f020071
+int drawable icon 0x7f020072
 int id abs__action_bar 0x7f040022
 int id abs__action_bar_container 0x7f040021
 int id abs__action_bar_subtitle 0x7f040011
@@ -285,12 +288,14 @@ int id abs__titleDivider 0x7f04001c
 int id abs__up 0x7f04000b
 int id disableHome 0x7f040009
 int id edit_query 0x7f040027
+int id find 0x7f040040
 int id homeAsUp 0x7f040006
 int id hostname 0x7f04003d
 int id listMode 0x7f040002
 int id loginButton 0x7f040036
 int id normal 0x7f040001
-int id refresh 0x7f04003f
+int id profile 0x7f04003f
+int id refresh 0x7f040041
 int id registerButton 0x7f04003a
 int id registerDisclaimer 0x7f040039
 int id showCustom 0x7f040008

@@ -1,20 +1,20 @@
 package com.cs.usagainsthumanity;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.http.client.ClientProtocolException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.cs.usagainsthumanity.Objects.Game;
-import com.cs.usagainsthumanity.dummy.DummyContent;
+import com.savagelook.android.UrlJsonAsyncTask;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,49 +24,48 @@ import com.cs.usagainsthumanity.dummy.DummyContent;
  */
 public class OpenGamesActivity extends SherlockListActivity {
 
-    private ArrayList<Game> gameList;
-    private GameArrayAdapter mAdapter = null;
-    private ProgressDialog pd;
+    
+    private SharedPreferences mPreferences;
+    private static final String GAME_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/?find=open";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
         getSupportActionBar().setHomeButtonEnabled(true);
-        pd = new ProgressDialog(this);
-        pd.show();
-        mAdapter = new GameArrayAdapter(OpenGamesActivity.this, DummyContent.DummyGames);
-		getListView().setAdapter(mAdapter);
-		pd.dismiss();
-        //new LoadGameTask().execute();
+        loadOpenGames(GAME_URL);
     }
     
-    private class LoadGameTask extends AsyncTask <Void, Map<String, Object>, Map<String, Object>>{
+    private void loadOpenGames(String url) {
+        GetTasksTask getTasksTask = new GetTasksTask(OpenGamesActivity.this);
+        getTasksTask.setMessageLoading("Loading games...");
+        getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
+        getTasksTask.execute(url);
+    }
 
-		@Override
-		protected Map<String, Object> doInBackground(Void... arg0) {
-			gameList = new ArrayList<Game>();
-			Map<String, Object> result = null;
-			try {
-				 result = Data.getRequest("games/?find=open");
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return result;
-		}
-		
-		@Override
-		protected void onPostExecute(Map<String, Object> result){
-			ArrayList<Map<String, Object>> games = (ArrayList<Map<String, Object>>) result.get("games");	
-			for(Map<String, Object> game : games){
-				//gameList.add(new Game(game));
-			}
-			mAdapter = new GameArrayAdapter(OpenGamesActivity.this, DummyContent.DummyGames);
-			getListView().setAdapter(mAdapter);
-			pd.dismiss();
-		}
-    	
+    private class GetTasksTask extends UrlJsonAsyncTask {
+        public GetTasksTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            try {
+            	JSONObject data = json.getJSONObject("data");
+                JSONArray jsonTasks = data.getJSONArray("games");
+                int length = jsonTasks.length();
+                List<Game> tasksTitles = new ArrayList<Game>(length);
+
+                for (int i = 0; i < length; i++) {
+                    tasksTitles.add(new Game(jsonTasks.getJSONObject(i)));
+                }
+
+                getListView().setAdapter(new GameArrayAdapter(OpenGamesActivity.this, tasksTitles));
+            } catch (Exception e) {
+                Toast.makeText(context, e.getMessage(),
+                        Toast.LENGTH_LONG).show();
+            } finally {
+                super.onPostExecute(json);
+            }
+        }
     }
 }

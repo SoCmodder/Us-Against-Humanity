@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.cs.usagainsthumanity.Objects.Game;
 import com.savagelook.android.UrlJsonAsyncTask;
 
@@ -31,25 +34,49 @@ public class HomeActivity extends SherlockListActivity {
         super.onCreate(savedInstanceState);
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
     }
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.activity_home, menu);
+		return true;
+	}
+
+	public boolean onPrepareOptionsMenu(Menu menu){
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+
+		case R.id.profile:
+			Toast.makeText(this, "Needs to be implemented", Toast.LENGTH_SHORT).show();
+			return true;
+			
+		case R.id.find:
+			Intent intent = new Intent(HomeActivity.this, OpenGamesActivity.class);
+            startActivityForResult(intent, 0);
+
+		default:
+			return false;
+
+		}
+	}
 
     @Override
     public void onResume() {
         super.onResume();
 
         if (mPreferences.contains("AuthToken")) {
-            try {
-				loadTasksFromAPI(TASKS_URL);
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+            loadTasksFromAPI(TASKS_URL);
         } else {
             Intent intent = new Intent(HomeActivity.this, WelcomeActivity.class);
             startActivityForResult(intent, 0);
         }
     }
 
-    private void loadTasksFromAPI(String url) throws UnsupportedEncodingException {
+    private void loadTasksFromAPI(String url){
         GetTasksTask getTasksTask = new GetTasksTask(HomeActivity.this);
         getTasksTask.setMessageLoading("Loading games...");
         getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));

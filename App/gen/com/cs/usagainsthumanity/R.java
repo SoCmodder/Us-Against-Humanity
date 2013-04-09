@@ -917,7 +917,10 @@ containing a value of this type.
         public static final int abs__textfield_searchview_holo_light=0x7f02006c;
         public static final int abs__textfield_searchview_right_holo_dark=0x7f02006d;
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
-        public static final int icon=0x7f02006f;
+        public static final int ic_action_add=0x7f02006f;
+        public static final int ic_action_find=0x7f020070;
+        public static final int ic_action_profile=0x7f020071;
+        public static final int icon=0x7f020072;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040022;
@@ -962,12 +965,14 @@ containing a value of this type.
         public static final int abs__up=0x7f04000b;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040027;
+        public static final int find=0x7f040040;
         public static final int homeAsUp=0x7f040006;
         public static final int hostname=0x7f04003d;
         public static final int listMode=0x7f040002;
         public static final int loginButton=0x7f040036;
         public static final int normal=0x7f040001;
-        public static final int refresh=0x7f04003f;
+        public static final int profile=0x7f04003f;
+        public static final int refresh=0x7f040041;
         public static final int registerButton=0x7f04003a;
         public static final int registerDisclaimer=0x7f040039;
         public static final int showCustom=0x7f040008;
