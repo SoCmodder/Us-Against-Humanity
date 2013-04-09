@@ -89,7 +89,7 @@ public class Data {
 		return parseJSON(convertStreamToString(response.getEntity().getContent()));		
 	}
 
-	public static Map<String, Object> getRequest(String path, int statusOfSuccess) throws ClientProtocolException, IOException{
+	public static Map<String, Object> getRequest(String path) throws ClientProtocolException, IOException{
 
 		DefaultHttpClient httpclient = new DefaultHttpClient();		
 		HttpGet request = new HttpGet(path);

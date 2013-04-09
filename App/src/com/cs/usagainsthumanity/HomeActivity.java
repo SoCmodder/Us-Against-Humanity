@@ -1,24 +1,25 @@
 package com.cs.usagainsthumanity;
 
-import android.app.Activity;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockListActivity;
+import com.cs.usagainsthumanity.Objects.Game;
 import com.savagelook.android.UrlJsonAsyncTask;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import java.util.ArrayList;
-import java.util.List;
 
-public class HomeActivity extends SherlockActivity {
+public class HomeActivity extends SherlockListActivity {
     //TODO: change this later
-    private static final String TASKS_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games.json";
+    private static final String TASKS_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/?find=in";
 
     private SharedPreferences mPreferences;
 
@@ -28,8 +29,6 @@ public class HomeActivity extends SherlockActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
     }
 
@@ -38,16 +37,22 @@ public class HomeActivity extends SherlockActivity {
         super.onResume();
 
         if (mPreferences.contains("AuthToken")) {
-            loadTasksFromAPI(TASKS_URL);
+            try {
+				loadTasksFromAPI(TASKS_URL);
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         } else {
             Intent intent = new Intent(HomeActivity.this, WelcomeActivity.class);
             startActivityForResult(intent, 0);
         }
     }
 
-    private void loadTasksFromAPI(String url) {
+    private void loadTasksFromAPI(String url) throws UnsupportedEncodingException {
         GetTasksTask getTasksTask = new GetTasksTask(HomeActivity.this);
         getTasksTask.setMessageLoading("Loading games...");
+        getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
         getTasksTask.execute(url);
     }
 
@@ -59,19 +64,16 @@ public class HomeActivity extends SherlockActivity {
         @Override
         protected void onPostExecute(JSONObject json) {
             try {
-                JSONArray jsonTasks = json.getJSONArray("games");
+            	JSONObject data = json.getJSONObject("data");
+                JSONArray jsonTasks = data.getJSONArray("games");
                 int length = jsonTasks.length();
-                List<String> tasksTitles = new ArrayList<String>(length);
+                List<Game> tasksTitles = new ArrayList<Game>(length);
 
                 for (int i = 0; i < length; i++) {
-                    tasksTitles.add(String.valueOf(jsonTasks.getJSONObject(i).getInt("id")));
+                    tasksTitles.add(new Game(jsonTasks.getJSONObject(i)));
                 }
 
-                ListView tasksListView = (ListView) findViewById (R.id.tasks_list_view);
-                if (tasksListView != null) {
-                    tasksListView.setAdapter(new ArrayAdapter<String>(HomeActivity.this,
-                            android.R.layout.simple_list_item_1, tasksTitles));
-                }
+                getListView().setAdapter(new GameArrayAdapter(HomeActivity.this, tasksTitles));
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),
                         Toast.LENGTH_LONG).show();

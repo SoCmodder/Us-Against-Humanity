@@ -1,5 +1,8 @@
 package com.cs.usagainsthumanity.Objects;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created with IntelliJ IDEA.
  * User: socmodder
@@ -9,13 +12,26 @@ package com.cs.usagainsthumanity.Objects;
 public class Player {
     int id;
     String name;
+    int score;
 
     public Player(int id, String name){
         this.id = id;
         this.name = name;
     }
 
-    public String getName(){
+    public Player(JSONObject jsonObject) {
+		try {
+			id = jsonObject.getInt("id");
+			name = jsonObject.getString("name");
+			score = jsonObject.getInt("score");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public String getName(){
         return this.name;
     }
 
