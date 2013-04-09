@@ -20,14 +20,16 @@ public class Game {
     boolean isPrivate;
     String hostname;
     List<Player> playerList;
+    int state = 0;
 
-    public Game(int id, int pointsToWin, int slots, boolean isPrivate, String hostname, List<Player> playerList){
+    public Game(int id, int pointsToWin, int slots, boolean isPrivate, String hostname, int state, List<Player> playerList){
         this.id = id;
         this.playerList = playerList;
         this.pointsToWin = pointsToWin;
         this.slots = slots;
         this.hostname = hostname;
         this.isPrivate = isPrivate;
+        this.state = state;
     }
 
     public Game(JSONObject jsonObject) {
@@ -38,6 +40,7 @@ public class Game {
 			pointsToWin = game.getInt("points_to_win");
 			slots = game.getInt("slots");
 			isPrivate = false;
+			state = game.getInt("state");
 			JSONArray players = jsonObject.getJSONArray("players");
 			int length = players.length();
 			playerList = new ArrayList<Player>(length);
@@ -74,4 +77,8 @@ public class Game {
     public boolean getPrivacy(){
         return this.isPrivate;
     }
+
+	public int getState() {
+		return state;
+	}
 }

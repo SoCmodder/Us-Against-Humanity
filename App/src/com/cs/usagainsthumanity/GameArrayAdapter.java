@@ -45,12 +45,15 @@ public class GameArrayAdapter extends BaseAdapter {
 			v = inflator.inflate(R.layout.game_list_item, arg2, false);			
 		}
 		Game game = games.get(arg0);
-		TextView host = (TextView) v.findViewById(R.id.hostname);
+		TextView host = (TextView) v.findViewById(R.id.host);
 		host.setText(game.getHostName());
 		int openSlots = game.getSlots() - game.getPlayerList().size();
 		TextView slots = (TextView) v.findViewById(R.id.slots);
 		slots.setText(openSlots + "/" + game.getSlots());
-			
+		TextView ptw = (TextView) v.findViewById(R.id.ptw);
+		ptw.setText(String.valueOf(game.getPointsToWin()));
+		TextView state = (TextView) v.findViewById(R.id.state);
+		state.setText(game.getState() == 0 ? "Open" : game.getState() == 1 ? "In Progress" : "Ended" );
 		return v;
 
 	}

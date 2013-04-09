@@ -44,7 +44,7 @@ public class DummyContent {
 	}	
 
 	private static void addDummyGame(int id, int pointsToWin, int slots, boolean isPrivate, String hostname, List<Player> playerList){
-		DummyGames.add(new Game(id, pointsToWin, slots, isPrivate, hostname, playerList));
+		DummyGames.add(new Game(id, pointsToWin, slots, isPrivate, hostname, 0, playerList));
 	}
 
 	
