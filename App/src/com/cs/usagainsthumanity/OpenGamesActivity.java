@@ -62,7 +62,7 @@ public class OpenGamesActivity extends SherlockListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 		
-		case R.id.homeAsUp:
+		case android.R.id.home:
 			finish();
 			return true;
 		case R.id.create:
