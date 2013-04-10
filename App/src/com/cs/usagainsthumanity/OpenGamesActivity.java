@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.view.View;
+import android.widget.AdapterView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -101,6 +103,18 @@ public class OpenGamesActivity extends SherlockListActivity {
                 }
 
                 getListView().setAdapter(new GameArrayAdapter(OpenGamesActivity.this, tasksTitles));
+                getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        //Do some stuff when an item is clicked
+                        //get info about the selected item
+                        //pass that info to the next activity
+                        //profit
+                        Intent derp = new Intent(OpenGamesActivity.this, ViewGameActivity.class);
+                        //derp.putExtra("String key", value);
+                        startActivity(derp);
+                    }
+                });
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),
                         Toast.LENGTH_LONG).show();

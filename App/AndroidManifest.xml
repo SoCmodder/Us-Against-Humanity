@@ -31,5 +31,6 @@
                 android:noHistory="true"/>
         <activity android:name=".OpenGamesActivity"/>
         <activity android:name=".CreateGameActivity"/>
+        <activity android:name=".ViewGameActivity"/>
     </application>
 </manifest> 
