@@ -13,8 +13,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="bin" level="project" />
-    <orderEntry type="module" module-name="ABSlib" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="bin" level="project" />
+    <orderEntry type="module" module-name="ABSlib" exported="" scope="PROVIDED" />
   </component>
 </module>
 
