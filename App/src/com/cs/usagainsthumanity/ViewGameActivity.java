@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
+import com.cs.usagainsthumanity.Objects.CustomCard;
 import com.cs.usagainsthumanity.Objects.Game;
 import com.fima.cardsui.views.CardUI;
 import com.savagelook.android.UrlJsonAsyncTask;
@@ -27,7 +28,7 @@ import java.util.List;
 public class ViewGameActivity extends Activity {
     CardUI cardView;
     SharedPreferences mPreferences;
-    private static final String GAME_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/:id/hand";
+    private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/:id/hand";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +37,7 @@ public class ViewGameActivity extends Activity {
 
         cardView = (CardUI)findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
-
-
+        loadHand(HAND_URL);
     }
 
     private void loadHand(String url) {
@@ -58,13 +58,16 @@ public class ViewGameActivity extends Activity {
                 JSONObject data = json.getJSONObject("data");
                 JSONArray jsonTasks = data.getJSONArray("texts");
                 int length = jsonTasks.length();
-                List<Game> tasksTitles = new ArrayList<Game>(length);
+                List<String> tasksTitles = new ArrayList<String>(length);
 
                 for (int i = 0; i < length; i++) {
-                    tasksTitles.add(new Game(jsonTasks.getJSONObject(i)));
+                    tasksTitles.add(String.valueOf(jsonTasks.getJSONObject(i)));
                 }
 
-                //cardView.addCard();
+                for(int i=0; i<tasksTitles.size(); i++){
+                    cardView.addCard(new CustomCard(tasksTitles.get(i)));
+                }
+
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),
                         Toast.LENGTH_LONG).show();

@@ -10,7 +10,6 @@
         android:id="@+id/stackTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
         android:paddingTop="8dp"
         android:textColor="@color/card_title_text"
         android:textSize="16sp"
