@@ -29,8 +29,6 @@ import com.savagelook.android.UrlJsonAsyncTask;
  * Time: 8:17 AM
  */
 public class OpenGamesActivity extends SherlockListActivity {
-    int totalGames;
-
     
     private SharedPreferences mPreferences;
     private static final String GAME_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/?find=open";
@@ -99,7 +97,6 @@ public class OpenGamesActivity extends SherlockListActivity {
 
                 for (int i = 0; i < length; i++) {
                     tasksTitles.add(new Game(jsonTasks.getJSONObject(i)));
-                    totalGames++;
                 }
 
                 getListView().setAdapter(new GameArrayAdapter(OpenGamesActivity.this, tasksTitles));
