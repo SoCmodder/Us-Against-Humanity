@@ -58,17 +58,18 @@ public class ViewGameActivity extends Activity {
             try {
                 JSONObject data = json.getJSONObject("data");
                 JSONArray jsonTasks = data.getJSONArray("texts");
+                JSONArray card_ids = data.getJSONArray("ids");
                 int length = jsonTasks.length();
                 List<String> tasksTitles = new ArrayList<String>(length);
 
                 for (int i = 0; i < length; i++) {
-                    tasksTitles.add(String.valueOf(jsonTasks.getJSONObject(i)));
+                    tasksTitles.add((String)jsonTasks.get(i));
                 }
 
                 for(int i=0; i<tasksTitles.size(); i++){
                     cardView.addCard(new CustomCard(tasksTitles.get(i)));
                 }
-
+                cardView.refresh();
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),
                         Toast.LENGTH_LONG).show();
