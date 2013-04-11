@@ -28,13 +28,14 @@ import java.util.List;
 public class ViewGameActivity extends Activity {
     CardUI cardView;
     SharedPreferences mPreferences;
-    private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/:id/hand";
+    private int game_id = -1;
+    private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_game);
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
-
+        game_id = getIntent().getIntExtra("game_id", -1);
         cardView = (CardUI)findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
         loadHand(HAND_URL);
@@ -44,7 +45,7 @@ public class ViewGameActivity extends Activity {
         GetTasksTask getTasksTask = new GetTasksTask(ViewGameActivity.this);
         getTasksTask.setMessageLoading("Loading Hand...");
         getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
-        getTasksTask.execute(url);
+        getTasksTask.execute(url + game_id + "/hand");
     }
 
     private class GetTasksTask extends UrlJsonAsyncTask {

@@ -38,9 +38,16 @@ public class HomeActivity extends SherlockListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Game game = (Game) getListView().getItemAtPosition(position);
-                Intent intent = new Intent(HomeActivity.this, ViewGameInfoActivity.class);
-                intent.putExtra("game", game);
-                startActivity(intent);
+                if(game.getState() == 1){
+                    Intent derp = new Intent(HomeActivity.this, ViewGameActivity.class);
+                    derp.putExtra("game_id", game.getId());
+                    startActivity(derp);
+                }else{
+                    Intent intent = new Intent(HomeActivity.this, ViewGameInfoActivity.class);
+                    intent.putExtra("game", game);
+                    startActivity(intent);
+                }
+
             }
         });
     }
