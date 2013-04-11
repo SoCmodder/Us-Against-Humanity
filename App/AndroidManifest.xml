@@ -29,6 +29,7 @@
                 android:name=".RegisterActivity"
                 android:label="@string/title_activity_register"
                 android:noHistory="true"/>
+        <activity android:name=".HomeActivity"/>
         <activity android:name=".OpenGamesActivity"/>
         <activity android:name=".CreateGameActivity"/>
         <activity android:name=".ViewGameActivity"/>
