@@ -11,11 +11,20 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Android 4.0 Platform (2)" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="bin" level="project" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="bin" level="project" />
+    <orderEntry type="module" module-name="ABSlib" exported="" scope="PROVIDED" />
     <orderEntry type="module" module-name="ABSlib" />
-    <orderEntry type="module" module-name="CardsUILib" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/android-support-v4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

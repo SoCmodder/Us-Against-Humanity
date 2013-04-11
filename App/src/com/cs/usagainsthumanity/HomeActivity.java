@@ -1,9 +1,10 @@
 package com.cs.usagainsthumanity;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.view.View;
+import android.widget.AdapterView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,7 +22,6 @@ import com.cs.usagainsthumanity.Objects.Game;
 import com.savagelook.android.UrlJsonAsyncTask;
 
 public class HomeActivity extends SherlockListActivity {
-    //TODO: change this later
     private static final String TASKS_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/?find=in";
 
     private SharedPreferences mPreferences;
@@ -34,6 +34,15 @@ public class HomeActivity extends SherlockListActivity {
         super.onCreate(savedInstanceState);
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
         setContentView(R.layout.game_list_view);
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Game game = (Game) getListView().getItemAtPosition(position);
+                Intent intent = new Intent(HomeActivity.this, ViewGameInfoActivity.class);
+                intent.putExtra("game", game);
+                startActivity(intent);
+            }
+        });
     }
     
     @Override

@@ -1,11 +1,12 @@
 package com.cs.usagainsthumanity.Objects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +14,7 @@ import org.json.JSONObject;
  * Date: 4/3/13
  * Time: 8:21 AM
  */
-public class Game {
+public class Game implements Serializable{
     int id;
     int pointsToWin;
     int slots;

@@ -32,5 +32,6 @@
         <activity android:name=".OpenGamesActivity"/>
         <activity android:name=".CreateGameActivity"/>
         <activity android:name=".ViewGameActivity"/>
+        <activity android:name=".ViewGameInfoActivity" android:label="Game Info"/>
     </application>
 </manifest> 
