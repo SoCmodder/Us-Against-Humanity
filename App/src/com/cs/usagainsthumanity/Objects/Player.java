@@ -3,13 +3,15 @@ package com.cs.usagainsthumanity.Objects;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: socmodder
  * Date: 4/3/13
  * Time: 8:21 AM
  */
-public class Player {
+public class Player implements Serializable{
     int id;
     String name;
     int score;
