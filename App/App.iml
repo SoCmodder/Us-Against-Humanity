@@ -14,8 +14,17 @@
     <orderEntry type="jdk" jdkName="Android 4.0 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="bin" level="project" />
-    <orderEntry type="module" module-name="ABSlib" exported="" scope="PROVIDED" />
-    <orderEntry type="module" module-name="CardsUILib" exported="" scope="PROVIDED" />
+    <orderEntry type="module" module-name="ABSlib" exported="" />
+    <orderEntry type="module" module-name="CardsUILib" exported="" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/android-support-v4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 
