@@ -17,10 +17,17 @@ import com.fima.cardsui.objects.Card;
 public class CustomCard extends Card {
 
     String text;
+    Integer id;
 
-    public CustomCard(String text){
+    public CustomCard(Integer id ,String text){
         this.text = text;
+        this.id = id;
     }
+
+    public Integer getID() {
+        return id;
+    }
+
 
     @Override
     public View getCardContent(Context context) {
