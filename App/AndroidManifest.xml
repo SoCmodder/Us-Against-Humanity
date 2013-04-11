@@ -34,5 +34,7 @@
         <activity android:name=".CreateGameActivity"/>
         <activity android:name=".ViewGameActivity"/>
         <activity android:name=".ViewGameInfoActivity" android:label="Game Info"/>
+        <activity android:name=".SettingsActivity"/>
+        <activity android:name=".UserInfoActivity" />
     </application>
 </manifest> 
