@@ -1,4 +1,4 @@
-package com.cs.usagainsthumanity;
+package com.cs.usagainsthumanity.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.cs.usagainsthumanity.Objects.Game;
+import com.cs.usagainsthumanity.Objects.GameRound;
 import com.cs.usagainsthumanity.Objects.Player;
 import com.cs.usagainsthumanity.R;
 
@@ -16,42 +16,42 @@ import java.util.List;
  * Created with IntelliJ IDEA.
  * User: Stewart
  * Date: 4/11/13
- * Time: 8:26 PM
+ * Time: 9:37 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ScoreAdapter  extends BaseAdapter {
-
-    private List<Player> players;
+public class GameRoundAdapter extends BaseAdapter{
+    private List<GameRound> rounds;
     private LayoutInflater inflator;
     private Context mContext;
 
-    public ScoreAdapter(Context mContext, List<Player> players){
-        this.players = players;
+    public GameRoundAdapter(Context mContext, List<GameRound> rounds){
+        this.rounds = rounds;
         this.mContext = mContext;
         this.inflator = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return players.size();
+        return rounds.size();
     }
 
     @Override
     public Object getItem(int arg0) {
-        return players.get(arg0);
+        return rounds.get(arg0);
     }
 
     @Override
     public long getItemId(int arg0) {
-        return players.get(arg0).getId();
+        return rounds.get(arg0).hashCode();
     }
 
     @Override
     public View getView(int arg0, View arg1, ViewGroup arg2) {
         View v = arg1;
         if(v == null){
-            v = inflator.inflate(R.layout.score_list_item, arg2, false);
+            v = inflator.inflate(R.layout.game_round_item, arg2, false);
         }
+        GameRound
         Player player = players.get(arg0);
         TextView playername = (TextView) v.findViewById(R.id.player_name);
         TextView score = (TextView) v.findViewById(R.id.score);
@@ -61,5 +61,4 @@ public class ScoreAdapter  extends BaseAdapter {
         return v;
 
     }
-
 }

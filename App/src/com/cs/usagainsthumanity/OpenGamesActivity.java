@@ -1,11 +1,11 @@
 package com.cs.usagainsthumanity;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.view.View;
 import android.widget.AdapterView;
+import com.cs.usagainsthumanity.Adapters.GameArrayAdapter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -6,6 +6,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.cs.usagainsthumanity.Adapters.ScoreAdapter;
 import com.cs.usagainsthumanity.Objects.Game;
 
 /**
