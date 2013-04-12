@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Player implements Serializable{
     int id;
     String name;
-    int score;
+    Integer score;
 
     public Player(int id, String name){
         this.id = id;
@@ -39,5 +39,9 @@ public class Player implements Serializable{
 
     public int getId(){
         return this.id;
+    }
+
+    public Integer getScore(){
+        return this.score;
     }
 }

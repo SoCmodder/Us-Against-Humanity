@@ -59,9 +59,7 @@ public class ViewGameActivity extends Activity {
                 JSONObject data = json.getJSONObject("data");
                 JSONArray jsonTasks = data.getJSONArray("texts");
                 JSONArray card_ids = data.getJSONArray("ids");
-                int length = jsonTasks.length();
-
-                for (int i = 0; i < length; i++) {
+                for (int i = 0; i < jsonTasks.length(); i++) {
                     cardView.addCard(new CustomCard((Integer)card_ids.get(i),(String)jsonTasks.get(i)));
 
                 }

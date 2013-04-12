@@ -119,7 +119,6 @@ public class HomeActivity extends SherlockListActivity {
                 for (int i = 0; i < length; i++) {
                     tasksTitles.add(new Game(jsonTasks.getJSONObject(i)));
                 }
-
                 getListView().setAdapter(new GameArrayAdapter(HomeActivity.this, tasksTitles));
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),
