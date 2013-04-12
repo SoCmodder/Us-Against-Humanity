@@ -4,6 +4,9 @@
     <facet type="android" name="Android">
       <configuration />
     </facet>
+    <facet type="android" name="Android2">
+      <configuration />
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -26,6 +29,8 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="ABSlib" exported="" />
+    <orderEntry type="module" module-name="ABSlib" />
+    <orderEntry type="module" module-name="CardsUILib" />
   </component>
 </module>
 

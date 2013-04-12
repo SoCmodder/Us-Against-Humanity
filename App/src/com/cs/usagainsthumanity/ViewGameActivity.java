@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 import com.cs.usagainsthumanity.Objects.CustomCard;
 import com.cs.usagainsthumanity.Objects.Game;
+import com.fima.cardsui.objects.CardStack;
 import com.fima.cardsui.views.CardUI;
 import com.savagelook.android.UrlJsonAsyncTask;
 import org.json.JSONArray;
@@ -25,8 +26,13 @@ import java.util.List;
  * Time: 7:48 PM
  * Description: Activity for viewing the currently selected game, yo.
  */
+    /*TODO: need to get the amount of cards allowed to play for each turn so that users can't submit
+    more than is allowed.*/
+
 public class ViewGameActivity extends Activity {
     CardUI cardView;
+    CardStack cardStack;
+    CardUI blackCardView;
     SharedPreferences mPreferences;
     private int game_id = -1;
     private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
@@ -38,6 +44,9 @@ public class ViewGameActivity extends Activity {
         game_id = getIntent().getIntExtra("game_id", -1);
         cardView = (CardUI)findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
+        blackCardView.setSwipeable(false);
+        cardStack.setTitle("Cards to Submit");
+
         loadHand(HAND_URL);
     }
 
@@ -46,6 +55,14 @@ public class ViewGameActivity extends Activity {
         getTasksTask.setMessageLoading("Loading Hand...");
         getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
         getTasksTask.execute(url + game_id + "/hand");
+    }
+
+    private void loadBlackCard(String url){
+        GetTasksTask getBlackCardTask = new GetTasksTask(ViewGameActivity.this);
+        getBlackCardTask.setMessageLoading("Loading Black Card...");
+        getBlackCardTask.setAuthToken(mPreferences.getString("AuthToken", ""));
+        //TODO: need to get the url for the black card
+        getBlackCardTask.execute(url);
     }
 
     private class GetTasksTask extends UrlJsonAsyncTask {
@@ -71,5 +88,10 @@ public class ViewGameActivity extends Activity {
                 super.onPostExecute(json);
             }
         }
+    }
+
+    //TODO: implement this
+    private void addCardToStack(){
+
     }
 }
