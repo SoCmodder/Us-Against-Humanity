@@ -20,8 +20,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.savagelook.android.UrlJsonAsyncTask;
+import com.actionbarsherlock.app.SherlockActivity;
 
 /**
  * Created with IntelliJ IDEA.

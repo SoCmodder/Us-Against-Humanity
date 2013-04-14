@@ -13,10 +13,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="bin" level="project" />
-    <orderEntry type="module" module-name="CardsUILib" scope="PROVIDED" />
-    <orderEntry type="module" module-name="ABSlib" scope="PROVIDED" />
-    <orderEntry type="module" module-name="SlidingMenu" scope="PROVIDED" />
+    <orderEntry type="module" module-name="ABSlib" />
+    <orderEntry type="module" module-name="CardsUILib" />
+    <orderEntry type="module" module-name="SlidingMenu" />
   </component>
 </module>
 
