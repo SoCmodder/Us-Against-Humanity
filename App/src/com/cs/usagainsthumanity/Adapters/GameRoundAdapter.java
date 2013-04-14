@@ -51,12 +51,12 @@ public class GameRoundAdapter extends BaseAdapter{
         if(v == null){
             v = inflator.inflate(R.layout.game_round_item, arg2, false);
         }
-        GameRound
-        Player player = players.get(arg0);
+        //GameRound players;
+        //Player player = players.get(arg0);
         TextView playername = (TextView) v.findViewById(R.id.player_name);
         TextView score = (TextView) v.findViewById(R.id.score);
-        playername.setText(player.getName());
-        score.setText(player.getScore().toString());
+        //playername.setText(player.getName());
+        //score.setText(player.getScore().toString());
         //state.setTextColor(gameState == 0? android.R.color.white : gameState == 1? android.R.color.holo_green_light: android.R.color.holo_red_light);
         return v;
 
