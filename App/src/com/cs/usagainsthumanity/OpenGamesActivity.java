@@ -1,26 +1,24 @@
 package com.cs.usagainsthumanity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.view.View;
-import android.widget.AdapterView;
-import com.cs.usagainsthumanity.Adapters.GameArrayAdapter;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
-
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.cs.usagainsthumanity.Adapters.GameArrayAdapter;
 import com.cs.usagainsthumanity.Objects.Game;
 import com.savagelook.android.UrlJsonAsyncTask;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -107,7 +105,7 @@ public class OpenGamesActivity extends SherlockListActivity {
                         //get info about the selected item
                         //pass that info to the next activity
                         //profit
-                        Intent derp = new Intent(OpenGamesActivity.this, ViewGameActivity.class);
+                        Intent derp = new Intent(OpenGamesActivity.this, ViewGameFragment.class);
                         //derp.putExtra("String key", value);
                         startActivity(derp);
                     }

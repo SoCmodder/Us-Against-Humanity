@@ -1,10 +1,13 @@
 package com.cs.usagainsthumanity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.cs.usagainsthumanity.Objects.CustomCard;
 import com.fima.cardsui.objects.CardStack;
 import com.fima.cardsui.views.CardUI;
@@ -21,8 +24,9 @@ import org.json.JSONObject;
  */
     /*TODO: need to get the amount of cards allowed to play for each turn so that users can't submit
     more than is allowed.*/
+    //TODO: Implement onActivityCreated method
 
-public class ViewGameActivity extends Activity {
+public class ViewGameFragment extends SherlockFragment {
     CardUI cardView;
     CardStack cardStack;
     CardUI blackCardView;
@@ -30,28 +34,30 @@ public class ViewGameActivity extends Activity {
     private int game_id = -1;
     private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
 
-    public void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_game);
-        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
-        game_id = getIntent().getIntExtra("game_id", -1);
-        cardView = (CardUI)findViewById(R.id.cards_view);
+        getSherlockActivity().setContentView(R.layout.activity_view_game);
+        mPreferences = getActivity().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
+        game_id = getSherlockActivity().getIntent().getIntExtra("game_id", -1);
+        cardView = (CardUI)getSherlockActivity().findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
         blackCardView.setSwipeable(false);
         cardStack.setTitle("Cards to Submit");
 
         loadHand(HAND_URL);
+
+        return inflater.inflate(R.layout.activity_view_game, container, false);
     }
 
     private void loadHand(String url) {
-        GetTasksTask getTasksTask = new GetTasksTask(ViewGameActivity.this);
+        GetTasksTask getTasksTask = new GetTasksTask(getSherlockActivity());
         getTasksTask.setMessageLoading("Loading Hand...");
         getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
         getTasksTask.execute(url + game_id + "/hand");
     }
 
     private void loadBlackCard(String url){
-        GetTasksTask getBlackCardTask = new GetTasksTask(ViewGameActivity.this);
+        GetTasksTask getBlackCardTask = new GetTasksTask(getSherlockActivity());
         getBlackCardTask.setMessageLoading("Loading Black Card...");
         getBlackCardTask.setAuthToken(mPreferences.getString("AuthToken", ""));
         //TODO: need to get the url for the black card

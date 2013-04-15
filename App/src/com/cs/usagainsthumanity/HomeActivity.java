@@ -40,7 +40,7 @@ public class HomeActivity extends SherlockListActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Game game = (Game) getListView().getItemAtPosition(position);
                 if(game.getState() == 1){
-                    Intent derp = new Intent(HomeActivity.this, ViewGameActivity.class);
+                    Intent derp = new Intent(HomeActivity.this, ViewGameFragment.class);
                     derp.putExtra("game_id", game.getId());
                     startActivity(derp);
                 }else{

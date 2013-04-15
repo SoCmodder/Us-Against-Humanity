@@ -10,4 +10,5 @@ import com.actionbarsherlock.app.SherlockFragment;
  * To change this template use File | Settings | File Templates.
  */
 public class ViewScoreFragment extends SherlockFragment{
+
 }
