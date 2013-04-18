@@ -33,7 +33,6 @@ public class CustomCard extends Card {
     public View getCardContent(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.custom_card, null);
         ((TextView) view.findViewById(R.id.text)).setText(text);
-        ((TextView) view.findViewById(R.id.description)).setText(text);
 
         return view;
     }

@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,8 +24,9 @@ public class GameRound implements Serializable{
             blacktext = jsonObject.getString("black_card");
             winninguser = jsonObject.getInt("winninguser");
             JSONArray array = jsonObject.getJSONArray("submitted");
+            submittedList = new ArrayList<Submitted>(array.length());
             for(int i = 0; i < array.length(); i++){
-                submittedList.add(new Submitted());
+                submittedList.add(new Submitted(array.getJSONObject(i)));
             }
         }catch (Exception e){
             e.printStackTrace();

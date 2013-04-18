@@ -5,9 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.cs.usagainsthumanity.Objects.GameRound;
-import com.cs.usagainsthumanity.Objects.Player;
+import com.cs.usagainsthumanity.Objects.Submitted;
 import com.cs.usagainsthumanity.R;
 
 import java.util.List;
@@ -51,10 +52,15 @@ public class GameRoundAdapter extends BaseAdapter{
         if(v == null){
             v = inflator.inflate(R.layout.game_round_item, arg2, false);
         }
+        GameRound gr = rounds.get(arg0);
         //GameRound players;
         //Player player = players.get(arg0);
-        TextView playername = (TextView) v.findViewById(R.id.player_name);
-        TextView score = (TextView) v.findViewById(R.id.score);
+        TextView blackcard = (TextView) v.findViewById(R.id.blacktext);
+        blackcard.setText(gr.getBlacktext());
+        TextView winninguser = (TextView) v.findViewById(R.id.winninguser);
+        winninguser.setText("");
+        ListView lv = (ListView) v.findViewById(R.id.submittedlist);
+        lv.setAdapter(new SubmittedAdapter(mContext, gr.getSubmittedList()));
         //playername.setText(player.getName());
         //score.setText(player.getScore().toString());
         //state.setTextColor(gameState == 0? android.R.color.white : gameState == 1? android.R.color.holo_green_light: android.R.color.holo_red_light);

@@ -17,7 +17,6 @@ public class WelcomeActivity extends SherlockActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
         findViewById(R.id.registerButton).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
