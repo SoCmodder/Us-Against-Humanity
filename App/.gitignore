@@ -1,4 +1,7 @@
 .idea
 .idea/*
-
+gen
+gen/*
+bin/
+bin/*
 App.iml
