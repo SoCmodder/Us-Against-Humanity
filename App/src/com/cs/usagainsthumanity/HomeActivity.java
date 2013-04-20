@@ -79,6 +79,10 @@ public class HomeActivity extends SherlockListActivity {
 		case R.id.refresh:
 			 loadTasksFromAPI(TASKS_URL);
 			 return true;
+		case R.id.settings:
+			Intent sIntent = new Intent(HomeActivity.this, SettingsActivity.class);
+			startActivityForResult(sIntent, 0);
+			return true;
 		default:
 			return false;
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Libs/ABSlib/ABSlib.iml" filepath="$PROJECT_DIR$/Libs/ABSlib/ABSlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/App/App.iml" filepath="$PROJECT_DIR$/App/App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Libs/CardsUILib/CardsUILib.iml" filepath="$PROJECT_DIR$/Libs/CardsUILib/CardsUILib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Libs/SlidingMenu/SlidingMenu.iml" filepath="$PROJECT_DIR$/Libs/SlidingMenu/SlidingMenu.iml" />
+    </modules>
+  </component>
+</project>
+

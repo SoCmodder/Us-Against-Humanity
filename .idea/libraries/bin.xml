@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="bin">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Libs/ABSlib/bin/abslibrary.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libs/ABSlib/bin/abslib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
