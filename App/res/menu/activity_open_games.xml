@@ -10,4 +10,7 @@
           android:title="Refresh"
           android:icon="@drawable/ic_action_refresh"
           android:showAsAction="ifRoom"/>
+    <item android:id="@+id/settings"
+        android:title="@string/settings"
+        android:showAsAction="never"/>
 </menu>

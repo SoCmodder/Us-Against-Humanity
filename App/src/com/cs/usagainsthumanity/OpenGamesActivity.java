@@ -74,6 +74,10 @@ public class OpenGamesActivity extends SherlockListActivity {
 		case R.id.refresh:
 			loadOpenGames(GAME_URL);
 			return true;
+		case R.id.settings:
+			Intent sIntent = new Intent(OpenGamesActivity.this, SettingsActivity.class);
+			startActivityForResult(sIntent, 0);
+			return true;
 		default:
 			return false;
 
