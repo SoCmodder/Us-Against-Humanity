@@ -14,6 +14,5 @@
     <string name="title_activity_login">Username</string>
     <string name="home_icon_title">Home</string><string name="host_label">Host:</string><string name="players_label">Players:</string><string name="last_round_label">Last Round</string>
     <string name="view_game_title">Current Game</string>
-    <string name="settings">Settings</string>
 
 </resources>
