@@ -65,7 +65,6 @@ public class OpenGamesActivity extends SherlockListActivity {
 			finish();
 			return true;
 		case R.id.create:
-			Toast.makeText(this, "Needs to be implemented", Toast.LENGTH_SHORT).show();
             //Start a new intent to go to the game creation page.
             Intent gameCreation = new Intent(OpenGamesActivity.this, CreateGameActivity.class);
             startActivity(gameCreation);
