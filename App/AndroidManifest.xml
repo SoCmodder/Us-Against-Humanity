@@ -32,6 +32,7 @@
         <activity android:name=".OpenGamesActivity"/>
         <activity android:name=".CreateGameActivity"/>
         <activity android:name=".ViewGameInfoActivity" android:label="Game Info"/>
+        <activity android:name=".ViewGameHistoryActivity" android:label="Game History"/>
         <activity android:name=".SettingsActivity"/>
         <activity android:name=".UserInfoActivity" />
     </application>

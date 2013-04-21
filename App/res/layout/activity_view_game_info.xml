@@ -1,45 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <RelativeLayout
-            android:layout_height="match_parent"
+        android:orientation="vertical">
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/host_label"
+            android:id="@+id/host_label"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/players_label"
+            android:id="@+id/textView"
+            android:layout_alignLeft="@+id/host_label"
+            android:layout_below="@+id/host_label"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/host_name"
+            android:layout_toRightOf="@+id/host_label"
+            android:layout_alignTop="@+id/host_label"/>
+    <ListView
             android:layout_width="match_parent"
-            >
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/host_label"
-                android:id="@+id/host_label" android:layout_alignParentLeft="true" android:layout_alignParentTop="true"
-                />
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/players_label"
-                android:id="@+id/textView" android:layout_alignLeft="@+id/host_label"
-                android:layout_below="@+id/host_label"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/host_name" android:layout_toRightOf="@+id/host_label"
-                android:layout_alignTop="@+id/host_label"/>
-        <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/playerlist" android:layout_alignLeft="@+id/host_label" android:layout_below="@+id/textView"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/last_round_label"
-                android:id="@+id/lastroundlabel"
-                android:layout_alignLeft="@+id/host_label" android:layout_below="@+id/playerlist"/>
-        <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/lastroundlist" android:layout_alignParentLeft="true"
-                android:layout_below="@+id/lastroundlabel"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/playerlist"
+            android:layout_alignLeft="@+id/host_label"
+            android:layout_below="@+id/textView"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/last_round_label"
+            android:id="@+id/lastroundlabel"
+            android:layout_alignLeft="@+id/host_label"
+            android:layout_below="@+id/playerlist"/>
+    <com.fima.cardsui.views.CardUI
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/lastroundlist"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lastroundlabel"/>
+</LinearLayout>
 
-    </RelativeLayout>
-</ScrollView>

@@ -1,6 +1,7 @@
 package com.cs.usagainsthumanity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +10,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.cs.usagainsthumanity.Adapters.GameArrayAdapter;
 import com.cs.usagainsthumanity.Adapters.GameRoundAdapter;
 import com.cs.usagainsthumanity.Adapters.ScoreAdapter;
+import com.cs.usagainsthumanity.Objects.CustomCard;
 import com.cs.usagainsthumanity.Objects.Game;
 import com.cs.usagainsthumanity.Objects.GameRound;
+import com.cs.usagainsthumanity.Objects.Submitted;
+import com.fima.cardsui.objects.CardStack;
+import com.fima.cardsui.views.CardUI;
 import com.savagelook.android.UrlJsonAsyncTask;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,14 +40,19 @@ import java.util.List;
 public class ViewGameInfoActivity extends SherlockFragmentActivity {
 
     private SharedPreferences mPreferences;
-    private ListView lastRound;
+    private CardUI lastRound;
+    private boolean mTwoPane = false;
+    private Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
         setContentView(R.layout.activity_view_game_info);
-        Game game = (Game) getIntent().getSerializableExtra("game");
+        if(findViewById(R.id.history_list) != null){
+            mTwoPane = true;
+        }
+        game = (Game) getIntent().getSerializableExtra("game");
         TextView hostname = (TextView) findViewById(R.id.host_name);
         hostname.setText(game.getHostName());
 
@@ -52,9 +65,46 @@ public class ViewGameInfoActivity extends SherlockFragmentActivity {
                 //To change body of implemented methods use File | Settings | File Templates.
             }
         });
-        lastRound = (ListView) findViewById(R.id.lastroundlist);
-        loadLastRoundFromAPI(Data.serverUrl + "games/" +  game.getId() + "/last_round" );
+        lastRound = (CardUI) findViewById(R.id.lastroundlist);
+        if(!mTwoPane){
+            loadLastRoundFromAPI(Data.serverUrl + "games/" +  game.getId() + "/last_round" );
+        }else{
+            Bundle arguments = new Bundle();
+            arguments.putInt(ViewGameHistoryFragment.ARG_ITEM_ID, game.getId());
+            ViewGameHistoryFragment fragment = new ViewGameHistoryFragment();
+            fragment.setArguments(arguments);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.history_list, fragment)
+                    .commit();
 
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(!mTwoPane){
+            menu.add(Menu.NONE, 1337, 20, "Game History");
+        }
+        return true;
+    }
+
+    public boolean onPrepareOptionsMenu(Menu menu){
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        super.onOptionsItemSelected(item);
+        switch(item.getItemId()){
+            case 1337:
+                Intent i = new Intent(this, ViewGameHistoryActivity.class);
+                i.putExtra(ViewGameHistoryFragment.ARG_ITEM_ID, game.getId());
+                startActivity(i);
+                return true;
+            default:
+                return false;
+        }
     }
 
     private void loadLastRoundFromAPI(String url){
@@ -74,8 +124,27 @@ public class ViewGameInfoActivity extends SherlockFragmentActivity {
             try {
                 JSONObject data = json.getJSONObject("data");
                 List<GameRound> gameRounds = new ArrayList<GameRound>();
+
                 gameRounds.add(new GameRound(data));
-                lastRound.setAdapter(new GameRoundAdapter(ViewGameInfoActivity.this, gameRounds));
+
+                //TODO Everything after this line needs to be made into a function
+                for(GameRound gameRound : gameRounds){
+                    CardStack temp = new CardStack();
+                    temp.setTitle(gameRound.getBlacktext() + "\n" + Integer.toString(gameRound.getWinninguser()));
+                    lastRound.addStack(temp);
+                    for(Submitted sub : gameRound.getSubmittedList()){
+                        temp = new CardStack();
+                        temp.setTitle(String.valueOf(sub.getGameuserId()));
+
+                        for(String text : sub.getSubmitted()){
+                            temp.add(new CustomCard(sub.getGameuserId(), text));
+                        }
+                        lastRound.addStack(temp);
+
+                    }
+                }
+
+                lastRound.refresh();
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),
                         Toast.LENGTH_LONG).show();
