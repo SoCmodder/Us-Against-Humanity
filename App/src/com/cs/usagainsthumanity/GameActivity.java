@@ -25,6 +25,7 @@ public class GameActivity extends BaseSlideActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, new ViewScoreFragment()).commit();
 
+
     }
 
 

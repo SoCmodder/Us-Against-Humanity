@@ -38,7 +38,7 @@ public class ViewGameFragment extends SherlockFragment {
         super.onCreate(savedInstanceState);
         getSherlockActivity().setContentView(R.layout.activity_view_game);
         mPreferences = getActivity().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
-        game_id = getSherlockActivity().getIntent().getIntExtra("game_id", -1);
+        game_id = getSherlockActivity().getIntent().getIntExtra("gameId", -1);
         cardView = (CardUI)getSherlockActivity().findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
         blackCardView.setSwipeable(false);
