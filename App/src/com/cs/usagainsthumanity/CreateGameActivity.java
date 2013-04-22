@@ -88,8 +88,8 @@ public class CreateGameActivity extends SherlockActivity {
         else{
             CreateGameTask createGameTask = new CreateGameTask(CreateGameActivity.this);
             createGameTask.setMessageLoading("Creating Game...");
-            createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
-            createGameTask.execute(CREATE_GAME_URL);
+            //createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
+            createGameTask.execute(CREATE_GAME_URL + "?auth_token=" + mPreferences.getString("AuthToken", ""));
         }
 
     }

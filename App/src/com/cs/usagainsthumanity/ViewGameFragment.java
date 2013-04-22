@@ -3,6 +3,7 @@ package com.cs.usagainsthumanity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ import org.json.JSONObject;
     more than is allowed.*/
     //TODO: Implement onActivityCreated method
 
-public class ViewGameFragment extends SherlockFragment {
+public class ViewGameFragment extends Fragment {
     CardUI cardView;
     CardStack cardStack;
     CardUI blackCardView;
@@ -36,13 +37,13 @@ public class ViewGameFragment extends SherlockFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSherlockActivity().setContentView(R.layout.activity_view_game);
+        getActivity().setContentView(R.layout.activity_view_game);
         mPreferences = getActivity().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
-        game_id = getSherlockActivity().getIntent().getIntExtra("gameId", -1);
-        cardView = (CardUI)getSherlockActivity().findViewById(R.id.cards_view);
+        game_id = getActivity().getIntent().getIntExtra("gameId", -1);
+        cardView = (CardUI)getActivity().findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
-        blackCardView.setSwipeable(false);
-        cardStack.setTitle("Cards to Submit");
+        //blackCardView.setSwipeable(false);
+        //cardStack.setTitle("Cards to Submit");
 
         loadHand(HAND_URL);
 
@@ -50,14 +51,14 @@ public class ViewGameFragment extends SherlockFragment {
     }
 
     private void loadHand(String url) {
-        GetTasksTask getTasksTask = new GetTasksTask(getSherlockActivity());
+        GetTasksTask getTasksTask = new GetTasksTask(getActivity());
         getTasksTask.setMessageLoading("Loading Hand...");
         getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
         getTasksTask.execute(url + game_id + "/hand");
     }
 
     private void loadBlackCard(String url){
-        GetTasksTask getBlackCardTask = new GetTasksTask(getSherlockActivity());
+        GetTasksTask getBlackCardTask = new GetTasksTask(getActivity());
         getBlackCardTask.setMessageLoading("Loading Black Card...");
         getBlackCardTask.setAuthToken(mPreferences.getString("AuthToken", ""));
         //TODO: need to get the url for the black card
