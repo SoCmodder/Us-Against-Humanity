@@ -48,10 +48,10 @@ public class CreateGameActivity extends SherlockActivity {
     Button submit;
     EditText winningPts, maximumPlayers;
     CheckBox privacy;
-    private static final String CREATE_GAME_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
+    private static final String CREATE_GAME_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games";
     SharedPreferences mPreferences;
 
-    int ptsToWin = 0, maxPlayers = 0;
+    Integer ptsToWin = 0, maxPlayers = 0;
     Boolean isPrivate = false;
     String hostname = null;
     List<Player> playerList;
@@ -65,21 +65,32 @@ public class CreateGameActivity extends SherlockActivity {
         winningPts = (EditText) findViewById(R.id.pts_to_win);
         maximumPlayers = (EditText) findViewById(R.id.max_players);
         privacy = (CheckBox) findViewById(R.id.privacy_checkbox);
-        mPreferences = getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
+        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: needs to be implemented
+                createGame();
             }
         });
 
     }
 
-    public void createGame(View button){
-        ptsToWin = Integer.getInteger(winningPts.getText().toString());
-        maxPlayers = Integer.getInteger(maximumPlayers.getText().toString());
+    public void createGame(){
+        ptsToWin = Integer.valueOf(winningPts.getText().toString());
+        maxPlayers = Integer.valueOf(maximumPlayers.getText().toString());
         isPrivate = privacy.isChecked();
+        if(ptsToWin<1 || ptsToWin==null){
+            winningPts.setError("Please enter a value of 1 or more.");
+        }else if(maxPlayers<3 || maxPlayers==null){
+            maximumPlayers.setError("Minimum of 3 players");
+        }
+        else{
+            CreateGameTask createGameTask = new CreateGameTask(CreateGameActivity.this);
+            createGameTask.setMessageLoading("Creating Game...");
+            createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
+            createGameTask.execute(CREATE_GAME_URL);
+        }
 
     }
 
