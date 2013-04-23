@@ -35,6 +35,7 @@ public class HomeActivity extends SherlockListActivity {
         super.onCreate(savedInstanceState);
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
         setContentView(R.layout.game_list_view);
+        startService(new Intent(this, NotificationService.class));
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
