@@ -37,10 +37,10 @@ public class ViewGameFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setContentView(R.layout.activity_view_game);
+        View v = inflater.inflate(R.layout.activity_view_game, container, false);
         mPreferences = getActivity().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
         game_id = getActivity().getIntent().getIntExtra("gameId", -1);
-        cardView = (CardUI)getActivity().findViewById(R.id.cards_view);
+        cardView = (CardUI)v.findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
         cardView.addCard(new CustomCard(0, "Test Card"));
         //blackCardView.setSwipeable(false);
@@ -49,7 +49,7 @@ public class ViewGameFragment extends Fragment {
 
         loadHand(HAND_URL);
 
-        return inflater.inflate(R.layout.activity_view_game, container, false);
+        return v;
     }
 
     private void loadHand(String url) {
