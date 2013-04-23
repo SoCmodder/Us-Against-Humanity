@@ -33,7 +33,7 @@ public class ViewGameFragment extends Fragment {
     CardUI blackCardView;
     SharedPreferences mPreferences;
     private int game_id = -1;
-    private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
+    private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
