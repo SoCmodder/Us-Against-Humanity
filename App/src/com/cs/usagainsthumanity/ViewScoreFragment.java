@@ -23,7 +23,7 @@ import org.json.JSONObject;
  * Time: 2:51 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ViewScoreFragment extends Fragment {
+public class ViewScoreFragment extends SherlockFragment {
     CardUI cardView;
     CardStack cardStack;
     CardUI blackCardView;

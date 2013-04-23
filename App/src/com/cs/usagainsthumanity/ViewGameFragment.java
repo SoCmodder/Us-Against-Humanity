@@ -27,7 +27,7 @@ import org.json.JSONObject;
     more than is allowed.*/
     //TODO: Implement onActivityCreated method
 
-public class ViewGameFragment extends Fragment {
+public class ViewGameFragment extends SherlockFragment {
     CardUI cardView;
     CardStack cardStack;
     CardUI blackCardView;
@@ -42,7 +42,10 @@ public class ViewGameFragment extends Fragment {
         game_id = getActivity().getIntent().getIntExtra("gameId", -1);
         cardView = (CardUI)v.findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
-        cardView.addCard(new CustomCard(0, "Test Card"));
+        CardStack stack = new CardStack();
+        stack.setTitle("Herp");
+        stack.add(new CustomCard(0, "Test Card"));
+        cardView.addStack(stack);
         //blackCardView.setSwipeable(false);
         //cardStack.setTitle("Cards to Submit");
         cardView.refresh();

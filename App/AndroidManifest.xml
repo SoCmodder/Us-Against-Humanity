@@ -36,5 +36,13 @@
         <activity android:name=".ViewGameHistoryActivity" android:label="Game History"/>
         <activity android:name=".SettingsActivity"/>
         <activity android:name=".UserInfoActivity" />
+        <service
+                android:name=".NotificationService"
+                android:process=":remote">
+            <intent-filter>
+                <action android:name="com.cs.usagainsthumanity.NotificationService" />
+            </intent-filter>
+        </service>
+
     </application>
 </manifest> 
