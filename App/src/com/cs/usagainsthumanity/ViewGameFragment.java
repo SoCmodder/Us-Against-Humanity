@@ -16,6 +16,9 @@ import com.savagelook.android.UrlJsonAsyncTask;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created with IntelliJ IDEA.
  * User: SoCmodder (Mitch Miller)
@@ -32,70 +35,36 @@ public class ViewGameFragment extends SherlockFragment {
     CardStack cardStack;
     CardUI blackCardView;
     SharedPreferences mPreferences;
+    ArrayList<String> card_texts;
+    ArrayList<Integer> card_ids;
     private int game_id = -1;
-    private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
+    //private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View v = inflater.inflate(R.layout.activity_view_game, container, false);
-        mPreferences = getActivity().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
+        //mPreferences = getActivity().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
         game_id = getActivity().getIntent().getIntExtra("gameID", -1);
         cardView = (CardUI)v.findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
-        CardStack stack = new CardStack();
-        stack.setTitle("Herp");
-        stack.add(new CustomCard(0, "Test Card"));
-        cardView.addStack(stack);
-        //blackCardView.setSwipeable(false);
-        //cardStack.setTitle("Cards to Submit");
+        //card_texts = new ArrayList<String>();
+        //card_ids = new ArrayList<Integer>();
+        //CardStack stack = new CardStack();
+        //stack.setTitle("Herp");
+        //stack.add(new CustomCard(0, "Test Card"));
+        //cardView.addStack(stack);
+        card_texts = getArguments().getStringArrayList("card_texts");
+        card_ids = getArguments().getIntegerArrayList("card_ids");
+        game_id = getArguments().getInt("gameID");
+        addCards();
         cardView.refresh();
-
-        loadHand(HAND_URL);
 
         return v;
     }
 
-    private void loadHand(String url) {
-        GetTasksTask getTasksTask = new GetTasksTask(getActivity());
-        getTasksTask.setMessageLoading("Loading Hand...");
-        getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
-        getTasksTask.execute(url + game_id + "/hand");
-    }
-
-    private void loadBlackCard(String url){
-        GetTasksTask getBlackCardTask = new GetTasksTask(getActivity());
-        getBlackCardTask.setMessageLoading("Loading Black Card...");
-        getBlackCardTask.setAuthToken(mPreferences.getString("AuthToken", ""));
-        //TODO: need to get the url for the black card
-        getBlackCardTask.execute(url);
-    }
-
-    private class GetTasksTask extends UrlJsonAsyncTask {
-        public GetTasksTask(Context context) {
-            super(context);
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject json) {
-            try {
-                JSONObject data = json.getJSONObject("data");
-                JSONArray jsonTasks = data.getJSONArray("texts");
-                JSONArray card_ids = data.getJSONArray("ids");
-                if(data != null){
-                    for (int i = 0; i < jsonTasks.length(); i++) {
-                        cardView.addCard(new CustomCard((Integer)card_ids.get(i),(String)jsonTasks.get(i)));
-                    }
-                }
-                else{
-                    cardView.addCard(new CustomCard(0, "Waiting for Game to begin."));
-                }
-                cardView.refresh();
-            } catch (Exception e) {
-                Toast.makeText(context, e.getMessage(),
-                        Toast.LENGTH_LONG).show();
-            } finally {
-                super.onPostExecute(json);
-            }
+    public void addCards(){
+        for(int i=0; i<card_texts.size(); i++){
+            cardView.addCard(new CustomCard(card_ids.get(i), card_texts.get(i)));
         }
     }
 
