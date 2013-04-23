@@ -206,4 +206,8 @@ public class UrlJsonAsyncTask extends AsyncTask<String, Void, JSONObject> {
 	public void setAuthToken(String authToken) {
 		this.authToken = authToken;
 	}
+
+    public String getAuthToken() {
+        return authToken;
+    }
 }
