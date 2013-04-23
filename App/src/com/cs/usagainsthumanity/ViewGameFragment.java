@@ -42,8 +42,10 @@ public class ViewGameFragment extends Fragment {
         game_id = getActivity().getIntent().getIntExtra("gameId", -1);
         cardView = (CardUI)getActivity().findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
+        cardView.addCard(new CustomCard(0, "Test Card"));
         //blackCardView.setSwipeable(false);
         //cardStack.setTitle("Cards to Submit");
+        cardView.refresh();
 
         loadHand(HAND_URL);
 
@@ -76,9 +78,13 @@ public class ViewGameFragment extends Fragment {
                 JSONObject data = json.getJSONObject("data");
                 JSONArray jsonTasks = data.getJSONArray("texts");
                 JSONArray card_ids = data.getJSONArray("ids");
-                for (int i = 0; i < jsonTasks.length(); i++) {
-                    cardView.addCard(new CustomCard((Integer)card_ids.get(i),(String)jsonTasks.get(i)));
-
+                if(data != null){
+                    for (int i = 0; i < jsonTasks.length(); i++) {
+                        cardView.addCard(new CustomCard((Integer)card_ids.get(i),(String)jsonTasks.get(i)));
+                    }
+                }
+                else{
+                    cardView.addCard(new CustomCard(0, "Waiting for Game to begin."));
                 }
                 cardView.refresh();
             } catch (Exception e) {
