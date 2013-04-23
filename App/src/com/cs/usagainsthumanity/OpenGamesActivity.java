@@ -108,9 +108,10 @@ public class OpenGamesActivity extends SherlockListActivity {
                         //get info about the selected item
                         //pass that info to the next activity
                         //profit
-                        Intent derp = new Intent(OpenGamesActivity.this, ViewGameFragment.class);
-                        //derp.putExtra("String key", value);
-                        startActivity(derp);
+                        Game game = (Game) getListView().getItemAtPosition(position);
+                        Intent intent = new Intent(OpenGamesActivity.this, ViewGameInfoActivity.class);
+                        intent.putExtra("game", game);
+                        startActivity(intent);
                     }
                 });
             } catch (Exception e) {

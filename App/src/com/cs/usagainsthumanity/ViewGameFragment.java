@@ -33,13 +33,13 @@ public class ViewGameFragment extends SherlockFragment {
     CardUI blackCardView;
     SharedPreferences mPreferences;
     private int game_id = -1;
-    private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games";
+    private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View v = inflater.inflate(R.layout.activity_view_game, container, false);
         mPreferences = getActivity().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
-        game_id = getActivity().getIntent().getIntExtra("gameId", -1);
+        game_id = getActivity().getIntent().getIntExtra("gameID", -1);
         cardView = (CardUI)v.findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
         CardStack stack = new CardStack();
