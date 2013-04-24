@@ -70,7 +70,7 @@ public class HomeActivity extends SherlockListActivity {
 		switch(item.getItemId()) {
 
 		case R.id.profile:
-			Toast.makeText(this, "Needs to be implemented", Toast.LENGTH_SHORT).show();
+			startActivityForResult(new Intent(HomeActivity.this, UserInfoActivity.class),0);
 			return true;
 			
 		case R.id.find:
