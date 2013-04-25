@@ -16,9 +16,10 @@ public class Player implements Serializable{
     String name;
     Integer score;
 
-    public Player(int id, String name){
+    public Player(String name, Integer score){
         this.id = id;
         this.name = name;
+        this.score = score;
     }
 
     public Player(JSONObject jsonObject) {

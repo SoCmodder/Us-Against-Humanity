@@ -100,7 +100,9 @@ public class GameActivity extends SlidingFragmentActivity {
                         card_ids.add(ids.getInt(i));
                     }
                     for(int i=0; i<score.length(); i++){
-                        playerList.add(new Player(score.getJSONObject(i)));
+                        Player p = new Player(score.getJSONObject(i).getString("name"),
+                                score.getJSONObject(i).getInt("score"));
+                        playerList.add(p);
                     }
                     scoreBundle.putSerializable("players", playerList);
                     bundle.putStringArrayList("card_texts", card_texts);
