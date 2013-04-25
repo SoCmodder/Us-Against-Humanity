@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * Time: 9:47 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Submitted {
+public class Submitted implements Serializable{
 
     private Integer gameuserId;
     private List<String> Submitted;
@@ -22,7 +23,7 @@ public class Submitted {
     public Submitted(JSONObject jsonObject){
         try {
             gameuserId = jsonObject.getInt("gameuser_id");
-            JSONArray jsonArray = jsonObject.getJSONArray("Whitecardtext");
+            JSONArray jsonArray = jsonObject.getJSONArray("whitetext");
             int length = jsonArray.length();
             Submitted = new ArrayList<String>(length);
             for(int i = 0; i < length; i++){

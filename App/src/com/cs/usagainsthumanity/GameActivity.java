@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 import com.cs.usagainsthumanity.Objects.CustomCard;
 import com.cs.usagainsthumanity.Objects.Player;
+import com.cs.usagainsthumanity.Objects.Submitted;
 import com.savagelook.android.UrlJsonAsyncTask;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -32,7 +33,6 @@ public class GameActivity extends SlidingFragmentActivity {
     Bundle scoreBundle;
     ViewGameFragment viewGameFragment;
     ViewScoreFragment viewScoreFragment;
-    String blackCardText;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -89,15 +89,20 @@ public class GameActivity extends SlidingFragmentActivity {
                 JSONObject data = json.getJSONObject("data");
                 JSONObject game = data.getJSONObject("game");
                 JSONObject hand = data.getJSONObject("hand");
+                JSONObject blackCard = data.getJSONObject("black_card");
                 JSONArray score = data.getJSONArray("score");
                 ArrayList<Player> playerList = new ArrayList<Player>();
-                blackCardText = data.getJSONObject("black_card").getString("text");
                 JSONArray cardTexts = hand.getJSONArray("texts");
+                JSONArray submitted = data.getJSONArray("submitted");
                 JSONArray ids = hand.getJSONArray("ids");
                 if(data.length() > 0){
                     for (int i = 0; i < cardTexts.length(); i++) {
                         card_texts.add(cardTexts.getString(i));
                         card_ids.add(ids.getInt(i));
+                    }
+                    ArrayList<Submitted> submittedArrayList = new ArrayList<Submitted>();
+                    for(int i = 0; i < submitted.length(); i++){
+                        submittedArrayList.add(new Submitted(submitted.getJSONObject(i)));
                     }
                     for(int i=0; i<score.length(); i++){
                         playerList.add(new Player(score.getJSONObject(i)));
@@ -105,7 +110,10 @@ public class GameActivity extends SlidingFragmentActivity {
                     scoreBundle.putSerializable("players", playerList);
                     bundle.putStringArrayList("card_texts", card_texts);
                     bundle.putIntegerArrayList("card_ids", card_ids);
-                    bundle.putString("black_card", blackCardText);
+                    bundle.putString("blackCardText", blackCard.getString("text"));
+                    bundle.putInt("blackCardNum", blackCard.getInt("numwhite"));
+                    bundle.putBoolean("is_czar", data.getBoolean("is_czar"));
+                    bundle.putSerializable("submitted", submittedArrayList);
                     viewGameFragment.setArguments(bundle);
                     viewScoreFragment.setArguments(scoreBundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, viewGameFragment).commit();
