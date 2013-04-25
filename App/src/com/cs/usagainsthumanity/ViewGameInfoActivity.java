@@ -59,7 +59,7 @@ public class ViewGameInfoActivity extends SherlockFragmentActivity {
             TextView hostname = (TextView) findViewById(R.id.host_name);
             hostname.setText(game.getHostName());
 
-            ScoreAdapter mAdapter = new ScoreAdapter(ViewGameInfoActivity.this, game.getPlayerList());
+            ScoreAdapter mAdapter = new ScoreAdapter(ViewGameInfoActivity.this, R.layout.score_list_item, game.getPlayerList());
             ListView lv = (ListView) findViewById(R.id.playerlist);
             lv.setAdapter(mAdapter);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

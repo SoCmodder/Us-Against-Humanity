@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 import com.cs.usagainsthumanity.Objects.CustomCard;
+import com.cs.usagainsthumanity.Objects.Player;
 import com.savagelook.android.UrlJsonAsyncTask;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -60,15 +61,12 @@ public class GameActivity extends SlidingFragmentActivity {
 
 
         viewScoreFragment = new ViewScoreFragment();
-        viewScoreFragment.setArguments(scoreBundle);
 
         getSlidingMenu().setMode(SlidingMenu.LEFT);
         getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
         setContentView(R.layout.menu_frame);
-        //getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, viewGameFragment).commit();
         setBehindContentView(R.layout.menu_frame2);
-        //getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame2, viewGameFragment).commit();
 
 
     }
@@ -78,14 +76,6 @@ public class GameActivity extends SlidingFragmentActivity {
         getTasksTask.setMessageLoading("Loading Hand...");
         getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
         getTasksTask.execute(url + game_id + "/round");
-    }
-
-    private void loadBlackCard(String url){
-        GetTasksTask getBlackCardTask = new GetTasksTask(GameActivity.this);
-        getBlackCardTask.setMessageLoading("Loading Black Card...");
-        getBlackCardTask.setAuthToken(mPreferences.getString("AuthToken", ""));
-        //TODO: need to get the url for the black card
-        getBlackCardTask.execute(url);
     }
 
     private class GetTasksTask extends UrlJsonAsyncTask {
@@ -98,8 +88,10 @@ public class GameActivity extends SlidingFragmentActivity {
             try {
                 JSONObject data = json.getJSONObject("data");
                 JSONObject game = data.getJSONObject("game");
-                JSONObject hand = game.getJSONObject("hand");
-                blackCardText = game.getJSONObject("black_card").getString("text");
+                JSONObject hand = data.getJSONObject("hand");
+                JSONArray score = data.getJSONArray("score");
+                ArrayList<Player> playerList = new ArrayList<Player>();
+                blackCardText = data.getJSONObject("black_card").getString("text");
                 JSONArray cardTexts = hand.getJSONArray("texts");
                 JSONArray ids = hand.getJSONArray("ids");
                 if(data.length() > 0){
@@ -107,11 +99,17 @@ public class GameActivity extends SlidingFragmentActivity {
                         card_texts.add(cardTexts.getString(i));
                         card_ids.add(ids.getInt(i));
                     }
+                    for(int i=0; i<score.length(); i++){
+                        playerList.add(new Player(score.getJSONObject(i)));
+                    }
+                    scoreBundle.putSerializable("players", playerList);
                     bundle.putStringArrayList("card_texts", card_texts);
                     bundle.putIntegerArrayList("card_ids", card_ids);
                     bundle.putString("black_card", blackCardText);
                     viewGameFragment.setArguments(bundle);
+                    viewScoreFragment.setArguments(scoreBundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, viewGameFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame2, viewScoreFragment).commit();
                 }
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),

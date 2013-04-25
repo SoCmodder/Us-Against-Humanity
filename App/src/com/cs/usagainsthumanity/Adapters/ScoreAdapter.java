@@ -1,9 +1,11 @@
 package com.cs.usagainsthumanity.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.cs.usagainsthumanity.Objects.Player;
@@ -18,26 +20,22 @@ import java.util.List;
  * Time: 8:26 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ScoreAdapter  extends BaseAdapter {
+public class ScoreAdapter  extends ArrayAdapter<Player> {
 
     private List<Player> players;
-    private LayoutInflater inflator;
+    private int layoutResourceId;
     private Context mContext;
 
-    public ScoreAdapter(Context mContext, List<Player> players){
+    public ScoreAdapter(Context mContext, int layoutResourceId, List<Player> players){
+        super(mContext, layoutResourceId, players);
         this.players = players;
         this.mContext = mContext;
-        this.inflator = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.layoutResourceId = layoutResourceId;
     }
 
     @Override
     public int getCount() {
         return players.size();
-    }
-
-    @Override
-    public Object getItem(int arg0) {
-        return players.get(arg0);
     }
 
     @Override
@@ -48,17 +46,33 @@ public class ScoreAdapter  extends BaseAdapter {
     @Override
     public View getView(int arg0, View arg1, ViewGroup arg2) {
         View v = arg1;
+        PlayerHolder holder = null;
         if(v == null){
-            v = inflator.inflate(R.layout.score_list_item, arg2, false);
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            v = inflater.inflate(layoutResourceId, arg2, false);
+
+            holder = new PlayerHolder();
+            holder.playername = (TextView)v.findViewById(R.id.player_name);
+            holder.score = (TextView)v.findViewById(R.id.score);
+
+            v.setTag(holder);
         }
         Player player = players.get(arg0);
-        TextView playername = (TextView) v.findViewById(R.id.player_name);
-        TextView score = (TextView) v.findViewById(R.id.score);
-        playername.setText(player.getName());
-        score.setText(player.getScore().toString());
+        holder.playername.setText(player.getName());
+        if(player.getScore() != null){
+            holder.score.setText(player.getScore().toString());
+        }
+        else{
+            holder.score.setText("0");
+        }
         //state.setTextColor(gameState == 0? android.R.color.white : gameState == 1? android.R.color.holo_green_light: android.R.color.holo_red_light);
         return v;
 
+    }
+
+    static class PlayerHolder{
+        TextView playername;
+        TextView score;
     }
 
 }
