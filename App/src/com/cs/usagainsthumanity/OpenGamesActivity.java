@@ -49,6 +49,7 @@ public class OpenGamesActivity extends SherlockListActivity {
         super.onCreate(savedInstanceState);
         mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("Open Games");
         setContentView(R.layout.game_list_view);
         loadOpenGames(GAME_URL);
     }

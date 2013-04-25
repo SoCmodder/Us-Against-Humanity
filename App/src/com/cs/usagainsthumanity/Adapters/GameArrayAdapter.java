@@ -3,6 +3,7 @@ package com.cs.usagainsthumanity.Adapters;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,15 +49,14 @@ public class GameArrayAdapter extends BaseAdapter {
 		Game game = games.get(arg0);
         if(game != null){
 		    TextView host = (TextView) v.findViewById(R.id.host);
-		    host.setText(game.getHostName());
-		    int openSlots = game.getSlots() - game.getPlayerList().size();
+		    host.setText("Host: " + game.getHostName());
 		    TextView slots = (TextView) v.findViewById(R.id.slots);
-		    slots.setText(openSlots + "/" + game.getSlots());
+		    slots.setText("Players: " + game.getPlayerList().size() + "/" + game.getSlots());
 		    TextView ptw = (TextView) v.findViewById(R.id.ptw);
-		    ptw.setText(String.valueOf(game.getPointsToWin()));
+		    ptw.setText("Points To Win: " + String.valueOf(game.getPointsToWin()));
 		    TextView state = (TextView) v.findViewById(R.id.state);
 		    int gameState = game.getState();
-		    state.setText(gameState == 0 ? "Open" : gameState == 1 ? "In Progress" : "Ended" );
+		    state.setText(gameState == 0 ? "Game State: Open" : gameState == 1 ? "Game State: In Progress" : "Game State: Ended" );
         }
 		//state.setTextColor(gameState == 0? android.R.color.white : gameState == 1? android.R.color.holo_green_light: android.R.color.holo_red_light); 
 		return v;
