@@ -134,13 +134,12 @@ public class NotificationService extends Service {
                     break;
 
             }
-            Notification note = new Notification.Builder(NotificationService.this)
+            /*Notification note = new Notification.Builder(NotificationService.this)
                     .setContentTitle(message)
                     .setContentText(jsonObject.getString("message"))
-                    .setContentIntent(pendingIntent)
-                    .setSmallIcon(R.drawable.ic_stat_note)
-                    .setNumber(-1).build();
-            note.flags |= Notification.FLAG_AUTO_CANCEL;
+                    .setContentIntent(pendingIntent).setSmallIcon(R.drawable.ic_stat_note).setNumber(-1).build();
+            note.flags |= Notification.FLAG_AUTO_CANCEL;    */
+            Notification note = new Notification();
 
             return note;
 

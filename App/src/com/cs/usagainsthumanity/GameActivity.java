@@ -31,6 +31,7 @@ public class GameActivity extends SlidingFragmentActivity {
     Bundle scoreBundle;
     ViewGameFragment viewGameFragment;
     ViewScoreFragment viewScoreFragment;
+    String blackCardText;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -50,13 +51,13 @@ public class GameActivity extends SlidingFragmentActivity {
         bundle = new Bundle();
         scoreBundle = new Bundle();
 
-        loadHand(HAND_URL);
+        loadRound(HAND_URL);
 
         bundle.putInt("gameID", game_id);
         scoreBundle.putInt("gameID", game_id);
 
         viewGameFragment = new ViewGameFragment();
-        viewGameFragment.setArguments(bundle);
+
 
         viewScoreFragment = new ViewScoreFragment();
         viewScoreFragment.setArguments(scoreBundle);
@@ -65,18 +66,18 @@ public class GameActivity extends SlidingFragmentActivity {
         getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
         setContentView(R.layout.menu_frame);
-        getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, viewGameFragment).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, viewGameFragment).commit();
         setBehindContentView(R.layout.menu_frame2);
         //getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame2, viewGameFragment).commit();
 
 
     }
 
-    private void loadHand(String url) {
+    private void loadRound(String url) {
         GetTasksTask getTasksTask = new GetTasksTask(GameActivity.this);
         getTasksTask.setMessageLoading("Loading Hand...");
         getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
-        getTasksTask.execute(url + game_id + "/hand");
+        getTasksTask.execute(url + game_id + "/round");
     }
 
     private void loadBlackCard(String url){
@@ -96,15 +97,21 @@ public class GameActivity extends SlidingFragmentActivity {
         protected void onPostExecute(JSONObject json) {
             try {
                 JSONObject data = json.getJSONObject("data");
-                JSONArray cardTexts = data.getJSONArray("texts");
-                JSONArray ids = data.getJSONArray("ids");
-                if(data != null){
+                JSONObject game = data.getJSONObject("game");
+                JSONObject hand = game.getJSONObject("hand");
+                blackCardText = game.getJSONObject("black_card").getString("text");
+                JSONArray cardTexts = hand.getJSONArray("texts");
+                JSONArray ids = hand.getJSONArray("ids");
+                if(data.length() > 0){
                     for (int i = 0; i < cardTexts.length(); i++) {
                         card_texts.add(cardTexts.getString(i));
                         card_ids.add(ids.getInt(i));
                     }
                     bundle.putStringArrayList("card_texts", card_texts);
                     bundle.putIntegerArrayList("card_ids", card_ids);
+                    bundle.putString("black_card", blackCardText);
+                    viewGameFragment.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, viewGameFragment).commit();
                 }
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),

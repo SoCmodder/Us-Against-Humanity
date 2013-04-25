@@ -38,7 +38,6 @@ public class ViewGameFragment extends SherlockFragment {
     ArrayList<String> card_texts;
     ArrayList<Integer> card_ids;
     private int game_id = -1;
-    //private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +46,8 @@ public class ViewGameFragment extends SherlockFragment {
         game_id = getActivity().getIntent().getIntExtra("gameID", -1);
         cardView = (CardUI)v.findViewById(R.id.cards_view);
         cardView.setSwipeable(false);
-        //card_texts = new ArrayList<String>();
-        //card_ids = new ArrayList<Integer>();
+
+
         //CardStack stack = new CardStack();
         //stack.setTitle("Herp");
         //stack.add(new CustomCard(0, "Test Card"));
