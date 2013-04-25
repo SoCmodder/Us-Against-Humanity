@@ -118,14 +118,6 @@ public class ViewGameFragment extends SherlockFragment {
                                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        ArrayList<Card> cards = submitStack.getCards();
-                                        cardIDS = new int[cards.size()];
-                                        int i = cards.size() - 1;
-                                        for (Card card : cards) {
-                                            CustomCard customCard = (CustomCard) card;
-                                            cardIDS[i] = customCard.getID();
-                                            i--;
-                                        }
                                         winning_id = customCard.getID();
                                         WinCardTask createGameTask = new WinCardTask(getSherlockActivity());
                                         createGameTask.setMessageLoading("Submitting Cards...");
@@ -331,25 +323,14 @@ public class ViewGameFragment extends SherlockFragment {
         protected JSONObject doInBackground(String... urls) {
             DefaultHttpClient client = new DefaultHttpClient();
             HttpPut put = new HttpPut(urls[0]);
-
-            JSONObject gameObj = new JSONObject();
             String response = null;
             JSONObject json = new JSONObject();
 
             try {
                 try {
-                    JSONArray holder = new JSONArray();
-                    // setup the returned values in case
-                    // something goes wrong
-                    json.put("success", false);
-                    json.put("info", "Something went wrong. Retry!");
-                    // add the user email and password to
-                    // the params
-                    for(int i = 0; i < cardIDS.length; i++){
-                        holder.put(cardIDS[i]);
-                    }
+
                     JSONObject temp = new JSONObject();
-                    temp.put("card_id", holder);
+                    temp.put("user_id", winning_id);
                     StringEntity se = new StringEntity(temp.toString());
                     put.setEntity(se);
 
