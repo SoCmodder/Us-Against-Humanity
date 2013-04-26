@@ -7,16 +7,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.cs.usagainsthumanity.Adapters.CardAdapter;
 import com.cs.usagainsthumanity.Objects.BlackCard;
+import com.cs.usagainsthumanity.Objects.CardObj;
 import com.cs.usagainsthumanity.Objects.CustomCard;
 import com.cs.usagainsthumanity.Objects.Submitted;
 import com.fima.cardsui.objects.Card;
@@ -49,7 +56,7 @@ import java.util.Arrays;
     more than is allowed.*/
 //TODO: Implement onActivityCreated method
 
-public class ViewGameFragment extends SherlockFragment {
+public class ViewGameFragment extends SherlockListFragment {
     CardUI cardView;
     CardStack submitStack;
     SharedPreferences mPreferences;
@@ -63,20 +70,24 @@ public class ViewGameFragment extends SherlockFragment {
     private static final String CREATE_GAME_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games";
     ActionMode mMode = null;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        View v = inflater.inflate(R.layout.activity_view_game, container, false);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
         mPreferences = getActivity().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
         excluded = new ArrayList<Integer>();
         game_id = getActivity().getIntent().getIntExtra("gameID", -1);
-        cardView = (CardUI)v.findViewById(R.id.cards_view);
-        cardView.setSwipeable(false);
-
-
         //CardStack stack = new CardStack();
         //stack.setTitle("Herp");
         //stack.add(new CustomCard(0, "Test Card"));
         //cardView.addStack(stack);
+        View blackView = getLayoutInflater(getArguments()).inflate(R.layout.black_card, null);
+        TextView blackText = (TextView) blackView.findViewById(R.id.text);
+        blackText.setText(getArguments().getString("blackCardText"));
+        getListView().addHeaderView(blackView);
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+
+
         card_texts = getArguments().getStringArrayList("card_texts");
         card_ids = getArguments().getIntegerArrayList("card_ids");
         game_id = getArguments().getInt("gameID");
@@ -85,18 +96,42 @@ public class ViewGameFragment extends SherlockFragment {
             CardStack blackStack = new CardStack();
             blackStack.add(new BlackCard(getArguments().getString("blackCardText")));
             cardView.addStack(blackStack);
-            cardView.setSwipeable(true);
             ArrayList<Submitted> subs = (ArrayList<Submitted>) getArguments().getSerializable("submitted");
             addSubmittedCards(subs);
 
         }else{
-            addCards();
+            ArrayList<CardObj> cardObjs = new ArrayList<CardObj>();
+            for(int i = 0; i < card_texts.size(); i++){
+                cardObjs.add(new CardObj(card_ids.get(i), card_texts.get(i)));
+            }
+            setListAdapter(new CardAdapter(getSherlockActivity(), R.layout.custom_card, cardObjs));
+            AdapterView.OnItemLongClickListener OILCL = new AdapterView.OnItemLongClickListener(){
+                @Override
+                public boolean onItemLongClick(AdapterView<?> l, View v,
+                                               final int position, long id) {
+
+                        if(getListView().isItemChecked(position)){
+                            getListView().setItemChecked(position, false);
+                        }else{
+                            getListView().setItemChecked(position, true);
+                        }
+                        SparseBooleanArray sba = getListView().getCheckedItemPositions();
+                        int checkedCount = sba.size();
+                        if(checkedCount > 0){
+                            if(mMode == null){
+                                mMode = getSherlockActivity().startActionMode(mActionModeCallback);
+                            }
+                        }else{
+                            if(mMode!= null){
+                                mMode.finish();
+                            }
+                        }
+                    return true;
+                }
+
+            };
+            getListView().setOnItemLongClickListener(OILCL);
         }
-
-
-        cardView.refresh();
-
-        return v;
     }
 
     private void addSubmittedCards(ArrayList<Submitted> subs) {
@@ -140,7 +175,9 @@ public class ViewGameFragment extends SherlockFragment {
     }
 
     public void addCards(){
+
         CardStack blackStack = new CardStack();
+
         blackStack.add(new BlackCard(getArguments().getString("blackCardText")));
         cardView.addStack(blackStack);
         submitStack = new CardStack();
@@ -205,7 +242,7 @@ public class ViewGameFragment extends SherlockFragment {
 
         // Called when the user exits the action mode
         public void onDestroyActionMode(ActionMode mode) {
-            if (!excluded.isEmpty()){
+
                 AlertDialog alertDialog = new AlertDialog.Builder(getSherlockActivity())
                         .setTitle("Submit Selected Cards?")
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -217,25 +254,22 @@ public class ViewGameFragment extends SherlockFragment {
                         .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ArrayList<Card> cards = submitStack.getCards();
-                                cardIDS = new int[cards.size()];
-                                int i = cards.size() - 1;
-                                for (Card card : cards) {
-                                    CustomCard customCard = (CustomCard) card;
-                                    cardIDS[i] = customCard.getID();
-                                    i--;
+                                SparseBooleanArray sparseBooleanArray = getListView().getCheckedItemPositions();
+                                cardIDS = new int[sparseBooleanArray.size()];
+                                for(int i = 0; i < sparseBooleanArray.size(); i++){
+                                    cardIDS[i] = card_ids.get(sparseBooleanArray.indexOfKey(i));
                                 }
                                 PlayCardTask createGameTask = new PlayCardTask(getSherlockActivity());
                                 createGameTask.setMessageLoading("Submitting Cards...");
                                 //createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
-                                createGameTask.execute(CREATE_GAME_URL + "/" + game_id + "/whitecard"+ "?auth_token=" + mPreferences.getString("AuthToken", ""));
+                                String url = CREATE_GAME_URL + "/" + game_id + "/whitecard"+ "?auth_token=" + mPreferences.getString("AuthToken", "");
+                                createGameTask.execute(url);
 
                             }
                         })
                         .create();
                 alertDialog.show();
-                excluded.clear();
-            }
+
             mMode = null;
         }
     };
