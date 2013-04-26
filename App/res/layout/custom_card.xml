@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-        android:padding="4dp">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  style="@style/activated"
+                  android:padding="4dp" >
+    <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:background="@drawable/card_background_white"
                   android:orientation="vertical"
@@ -18,7 +18,4 @@
             android:textSize="20sp"
             android:text="Text" android:layout_gravity="center"/>
         </LinearLayout>
-
-
-
 </LinearLayout>

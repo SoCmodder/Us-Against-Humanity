@@ -84,7 +84,7 @@ public class ViewGameFragment extends SherlockListFragment {
         TextView blackText = (TextView) blackView.findViewById(R.id.text);
         blackText.setText(getArguments().getString("blackCardText"));
         getListView().addHeaderView(blackView);
-        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
 
 
