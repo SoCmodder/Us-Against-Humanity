@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:summary="Notification Settings"
+        android:title="Notifications">
+    <CheckBoxPreference
+            android:key="notifications"
+            android:title="Enable Notifications"
+            android:summary="Should notifications be enabled" />
+    <ListPreference
+            android:key="Check"
+            android:title="Notification Interval"
+            android:summary="How often to check for new notifications"
+            android:dependency="notifications"
+            android:entries="@array/timeLabel"
+            android:entryValues="@array/timeVal"
+            />
+
+
+</PreferenceCategory>
+
+</PreferenceScreen>

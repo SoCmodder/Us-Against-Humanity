@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 import com.cs.usagainsthumanity.Adapters.GameArrayAdapter;
@@ -81,8 +82,8 @@ public class NotificationService extends Service {
     public void onCreate(){
         super.onCreate();
         Log.i("Service", "Creating Task");
-        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
-        int minutes = mPreferences.getInt("Check", 20);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int minutes = Integer.parseInt(mPreferences.getString("Check", "20"));
         random = new Random();
         mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         timer = new Timer("Check Timer");

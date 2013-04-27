@@ -9,11 +9,11 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/player_name" android:layout_alignParentLeft="true" android:layout_alignParentTop="true"
-            android:textAppearance="@android:style/TextAppearance.Holo.Large"/>
+            android:textAppearance="@android:style/TextAppearance.Holo.Large.Inverse"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/score" android:layout_alignParentRight="true" android:layout_alignTop="@+id/player_name"
-            android:textAppearance="@android:style/TextAppearance.Holo.Large"/>
+            android:textAppearance="@android:style/TextAppearance.Holo.Large.Inverse"/>
 </RelativeLayout>

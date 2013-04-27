@@ -3,6 +3,7 @@ package com.cs.usagainsthumanity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class ViewScoreFragment extends SherlockListFragment {
         super.onCreate(savedInstanceState);
         //View v = inflater.inflate(R.layout.activity_view_score, container, false);
         playerList = (ArrayList<Player>) getArguments().getSerializable("players");
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
 
 
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, playerList);

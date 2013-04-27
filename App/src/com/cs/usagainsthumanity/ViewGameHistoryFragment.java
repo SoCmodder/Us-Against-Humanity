@@ -3,6 +3,7 @@ package com.cs.usagainsthumanity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class ViewGameHistoryFragment extends SherlockFragment{
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mPreferences = getSherlockActivity().getSharedPreferences("CurrentUser", getSherlockActivity().MODE_PRIVATE);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
         View v = inflater.inflate(R.layout.fragment_game_history, container, false);
         mView = (CardUI) v.findViewById(R.id.cardview);
         int game_id = getArguments().getInt(ARG_ITEM_ID);

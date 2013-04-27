@@ -1,6 +1,7 @@
 package com.cs.usagainsthumanity;
 
 
+import android.preference.PreferenceManager;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -26,7 +27,7 @@ public class UserInfoActivity extends SherlockActivity {
     
 	public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         setContentView(R.layout.activity_view_profile);
         Integer userid = getIntent().getIntExtra("user_id", -1);
         if(userid == -1)

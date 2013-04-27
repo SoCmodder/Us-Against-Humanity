@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -65,7 +66,7 @@ public class CreateGameActivity extends SherlockActivity {
         winningPts = (EditText) findViewById(R.id.pts_to_win);
         maximumPlayers = (EditText) findViewById(R.id.max_players);
         privacy = (CheckBox) findViewById(R.id.privacy_checkbox);
-        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

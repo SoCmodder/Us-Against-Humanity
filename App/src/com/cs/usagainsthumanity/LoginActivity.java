@@ -2,6 +2,7 @@ package com.cs.usagainsthumanity;
 
 import java.io.IOException;
 
+import android.preference.PreferenceManager;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
@@ -41,7 +42,7 @@ public class LoginActivity extends SherlockActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);;
     }
 
     public void login(View button){

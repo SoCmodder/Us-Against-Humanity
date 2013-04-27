@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -75,7 +76,7 @@ public class ViewGameFragment extends SherlockListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        mPreferences = getActivity().getSharedPreferences("CurrentUser", Context.MODE_PRIVATE);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
         excluded = new ArrayList<Integer>();
         game_id = getActivity().getIntent().getIntExtra("gameID", -1);
         //CardStack stack = new CardStack();

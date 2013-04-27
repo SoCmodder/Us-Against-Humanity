@@ -3,6 +3,7 @@ package com.cs.usagainsthumanity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import com.cs.usagainsthumanity.Adapters.GameArrayAdapter;
@@ -33,10 +34,10 @@ public class HomeActivity extends SherlockListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         getSupportActionBar().setTitle("My Games");
         setContentView(R.layout.game_list_view);
-        startService(new Intent(this, NotificationService.class));
+
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,6 +101,12 @@ public class HomeActivity extends SherlockListActivity {
         } else {
             Intent intent = new Intent(HomeActivity.this, WelcomeActivity.class);
             startActivityForResult(intent, 0);
+        }
+
+        if(mPreferences.getBoolean("notifications", false)){
+            startService(new Intent(this, NotificationService.class));
+        }else {
+            stopService(new Intent(this, NotificationService.class));
         }
     }
 
