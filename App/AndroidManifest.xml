@@ -11,7 +11,7 @@
                  android:logo="@drawable/icon"
                  android:theme="@style/Theme.Humanity">
         <activity android:name=".HomeActivity"
-                  android:label="My Games">
+                  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
