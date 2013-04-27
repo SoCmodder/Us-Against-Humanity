@@ -22,6 +22,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.cs.usagainsthumanity.Adapters.CardAdapter;
+import com.cs.usagainsthumanity.Adapters.SubmittedAdapter;
 import com.cs.usagainsthumanity.Objects.BlackCard;
 import com.cs.usagainsthumanity.Objects.CardObj;
 import com.cs.usagainsthumanity.Objects.CustomCard;
@@ -59,6 +60,7 @@ import java.util.Arrays;
 public class ViewGameFragment extends SherlockListFragment {
     CardUI cardView;
     CardStack submitStack;
+    ArrayList<Integer> selected = new ArrayList<Integer>();
     SharedPreferences mPreferences;
     ArrayList<String> card_texts;
     ArrayList<Integer> card_ids;
@@ -93,55 +95,12 @@ public class ViewGameFragment extends SherlockListFragment {
         game_id = getArguments().getInt("gameID");
         is_czar = getArguments().getBoolean("is_czar");
         if(is_czar){
-            CardStack blackStack = new CardStack();
-            blackStack.add(new BlackCard(getArguments().getString("blackCardText")));
-            cardView.addStack(blackStack);
             ArrayList<Submitted> subs = (ArrayList<Submitted>) getArguments().getSerializable("submitted");
-            addSubmittedCards(subs);
-
-        }else{
-            ArrayList<CardObj> cardObjs = new ArrayList<CardObj>();
-            for(int i = 0; i < card_texts.size(); i++){
-                cardObjs.add(new CardObj(card_ids.get(i), card_texts.get(i)));
-            }
-            setListAdapter(new CardAdapter(getSherlockActivity(), R.layout.custom_card, cardObjs));
-            AdapterView.OnItemLongClickListener OILCL = new AdapterView.OnItemLongClickListener(){
-                @Override
-                public boolean onItemLongClick(AdapterView<?> l, View v,
-                                               final int position, long id) {
-
-                        if(getListView().isItemChecked(position)){
-                            getListView().setItemChecked(position, false);
-                        }else{
-                            getListView().setItemChecked(position, true);
-                        }
-                        SparseBooleanArray sba = getListView().getCheckedItemPositions();
-                        int checkedCount = sba.size();
-                        if(checkedCount > 0){
-                            if(mMode == null){
-                                mMode = getSherlockActivity().startActionMode(mActionModeCallback);
-                            }
-                        }else{
-                            if(mMode!= null){
-                                mMode.finish();
-                            }
-                        }
-                    return true;
-                }
-
-            };
-            getListView().setOnItemLongClickListener(OILCL);
-        }
-    }
-
-    private void addSubmittedCards(ArrayList<Submitted> subs) {
-        for(Submitted submitted:subs){
-            CardStack temp = new CardStack();
-            for(String text: submitted.getSubmitted()){
-                final CustomCard customCard = new CustomCard(submitted.getGameuserId(), text);
-                customCard.setOnClickListener(new View.OnClickListener() {
+            if(!subs.isEmpty()){
+                setListAdapter(new SubmittedAdapter(getSherlockActivity(), R.layout.submitted_game_item, subs));
+                getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, final long id) {
                         AlertDialog alertDialog = new AlertDialog.Builder(getSherlockActivity())
                                 .setTitle("Choose this as the winning cards?")
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -153,7 +112,7 @@ public class ViewGameFragment extends SherlockListFragment {
                                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        winning_id = customCard.getID();
+                                        winning_id = (int) id;
                                         WinCardTask createGameTask = new WinCardTask(getSherlockActivity());
                                         createGameTask.setMessageLoading("Submitting Cards...");
                                         //createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
@@ -163,64 +122,47 @@ public class ViewGameFragment extends SherlockListFragment {
                                 })
                                 .create();
                         alertDialog.show();
-
                     }
                 });
-                temp.add(customCard);
             }
-            cardView.addStack(temp);
-        }
-        cardView.refresh();
-
-    }
-
-    public void addCards(){
-
-        CardStack blackStack = new CardStack();
-
-        blackStack.add(new BlackCard(getArguments().getString("blackCardText")));
-        cardView.addStack(blackStack);
-        submitStack = new CardStack();
-        submitStack.setTitle("Select " + (getArguments().getInt("blackCardNum") - excluded.size()) + " cards");
-        for(Integer id : excluded){
-            final CustomCard customCard = new CustomCard(id, card_texts.get(card_ids.indexOf(id)));
-            customCard.setOnClickListener(new View.OnClickListener() {
+        }else{
+            ArrayList<CardObj> cardObjs = new ArrayList<CardObj>();
+            for(int i = 0; i < card_texts.size(); i++){
+                cardObjs.add(new CardObj(card_ids.get(i), card_texts.get(i)));
+            }
+            setListAdapter(new CardAdapter(getSherlockActivity(), R.layout.custom_card, cardObjs));
+            AdapterView.OnItemLongClickListener OILCL = new AdapterView.OnItemLongClickListener(){
                 @Override
-                public void onClick(View v) {
-                    excluded.remove(excluded.indexOf(customCard.getID()));
-                    if(excluded.isEmpty()){
-                        mMode.finish();
-                        mMode = null;
+                public boolean onItemLongClick(AdapterView<?> l, View v,
+                                               final int position, long id) {
+
+                    if(getListView().isItemChecked(position)){
+                        getListView().setItemChecked(position, false);
+                    }else{
+                        getListView().setItemChecked(position, true);
                     }
-                    cardView.clearCards();
-                    addCards();
-                }
-            });
-            submitStack.add(customCard);
-        }
-        cardView.addStack(submitStack);
-        for(int i=0; i<card_texts.size(); i++){
-            if(!excluded.contains(card_ids.get(i))){
-                final CustomCard temp = new CustomCard(card_ids.get(i), card_texts.get(i));
-                temp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                    SparseBooleanArray sba = getListView().getCheckedItemPositions();
+                    selected.clear();
+                    for(int i = 1; i < getListView().getAdapter().getCount(); i++){
+                        if (sba.get(i)){
+                            selected.add(i - 1);
+                        }
+                    }
+                    if(selected.size() > 0){
                         if(mMode == null){
                             mMode = getSherlockActivity().startActionMode(mActionModeCallback);
                         }
-                        selectCard(temp.getID());
+                    }else{
+                        if(mMode!= null){
+                            mMode.finish();
+                        }
                     }
-                });
-                cardView.addCard(temp);
-            }
-        }
-    }
+                    return true;
+                }
 
-    private void selectCard(Integer id) {
-        cardView.clearCards();
-        excluded.add(id);
-        addCards();
-        //To change body of created methods use File | Settings | File Templates.
+            };
+            getListView().setOnItemLongClickListener(OILCL);
+        }
     }
 
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
@@ -242,7 +184,7 @@ public class ViewGameFragment extends SherlockListFragment {
 
         // Called when the user exits the action mode
         public void onDestroyActionMode(ActionMode mode) {
-
+            if(selected.size() > 0){
                 AlertDialog alertDialog = new AlertDialog.Builder(getSherlockActivity())
                         .setTitle("Submit Selected Cards?")
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -254,15 +196,16 @@ public class ViewGameFragment extends SherlockListFragment {
                         .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
                                 SparseBooleanArray sparseBooleanArray = getListView().getCheckedItemPositions();
-                                cardIDS = new int[sparseBooleanArray.size()];
-                                for(int i = 0; i < sparseBooleanArray.size(); i++){
-                                    cardIDS[i] = card_ids.get(sparseBooleanArray.indexOfKey(i));
+                                cardIDS = new int[selected.size()];
+                                for (int i = 0; i < selected.size(); i++) {
+                                    cardIDS[i] = card_ids.get(selected.get(i));
                                 }
                                 PlayCardTask createGameTask = new PlayCardTask(getSherlockActivity());
                                 createGameTask.setMessageLoading("Submitting Cards...");
                                 //createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
-                                String url = CREATE_GAME_URL + "/" + game_id + "/whitecard"+ "?auth_token=" + mPreferences.getString("AuthToken", "");
+                                String url = CREATE_GAME_URL + "/" + game_id + "/whitecard" + "?auth_token=" + mPreferences.getString("AuthToken", "");
                                 createGameTask.execute(url);
 
                             }
@@ -270,6 +213,7 @@ public class ViewGameFragment extends SherlockListFragment {
                         .create();
                 alertDialog.show();
 
+            }
             mMode = null;
         }
     };

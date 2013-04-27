@@ -60,7 +60,7 @@ public class GameRoundAdapter extends BaseAdapter{
         TextView winninguser = (TextView) v.findViewById(R.id.winninguser);
         winninguser.setText("");
         ListView lv = (ListView) v.findViewById(R.id.submittedlist);
-        lv.setAdapter(new SubmittedAdapter(mContext, gr.getSubmittedList()));
+        lv.setAdapter(new SubmittedAdapter(mContext, R.layout.custom_card, gr.getSubmittedList()));
         //playername.setText(player.getName());
         //score.setText(player.getScore().toString());
         //state.setTextColor(gameState == 0? android.R.color.white : gameState == 1? android.R.color.holo_green_light: android.R.color.holo_red_light);

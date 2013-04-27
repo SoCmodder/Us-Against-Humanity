@@ -75,7 +75,8 @@ public class GameActivity extends SlidingFragmentActivity {
         GetTasksTask getTasksTask = new GetTasksTask(GameActivity.this);
         getTasksTask.setMessageLoading("Loading Hand...");
         getTasksTask.setAuthToken(mPreferences.getString("AuthToken", ""));
-        getTasksTask.execute(url + game_id + "/round");
+        String apiURL = url + game_id + "/round";
+        getTasksTask.execute(apiURL);
     }
 
     private class GetTasksTask extends UrlJsonAsyncTask {
