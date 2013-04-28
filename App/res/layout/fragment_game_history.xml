@@ -4,9 +4,14 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <com.fima.cardsui.views.CardUI
+
+    <com.emilsjolander.components.stickylistheaders.StickyListHeadersListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/cardview"/>
+            android:layout_height="fill_parent"
+            android:dividerHeight="5dp"
+            android:fastScrollEnabled="true"
+            android:padding="16dip"
+            android:id="@+id/cardview"
+            android:layout_alignParentLeft="true"/>
 
 </LinearLayout>

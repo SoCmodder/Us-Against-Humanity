@@ -17,16 +17,18 @@ import java.util.List;
 public class GameRound implements Serializable{
     private String blacktext;
     private int winninguser;
+    private int id;
     List<Submitted> submittedList;
 
     public GameRound(JSONObject jsonObject){
         try{
             blacktext = jsonObject.getString("black_card");
             winninguser = jsonObject.getInt("winninguser");
+            id = jsonObject.getInt("id");
             JSONArray array = jsonObject.getJSONArray("submitted");
             submittedList = new ArrayList<Submitted>(array.length());
             for(int i = 0; i < array.length(); i++){
-                submittedList.add(new Submitted(array.getJSONObject(i)));
+                submittedList.add(new Submitted(array.getJSONObject(i), id));
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -49,6 +51,14 @@ public class GameRound implements Serializable{
 
     public void setBlacktext(String blacktext) {
         this.blacktext = blacktext;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getWinninguser() {

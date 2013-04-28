@@ -5,13 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import com.cs.usagainsthumanity.Objects.CardObj;
-import com.cs.usagainsthumanity.Objects.CustomCard;
-import com.cs.usagainsthumanity.Objects.GameRound;
 import com.cs.usagainsthumanity.Objects.Submitted;
 import com.cs.usagainsthumanity.R;
-import com.fima.cardsui.objects.CardStack;
-import com.fima.cardsui.views.CardUI;
 
 import java.util.List;
 
@@ -58,7 +53,7 @@ public class SubmittedAdapter extends ArrayAdapter<Submitted> {
         holder = new SubmittedHolder();
         holder.username = (TextView)v.findViewById(R.id.user_name);
         Submitted submittedItem = submitted.get(arg0);
-        holder.username.setText(Integer.toString(submittedItem.getGameuserId()));
+        holder.username.setText("User #" + arg0);
         for(String text : submittedItem.getSubmitted()){
             LayoutInflater inflater2 = LayoutInflater.from(mContext);
             View v2 = inflater2.inflate(R.layout.custom_card, ll, false);

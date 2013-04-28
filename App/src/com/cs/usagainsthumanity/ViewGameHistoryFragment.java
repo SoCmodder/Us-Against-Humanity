@@ -9,11 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.cs.usagainsthumanity.Objects.CustomCard;
+import com.cs.usagainsthumanity.Adapters.GameRoundAdapter;
 import com.cs.usagainsthumanity.Objects.GameRound;
 import com.cs.usagainsthumanity.Objects.Submitted;
-import com.fima.cardsui.objects.CardStack;
-import com.fima.cardsui.views.CardUI;
+import com.emilsjolander.components.stickylistheaders.StickyListHeadersListView;
 import com.savagelook.android.UrlJsonAsyncTask;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,14 +29,14 @@ import java.util.List;
  */
 public class ViewGameHistoryFragment extends SherlockFragment{
     public static final String ARG_ITEM_ID = "Game ID";
-    private CardUI mView;
+    private StickyListHeadersListView stickyList;
     private SharedPreferences mPreferences;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
         View v = inflater.inflate(R.layout.fragment_game_history, container, false);
-        mView = (CardUI) v.findViewById(R.id.cardview);
+        stickyList = (StickyListHeadersListView) v.findViewById(R.id.cardview);
         int game_id = getArguments().getInt(ARG_ITEM_ID);
         loadHistoryFromAPI(Data.serverUrl + "games/" + game_id + "/history");
 
@@ -69,23 +68,7 @@ public class ViewGameHistoryFragment extends SherlockFragment{
                     gameRounds.add(new GameRound(rounds.getJSONObject(i)));
                 }
                 //TODO Everything after this line needs to be made into a function
-                for(GameRound gameRound : gameRounds){
-                    CardStack temp = new CardStack();
-                    temp.setTitle(gameRound.getBlacktext() + "\n" + Integer.toString(gameRound.getWinninguser()));
-                    mView.addStack(temp);
-                    for(Submitted sub : gameRound.getSubmittedList()){
-                        temp = new CardStack();
-                        temp.setTitle(String.valueOf(sub.getGameuserId()));
-
-                        for(String text : sub.getSubmitted()){
-                            temp.add(new CustomCard(sub.getGameuserId(), text));
-                        }
-                        mView.addStack(temp);
-
-                    }
-                }
-
-                mView.refresh();
+                stickyList.setAdapter(new GameRoundAdapter(getSherlockActivity(), R.layout.submitted_game_item, gameRounds));
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(context, e.getMessage(),

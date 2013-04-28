@@ -3,38 +3,27 @@ package com.cs.usagainsthumanity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.cs.usagainsthumanity.Adapters.CardAdapter;
 import com.cs.usagainsthumanity.Adapters.SubmittedAdapter;
-import com.cs.usagainsthumanity.Objects.BlackCard;
 import com.cs.usagainsthumanity.Objects.CardObj;
-import com.cs.usagainsthumanity.Objects.CustomCard;
 import com.cs.usagainsthumanity.Objects.Submitted;
-import com.fima.cardsui.objects.Card;
-import com.fima.cardsui.objects.CardStack;
-import com.fima.cardsui.views.CardUI;
 import com.savagelook.android.UrlJsonAsyncTask;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
@@ -45,7 +34,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created with IntelliJ IDEA.
@@ -59,8 +49,6 @@ import java.util.Arrays;
 //TODO: Implement onActivityCreated method
 
 public class ViewGameFragment extends SherlockListFragment {
-    CardUI cardView;
-    CardStack submitStack;
     ArrayList<Integer> selected = new ArrayList<Integer>();
     SharedPreferences mPreferences;
     ArrayList<String> card_texts;
@@ -98,6 +86,7 @@ public class ViewGameFragment extends SherlockListFragment {
         if(is_czar){
             ArrayList<Submitted> subs = (ArrayList<Submitted>) getArguments().getSerializable("submitted");
             if(!subs.isEmpty()){
+                Collections.shuffle(subs);
                 setListAdapter(new SubmittedAdapter(getSherlockActivity(), R.layout.submitted_game_item, subs));
                 getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

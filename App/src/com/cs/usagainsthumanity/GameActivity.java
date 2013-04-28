@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.cs.usagainsthumanity.Objects.CustomCard;
 import com.cs.usagainsthumanity.Objects.Game;
 import com.cs.usagainsthumanity.Objects.Player;
 import com.cs.usagainsthumanity.Objects.Submitted;
@@ -21,7 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -111,6 +108,10 @@ public class GameActivity extends SlidingFragmentActivity {
                 startActivity(derp);
                 finish();
                 return true;
+            case R.id.settings:
+                Intent sIntent = new Intent(GameActivity.this, SettingsActivity.class);
+                startActivityForResult(sIntent, 0);
+                return true;
             default:
                 return false;
 
@@ -141,7 +142,7 @@ public class GameActivity extends SlidingFragmentActivity {
                     }
                     ArrayList<Submitted> submittedArrayList = new ArrayList<Submitted>();
                     for(int i = 0; i < submitted.length(); i++){
-                        submittedArrayList.add(new Submitted(submitted.getJSONObject(i)));
+                        submittedArrayList.add(new Submitted(submitted.getJSONObject(i),1));
                     }
                     for(int i=0; i<score.length(); i++){
                         Player p = new Player(score.getJSONObject(i).getString("name"),
