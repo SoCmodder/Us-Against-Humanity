@@ -97,7 +97,8 @@ public class GameRoundAdapter extends BaseAdapter implements StickyListHeadersAd
         TextView username;
     }
 
-    @Override public View getHeaderView(int position, View convertView, ViewGroup parent) {
+    @Override
+    public View getHeaderView(int position, View convertView, ViewGroup parent) {
         HeaderViewHolder holder;
         if (convertView == null) {
             holder = new HeaderViewHolder();

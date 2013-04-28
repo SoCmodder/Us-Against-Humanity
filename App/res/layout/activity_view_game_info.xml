@@ -43,7 +43,6 @@
             android:layout_height="fill_parent"
             android:dividerHeight="5dp"
             android:fastScrollEnabled="true"
-            android:padding="16dip"
             android:id="@+id/lastroundlist"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/lastroundlabel"/>

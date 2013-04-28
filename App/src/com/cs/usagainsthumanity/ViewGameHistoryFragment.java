@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.cs.usagainsthumanity.Adapters.GameRoundAdapter;
 import com.cs.usagainsthumanity.Objects.GameRound;
-import com.cs.usagainsthumanity.Objects.Submitted;
 import com.emilsjolander.components.stickylistheaders.StickyListHeadersListView;
 import com.savagelook.android.UrlJsonAsyncTask;
 import org.json.JSONArray;

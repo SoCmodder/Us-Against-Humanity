@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.cs.usagainsthumanity.Objects.CardObj;
-import com.cs.usagainsthumanity.Objects.Player;
 import com.cs.usagainsthumanity.R;
 
 import java.util.List;
