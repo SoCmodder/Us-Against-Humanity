@@ -6,82 +6,40 @@
     android:orientation="vertical"
     tools:context=".UserInfoActivity" >
 
-    <EditText
-        android:id="@+id/editText1"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="false"
-        android:ems="10"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:freezesText="true"
-        android:inputType="none"
-        android:linksClickable="false"
-        android:longClickable="false"
-        android:text="Username:" >
+        android:text="Username:" />
 
-        <requestFocus />
-    </EditText>
-
-    <EditText
+    <TextView
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="false"
-        android:ems="10"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:hint="(Username Here)"
-        android:inputType="none"
-        android:longClickable="false" />
+        android:text="(Username Here)" />
 
-    <EditText
-        android:id="@+id/editText3"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="false"
-        android:ems="10"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:gravity="left"
-        android:inputType="none"
-        android:longClickable="false"
         android:text="Games Played:" />
 
-    <EditText
+    <TextView
         android:id="@+id/gamesPlayed"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="false"
-        android:ems="10"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:hint="0"
-        android:inputType="none"
-        android:longClickable="false" />
+        android:layout_height="wrap_content" 
+        android:text="0" />
 
-    <EditText
-        android:id="@+id/editText2"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="false"
-        android:ems="10"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:inputType="none"
-        android:longClickable="false"
         android:text="Games Won:" />
 
-    <EditText
+    <TextView
         android:id="@+id/gamesWon"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="false"
-        android:ems="10"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:hint="0"
-        android:inputType="none"
-        android:longClickable="false" />
+        android:layout_height="wrap_content" 
+        android:text="0" />
 
 </LinearLayout>
