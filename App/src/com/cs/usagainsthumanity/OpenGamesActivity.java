@@ -134,7 +134,7 @@ public class OpenGamesActivity extends SherlockListActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         CreateGameTask createGameTask = new CreateGameTask(OpenGamesActivity.this);
-                                        createGameTask.setMessageLoading("Creating Game...");
+                                        createGameTask.setMessageLoading("Joining Game...");
                                         createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
                                         createGameTask.execute(CREATE_GAME_URL + game.getId());
                                     }

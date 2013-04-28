@@ -2,6 +2,7 @@ package com.cs.usagainsthumanity.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,8 @@ public class ScoreAdapter extends ArrayAdapter<Player> {
         holder = new PlayerHolder();
         holder.playername = (TextView)v.findViewById(R.id.player_name);
         holder.score = (TextView)v.findViewById(R.id.score);
+        holder.playername.setTextColor(Color.BLACK);
+        holder.score.setTextColor(Color.BLACK);
 
         v.setTag(holder);
         Player player = players.get(arg0);
