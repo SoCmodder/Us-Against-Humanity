@@ -105,6 +105,12 @@ public class GameActivity extends SlidingFragmentActivity {
                 startActivity(intent);
 
                 return true;
+            case R.id.refresh:
+                Intent derp = new Intent(GameActivity.this, GameActivity.class);
+                derp.putExtra("gameID", gameObj.getId());
+                startActivity(derp);
+                finish();
+                return true;
             default:
                 return false;
 

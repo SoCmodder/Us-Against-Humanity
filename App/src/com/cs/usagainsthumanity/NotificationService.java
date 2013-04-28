@@ -138,9 +138,11 @@ public class NotificationService extends Service {
             Notification.Builder noteBuilder = new Notification.Builder(NotificationService.this)
                     .setContentTitle(message)
                     .setContentText(jsonObject.getString("message"))
-                    .setContentIntent(pendingIntent).setSmallIcon(R.drawable.ic_stat_note).setNumber(-1);
+                    .setContentIntent(pendingIntent).setSmallIcon(R.drawable.ic_stat_note).setNumber(-1)
+                    .setPriority(Notification.PRIORITY_HIGH).setLights(12517376, 1000, 500);
             Notification note = noteBuilder.getNotification();
             note.flags |= Notification.FLAG_AUTO_CANCEL;
+
 
 
             return note;

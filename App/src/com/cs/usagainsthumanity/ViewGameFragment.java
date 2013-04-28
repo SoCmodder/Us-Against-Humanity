@@ -132,16 +132,12 @@ public class ViewGameFragment extends SherlockListFragment {
                 cardObjs.add(new CardObj(card_ids.get(i), card_texts.get(i)));
             }
             setListAdapter(new CardAdapter(getSherlockActivity(), R.layout.custom_card, cardObjs));
-            AdapterView.OnItemLongClickListener OILCL = new AdapterView.OnItemLongClickListener(){
+            AdapterView.OnItemClickListener OILCL = new AdapterView.OnItemClickListener(){
                 @Override
-                public boolean onItemLongClick(AdapterView<?> l, View v,
+                public void onItemClick(AdapterView<?> l, View v,
                                                final int position, long id) {
 
-                    if(getListView().isItemChecked(position)){
-                        getListView().setItemChecked(position, false);
-                    }else{
-                        getListView().setItemChecked(position, true);
-                    }
+
                     SparseBooleanArray sba = getListView().getCheckedItemPositions();
                     selected.clear();
                     for(int i = 1; i < getListView().getAdapter().getCount(); i++){
@@ -158,11 +154,10 @@ public class ViewGameFragment extends SherlockListFragment {
                             mMode.finish();
                         }
                     }
-                    return true;
                 }
 
             };
-            getListView().setOnItemLongClickListener(OILCL);
+            getListView().setOnItemClickListener(OILCL);
         }
     }
 
