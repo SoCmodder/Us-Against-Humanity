@@ -55,7 +55,7 @@ public class UserInfoActivity extends SherlockActivity {
             	if((json.getString("success").equals("true"))){
 	            	JSONObject data = json.getJSONObject("data");
 	            	TextView usernameField = (TextView) findViewById(R.id.username);
-	            	usernameField.setText(data.getJSONObject("user").getString("name"));
+	            	usernameField.setText(data.getJSONObject("user").getString("name")+"'s Profile");
             	}
             	else
                     Toast.makeText(context, json.getString("info"),Toast.LENGTH_LONG).show();
@@ -85,7 +85,7 @@ public class UserInfoActivity extends SherlockActivity {
             try {
             	TextView usernameField = (TextView) findViewById(R.id.username);
             	if((json.getString("success").equals("true")))
-            		usernameField.setText(json.getJSONObject("data").getString("name"));
+            		usernameField.setText(json.getJSONObject("data").getString("name")+"'s Profile");
             	else
                     Toast.makeText(context, json.getString("info"),Toast.LENGTH_LONG).show();
             } catch (Exception e) {

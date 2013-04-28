@@ -7,16 +7,13 @@
     tools:context=".UserInfoActivity" >
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Username:" />
-
-    <TextView
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="(Username Here)" />
+        android:gravity="center"
+        android:paddingBottom="15dp"
+        android:text="(Username)&apos;s Profile"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -27,7 +24,8 @@
     <TextView
         android:id="@+id/gamesPlayed"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
         android:text="0" />
 
     <TextView
@@ -39,7 +37,8 @@
     <TextView
         android:id="@+id/gamesWon"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
         android:text="0" />
 
     <TextView
