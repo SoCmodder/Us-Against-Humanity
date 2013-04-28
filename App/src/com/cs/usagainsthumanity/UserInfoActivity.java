@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -54,8 +54,8 @@ public class UserInfoActivity extends SherlockActivity {
             try {
             	if((json.getString("success").equals("true"))){
 	            	JSONObject data = json.getJSONObject("data");
-	            	EditText usernameField = (EditText) findViewById(R.id.username);
-	            	usernameField.setText(data.getJSONObject("user").getString("name"));
+	            	TextView usernameField = (TextView) findViewById(R.id.username);
+	            	usernameField.setText(data.getJSONObject("user").getString("name")+"'s Profile");
             	}
             	else
                     Toast.makeText(context, json.getString("info"),Toast.LENGTH_LONG).show();
@@ -83,9 +83,9 @@ public class UserInfoActivity extends SherlockActivity {
         @Override
         protected void onPostExecute(JSONObject json) {
             try {
-            	EditText usernameField = (EditText) findViewById(R.id.username);
+            	TextView usernameField = (TextView) findViewById(R.id.username);
             	if((json.getString("success").equals("true")))
-            		usernameField.setText(json.getJSONObject("data").getString("name"));
+            		usernameField.setText(json.getJSONObject("data").getString("name")+"'s Profile");
             	else
                     Toast.makeText(context, json.getString("info"),Toast.LENGTH_LONG).show();
             } catch (Exception e) {
