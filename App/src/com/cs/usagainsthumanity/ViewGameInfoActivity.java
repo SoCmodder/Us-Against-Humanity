@@ -12,19 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.cs.usagainsthumanity.Adapters.GameArrayAdapter;
 import com.cs.usagainsthumanity.Adapters.GameRoundAdapter;
 import com.cs.usagainsthumanity.Adapters.ScoreAdapter;
-import com.cs.usagainsthumanity.Objects.CustomCard;
 import com.cs.usagainsthumanity.Objects.Game;
 import com.cs.usagainsthumanity.Objects.GameRound;
-import com.cs.usagainsthumanity.Objects.Submitted;
-import com.fima.cardsui.objects.CardStack;
-import com.fima.cardsui.views.CardUI;
+import com.emilsjolander.components.stickylistheaders.StickyListHeadersListView;
 import com.savagelook.android.UrlJsonAsyncTask;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -41,9 +35,9 @@ import java.util.List;
 public class ViewGameInfoActivity extends SherlockFragmentActivity {
 
     private SharedPreferences mPreferences;
-    private CardUI lastRound;
     private boolean mTwoPane = false;
     private Game game;
+    private StickyListHeadersListView stickyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +63,8 @@ public class ViewGameInfoActivity extends SherlockFragmentActivity {
                     //To change body of implemented methods use File | Settings | File Templates.
                 }
             });
-            lastRound = (CardUI) findViewById(R.id.lastroundlist);
+            stickyList = (StickyListHeadersListView) findViewById(R.id.lastroundlist);
+
             if(!mTwoPane){
                 loadLastRoundFromAPI(Data.serverUrl + "games/" +  game.getId() + "/last_round" );
             }else{
@@ -133,23 +128,7 @@ public class ViewGameInfoActivity extends SherlockFragmentActivity {
                 gameRounds.add(new GameRound(data));
 
                 //TODO Everything after this line needs to be made into a function
-                for(GameRound gameRound : gameRounds){
-                    CardStack temp = new CardStack();
-                    temp.setTitle(gameRound.getBlacktext() + "\n" + Integer.toString(gameRound.getWinninguser()));
-                    lastRound.addStack(temp);
-                    for(Submitted sub : gameRound.getSubmittedList()){
-                        temp = new CardStack();
-                        temp.setTitle(String.valueOf(sub.getGameuserId()));
-
-                        for(String text : sub.getSubmitted()){
-                            temp.add(new CustomCard(sub.getGameuserId(), text));
-                        }
-                        lastRound.addStack(temp);
-
-                    }
-                }
-
-                lastRound.refresh();
+            stickyList.setAdapter(new GameRoundAdapter(ViewGameInfoActivity.this, R.layout.submitted_game_item, gameRounds));
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),
                         Toast.LENGTH_LONG).show();

@@ -38,9 +38,12 @@
             android:id="@+id/lastroundlabel"
             android:layout_alignLeft="@+id/host_label"
             android:layout_below="@+id/playerlist"/>
-    <com.fima.cardsui.views.CardUI
+    <com.emilsjolander.components.stickylistheaders.StickyListHeadersListView
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            android:dividerHeight="5dp"
+            android:fastScrollEnabled="true"
+            android:padding="16dip"
             android:id="@+id/lastroundlist"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/lastroundlabel"/>
