@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -15,9 +16,18 @@ import com.cs.usagainsthumanity.Objects.Submitted;
 import com.savagelook.android.UrlJsonAsyncTask;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
+import org.apache.http.client.HttpResponseException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -108,6 +118,13 @@ public class GameActivity extends SlidingFragmentActivity {
                 startActivity(derp);
                 finish();
                 return true;
+            case R.id.leave:
+                RemoveUserTask createGameTask = new RemoveUserTask(GameActivity.this);
+                createGameTask.setMessageLoading("Submitting Cards...");
+                //createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
+                createGameTask.execute(HAND_URL + game_id + "/users" + "?auth_token=" + mPreferences.getString("AuthToken", ""));
+
+                return true;
             case R.id.settings:
                 Intent sIntent = new Intent(GameActivity.this, SettingsActivity.class);
                 startActivityForResult(sIntent, 0);
@@ -165,6 +182,70 @@ public class GameActivity extends SlidingFragmentActivity {
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),
                         Toast.LENGTH_LONG).show();
+            } finally {
+                super.onPostExecute(json);
+            }
+        }
+    }
+
+
+    private class RemoveUserTask extends UrlJsonAsyncTask {
+        public RemoveUserTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... urls) {
+            DefaultHttpClient client = new DefaultHttpClient();
+            HttpDelete delete = new HttpDelete(urls[0]);
+            String response = null;
+            JSONObject json = new JSONObject();
+
+            try {
+                try {
+                    JSONArray holder = new JSONArray();
+                    // setup the returned values in case
+                    // something goes wrong
+                    json.put("success", false);
+                    json.put("info", "Something went wrong. Retry!");
+                    // add the user email and password to
+                    // the params
+                    // setup the request headers
+                    delete.setHeader("Accept", "application/json");
+                    delete.setHeader("Content-Type", "application/json");
+
+                    ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                    response = client.execute(delete, responseHandler);
+                    json = new JSONObject(response);
+
+                } catch (HttpResponseException e) {
+                    e.printStackTrace();
+                    Log.e("ClientProtocol", "" + e);
+                    json.put("info", "There was an error creating the game. Please retry!");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e("IO", "" + e);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.e("JSON", "" + e);
+            }
+
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            try {
+                if (json.getBoolean("success")) {
+                    // everything is ok
+                    Toast.makeText(GameActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    GameActivity.this.finish();
+                }
+            } catch (Exception e) {
+                // something went wrong: show a Toast
+                // with the exception message
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             } finally {
                 super.onPostExecute(json);
             }

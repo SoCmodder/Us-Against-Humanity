@@ -73,21 +73,26 @@ public class GameRoundAdapter extends BaseAdapter implements StickyListHeadersAd
         if(v == null){
             LayoutInflater inflater = LayoutInflater.from(mContext);
             v = inflater.inflate(layoutResourceId, parent, false);
-            v.setTag(holder);
-            LinearLayout ll = (LinearLayout)v.findViewById(R.id.inner_view);
+            holder = new SubmittedHolder();
+            holder.username = (TextView)v.findViewById(R.id.user_name);
+            holder.ll = (LinearLayout)v.findViewById(R.id.inner_view);
 
-            for(String text : submittedItem.getSubmitted()){
-                LayoutInflater inflater2 = LayoutInflater.from(mContext);
-                View v2 = inflater2.inflate(R.layout.custom_card, ll, false);
-                ((TextView)v2.findViewById(R.id.text)).setText(text);
-                ll.addView(v2);
-            }
+            v.setTag(holder);
+        }  else {
+            holder = (SubmittedHolder) convertView.getTag();
         }
 
-        holder = new SubmittedHolder();
-        holder.username = (TextView)v.findViewById(R.id.user_name);
+
+
 
         holder.username.setText(submittedItem.getUsername());
+        holder.ll.removeAllViews();
+        for(String text : submittedItem.getSubmitted()){
+            LayoutInflater inflater2 = LayoutInflater.from(mContext);
+            View v2 = inflater2.inflate(R.layout.custom_card, holder.ll, false);
+            ((TextView)v2.findViewById(R.id.text)).setText(text);
+            holder.ll.addView(v2);
+        }
 
         return v;
 
@@ -95,6 +100,7 @@ public class GameRoundAdapter extends BaseAdapter implements StickyListHeadersAd
 
     static class SubmittedHolder{
         TextView username;
+        LinearLayout ll;
     }
 
     @Override
