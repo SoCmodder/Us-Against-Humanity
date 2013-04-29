@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -47,7 +46,7 @@ import java.util.List;
 public class CreateGameActivity extends SherlockActivity {
     Button submit;
     EditText winningPts, maximumPlayers;
-    CheckBox privacy;
+    //CheckBox privacy;
     private static final String CREATE_GAME_URL = Data.serverUrl + "games";
     SharedPreferences mPreferences;
 
@@ -79,7 +78,7 @@ public class CreateGameActivity extends SherlockActivity {
     public void createGame(){
         ptsToWin = Integer.valueOf(winningPts.getText().toString());
         maxPlayers = Integer.valueOf(maximumPlayers.getText().toString());
-        isPrivate = privacy.isChecked();
+        //isPrivate = privacy.isChecked();
         if(ptsToWin<1 || ptsToWin==null){
             winningPts.setError("Please enter a value of 1 or more.");
         }else if(maxPlayers<3 || maxPlayers==null){
@@ -157,6 +156,7 @@ public class CreateGameActivity extends SherlockActivity {
                     // launch the HomeActivity and close this one
                     Intent intent = new Intent(CreateGameActivity.this, GameActivity.class);
                     intent.putExtra("gameID", gameId);
+                    intent.putExtra("created", 1);
                     startActivity(intent);
                     finish();
                 }

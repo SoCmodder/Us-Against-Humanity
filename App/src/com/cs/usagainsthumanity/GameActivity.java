@@ -19,8 +19,6 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
@@ -51,6 +49,11 @@ public class GameActivity extends SlidingFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        if(getIntent().getIntExtra("created", 0) == 1){
+            Intent intent = new Intent(GameActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
         SlidingMenu sm = getSlidingMenu();
         sm.setShadowWidthRes(R.dimen.shadow_width);
         sm.setShadowDrawable(R.drawable.shadow);

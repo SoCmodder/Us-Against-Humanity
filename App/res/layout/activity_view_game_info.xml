@@ -5,21 +5,21 @@
         android:layout_width="match_parent"
         android:orientation="vertical">
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/host_label"
             android:id="@+id/host_label"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"/>
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/players_label"
             android:id="@+id/textView"
             android:layout_alignLeft="@+id/host_label"
             android:layout_below="@+id/host_label"/>
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/host_name"
