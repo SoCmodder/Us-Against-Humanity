@@ -48,7 +48,7 @@ public class NotificationService extends Service {
         public void run() {
             Log.i("Service", "Timer task doing work");
             DefaultHttpClient httpclient = new DefaultHttpClient();
-            HttpGet request = new HttpGet("http://r06sjbkcc.device.mst.edu:3000/api/v1/notifications");
+            HttpGet request = new HttpGet(Data.serverUrl + "notifications");
             request.setHeader("Authorization", "Token token=\"" + mPreferences.getString("AuthToken", "") + "\"");
             Log.d("String", "Request: " + request.getAllHeaders()[0].toString());
             HttpResponse response = null;

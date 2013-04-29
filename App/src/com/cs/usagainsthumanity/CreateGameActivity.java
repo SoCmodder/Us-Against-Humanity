@@ -49,7 +49,7 @@ public class CreateGameActivity extends SherlockActivity {
     Button submit;
     EditText winningPts, maximumPlayers;
     CheckBox privacy;
-    private static final String CREATE_GAME_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games";
+    private static final String CREATE_GAME_URL = Data.serverUrl + "games";
     SharedPreferences mPreferences;
 
     Integer ptsToWin = 0, maxPlayers = 0;

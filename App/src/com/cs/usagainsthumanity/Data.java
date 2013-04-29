@@ -24,7 +24,7 @@ import android.util.Log;
 
 public class Data {
 
-	public static String serverUrl = "http://r06sjbkcc.device.mst.edu:3000/api/v1/";	
+	public static String serverUrl = "http://infinite-woodland-5610.herokuapp.com/api/v1/";
 	public static String userId;
 	public static String auth_token = null;
 

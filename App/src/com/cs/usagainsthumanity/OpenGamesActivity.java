@@ -43,8 +43,8 @@ import java.util.List;
 public class OpenGamesActivity extends SherlockListActivity {
     
     private SharedPreferences mPreferences;
-    private static final String GAME_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/?find=open";
-    private static final String CREATE_GAME_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
+    private static final String GAME_URL = Data.serverUrl + "games/?find=open";
+    private static final String CREATE_GAME_URL = Data.serverUrl + "games/";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

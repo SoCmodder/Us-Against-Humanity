@@ -24,8 +24,8 @@ import com.savagelook.android.UrlJsonAsyncTask;
  * To change this template use File | Settings | File Templates.
  */
 public class UserInfoActivity extends SherlockActivity {
-    private static final String WHO_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/who";
-    private static final String USERS_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/users/";
+    private static final String WHO_URL = Data.serverUrl + "who";
+    private static final String USERS_URL = Data.serverUrl + "users/";
     private SharedPreferences mPreferences;
 
     public void onCreate(Bundle savedInstanceState){

@@ -29,7 +29,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class PastGameActivity extends SherlockListActivity {
-    private static final String TASKS_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/?find=ended";
+    private static final String TASKS_URL = Data.serverUrl + "games/?find=ended";
 
     private SharedPreferences mPreferences;
 

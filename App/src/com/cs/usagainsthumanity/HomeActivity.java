@@ -24,7 +24,7 @@ import com.cs.usagainsthumanity.Objects.Game;
 import com.savagelook.android.UrlJsonAsyncTask;
 
 public class HomeActivity extends SherlockListActivity {
-    private static final String TASKS_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/?find=in";
+    private static final String TASKS_URL = Data.serverUrl + "games/?find=in";
 
     private SharedPreferences mPreferences;
 

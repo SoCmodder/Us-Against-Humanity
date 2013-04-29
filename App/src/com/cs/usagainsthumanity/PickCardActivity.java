@@ -37,7 +37,7 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class PickCardActivity extends SherlockListActivity {
-    String SERVER_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/whitecard";
+    String SERVER_URL = Data.serverUrl + "whitecard";
     SharedPreferences mPreferences;
     ArrayList<CardObj> cards;
 

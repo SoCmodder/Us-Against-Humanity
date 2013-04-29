@@ -33,7 +33,7 @@ import com.savagelook.android.UrlJsonAsyncTask;
 public class LoginActivity extends SherlockActivity {
 
     //This needs to be changed...obviously
-    private final static String LOGIN_API_ENDPOINT_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/sessions.json";
+    private final static String LOGIN_API_ENDPOINT_URL = Data.serverUrl + "sessions.json";
     private SharedPreferences mPreferences;
     private String mUserEmail;
     private String mUserPassword;

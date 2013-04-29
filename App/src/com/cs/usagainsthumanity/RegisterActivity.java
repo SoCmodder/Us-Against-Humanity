@@ -31,7 +31,7 @@ import com.actionbarsherlock.app.SherlockActivity;
  * Time: 2:53 PM
  */
 public class RegisterActivity extends SherlockActivity {
-    private final static String REGISTER_API_ENDPOINT_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/registrations";
+    private final static String REGISTER_API_ENDPOINT_URL = Data.serverUrl + "registrations";
     private SharedPreferences mPreferences;
     private String mUserEmail;
     private String mUserName;

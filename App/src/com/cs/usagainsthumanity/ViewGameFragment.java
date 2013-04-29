@@ -59,7 +59,7 @@ public class ViewGameFragment extends SherlockListFragment {
     private int winning_id;
     private int game_id = -1;
     private int[] cardIDS;
-    private static final String CREATE_GAME_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games";
+    private static final String CREATE_GAME_URL = Data.serverUrl + "games";
     ActionMode mMode = null;
 
     @Override

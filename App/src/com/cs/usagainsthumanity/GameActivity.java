@@ -38,7 +38,7 @@ import java.util.ArrayList;
  */
 public class GameActivity extends SlidingFragmentActivity {
     SharedPreferences mPreferences;
-    private static final String HAND_URL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/";
+    private static final String HAND_URL = Data.serverUrl + "games/";
     private int game_id = -1;
     private Game gameObj = null;
     ArrayList<String> card_texts;
