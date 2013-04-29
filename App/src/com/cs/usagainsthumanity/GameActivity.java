@@ -162,8 +162,7 @@ public class GameActivity extends SlidingFragmentActivity {
                         submittedArrayList.add(new Submitted(submitted.getJSONObject(i),1));
                     }
                     for(int i=0; i<score.length(); i++){
-                        Player p = new Player(score.getJSONObject(i).getString("name"),
-                                score.getJSONObject(i).getInt("score"), score.getJSONObject(i).getInt("user_id"));
+                        Player p = new Player(score.getJSONObject(i));
                         playerList.add(p);
                     }
                     gameObj = new Game(game);

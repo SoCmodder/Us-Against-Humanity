@@ -67,26 +67,27 @@ public class GameRoundAdapter extends BaseAdapter implements StickyListHeadersAd
     }
 
     @Override public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
-        SubmittedHolder holder = null;
-        Submitted submittedItem = submitteds[position];
-        if(v == null){
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            v = inflater.inflate(layoutResourceId, parent, false);
-            holder = new SubmittedHolder();
-            holder.username = (TextView)v.findViewById(R.id.user_name);
-            holder.ll = (LinearLayout)v.findViewById(R.id.inner_view);
 
-            v.setTag(holder);
+        SubmittedHolder holder = null;
+
+        if(convertView == null){
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            convertView = inflater.inflate(layoutResourceId, parent, false);
+            holder = new SubmittedHolder();
+            holder.username = (TextView)convertView.findViewById(R.id.user_name);
+            holder.ll = (LinearLayout)convertView.findViewById(R.id.inner_view);
+
+            convertView.setTag(holder);
         }  else {
             holder = (SubmittedHolder) convertView.getTag();
         }
 
 
 
-
-        holder.username.setText(submittedItem.getUsername());
+        Submitted submittedItem = submitteds[position];
         holder.ll.removeAllViews();
+        holder.username.setText(submittedItem.getUsername());
+
         for(String text : submittedItem.getSubmitted()){
             LayoutInflater inflater2 = LayoutInflater.from(mContext);
             View v2 = inflater2.inflate(R.layout.custom_card, holder.ll, false);
@@ -94,7 +95,7 @@ public class GameRoundAdapter extends BaseAdapter implements StickyListHeadersAd
             holder.ll.addView(v2);
         }
 
-        return v;
+        return convertView;
 
     }
 
@@ -177,7 +178,7 @@ public class GameRoundAdapter extends BaseAdapter implements StickyListHeadersAd
 
     @Override
     public Object[] getSections() {
-        return gameRounds.toArray(new String[gameRounds.size()]);
+        return gameRounds.toArray(new GameRound[gameRounds.size()]);
     }
 
     public void clearAll() {

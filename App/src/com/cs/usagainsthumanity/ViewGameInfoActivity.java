@@ -17,6 +17,7 @@ import com.cs.usagainsthumanity.Adapters.GameRoundAdapter;
 import com.cs.usagainsthumanity.Adapters.ScoreAdapter;
 import com.cs.usagainsthumanity.Objects.Game;
 import com.cs.usagainsthumanity.Objects.GameRound;
+import com.cs.usagainsthumanity.Objects.Player;
 import com.emilsjolander.components.stickylistheaders.StickyListHeadersListView;
 import com.savagelook.android.UrlJsonAsyncTask;
 import org.json.JSONObject;
@@ -60,7 +61,12 @@ public class ViewGameInfoActivity extends SherlockFragmentActivity {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //To change body of implemented methods use File | Settings | File Templates.
+                    Player player = game.getPlayerList().get(position);
+                    Intent intent = new Intent(ViewGameInfoActivity.this, UserInfoActivity.class);
+                    intent.putExtra("user_id", player.getId());
+                    startActivity(intent);
+
+
                 }
             });
             stickyList = (StickyListHeadersListView) findViewById(R.id.lastroundlist);

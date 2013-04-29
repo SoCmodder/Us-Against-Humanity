@@ -24,7 +24,7 @@ public class Player implements Serializable{
 
     public Player(JSONObject jsonObject) {
 		try {
-			id = jsonObject.getInt("id");
+			id = jsonObject.getInt("user_id");
 			name = jsonObject.getString("name");
 			score = jsonObject.getInt("score");
 		} catch (JSONException e) {

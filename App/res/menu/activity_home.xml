@@ -15,6 +15,11 @@
           android:title="Refresh"
           android:icon="@drawable/ic_action_refresh"
           android:showAsAction="ifRoom"/>
+    <item android:id="@+id/past"
+          android:orderInCategory="4"
+          android:title="Past Games"
+          android:icon="@drawable/ic_action_past"
+          android:showAsAction="ifRoom"/>
     <item android:id="@+id/settings"
           android:orderInCategory="4"
         android:title="@string/settings"

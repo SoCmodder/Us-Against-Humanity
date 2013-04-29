@@ -86,6 +86,11 @@ public class HomeActivity extends SherlockListActivity {
 			Intent sIntent = new Intent(HomeActivity.this, SettingsActivity.class);
 			startActivityForResult(sIntent, 0);
 			return true;
+        case R.id.past:
+            Intent mIntent = new Intent(HomeActivity.this, PastGameActivity.class);
+            startActivity(mIntent);
+            return true;
+
 		default:
 			return false;
 

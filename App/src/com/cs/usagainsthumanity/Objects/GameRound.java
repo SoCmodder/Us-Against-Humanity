@@ -16,14 +16,14 @@ import java.util.List;
  */
 public class GameRound implements Serializable{
     private String blacktext;
-    private int winninguser;
+    private String winninguser;
     private int id;
     List<Submitted> submittedList;
 
     public GameRound(JSONObject jsonObject){
         try{
             blacktext = jsonObject.getString("black_card");
-            winninguser = jsonObject.getInt("winninguser");
+            winninguser = jsonObject.getString("winninguser");
             id = jsonObject.getInt("id");
             JSONArray array = jsonObject.getJSONArray("submitted");
             submittedList = new ArrayList<Submitted>(array.length());
@@ -61,11 +61,11 @@ public class GameRound implements Serializable{
         this.id = id;
     }
 
-    public int getWinninguser() {
+    public String getWinninguser() {
         return winninguser;
     }
 
-    public void setWinninguser(int winninguser) {
+    public void setWinninguser(String winninguser) {
         this.winninguser = winninguser;
     }
 
