@@ -1,6 +1,5 @@
 package com.cs.usagainsthumanity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -65,7 +64,7 @@ public class CreateGameActivity extends SherlockActivity {
         submit = (Button) findViewById(R.id.submit_new_game_button);
         winningPts = (EditText) findViewById(R.id.pts_to_win);
         maximumPlayers = (EditText) findViewById(R.id.max_players);
-        privacy = (CheckBox) findViewById(R.id.privacy_checkbox);
+        //privacy = (CheckBox) findViewById(R.id.privacy_checkbox);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +88,6 @@ public class CreateGameActivity extends SherlockActivity {
         else{
             CreateGameTask createGameTask = new CreateGameTask(CreateGameActivity.this);
             createGameTask.setMessageLoading("Creating Game...");
-            //createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
             createGameTask.execute(CREATE_GAME_URL + "?auth_token=" + mPreferences.getString("AuthToken", ""));
         }
 
@@ -119,7 +117,7 @@ public class CreateGameActivity extends SherlockActivity {
                     // the params
                     gameObj.put("points_to_win", ptsToWin);
                     gameObj.put("slots", maxPlayers);
-                    gameObj.put("private", isPrivate);
+                    //gameObj.put("private", isPrivate);
 
                     holder.put("game", gameObj);
                     StringEntity se = new StringEntity(holder.toString());

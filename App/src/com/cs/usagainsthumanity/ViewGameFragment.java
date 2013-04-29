@@ -35,7 +35,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -68,10 +67,7 @@ public class ViewGameFragment extends SherlockListFragment {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
         excluded = new ArrayList<Integer>();
         game_id = getActivity().getIntent().getIntExtra("gameID", -1);
-        //CardStack stack = new CardStack();
-        //stack.setTitle("Herp");
-        //stack.add(new CustomCard(0, "Test Card"));
-        //cardView.addStack(stack);
+
         View blackView = getLayoutInflater(getArguments()).inflate(R.layout.black_card, null);
         TextView blackText = (TextView) blackView.findViewById(R.id.text);
         blackText.setText(getArguments().getString("blackCardText"));
@@ -106,7 +102,6 @@ public class ViewGameFragment extends SherlockListFragment {
                                         winning_id = (int) id;
                                         WinCardTask createGameTask = new WinCardTask(getSherlockActivity());
                                         createGameTask.setMessageLoading("Submitting Cards...");
-                                        //createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
                                         createGameTask.execute(CREATE_GAME_URL + "/" + game_id + "/winningcard" + "?auth_token=" + mPreferences.getString("AuthToken", ""));
 
                                     }
@@ -190,7 +185,6 @@ public class ViewGameFragment extends SherlockListFragment {
                                 }
                                 PlayCardTask createGameTask = new PlayCardTask(getSherlockActivity());
                                 createGameTask.setMessageLoading("Submitting Cards...");
-                                //createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
                                 String url = CREATE_GAME_URL + "/" + game_id + "/whitecard" + "?auth_token=" + mPreferences.getString("AuthToken", "");
                                 createGameTask.execute(url);
 

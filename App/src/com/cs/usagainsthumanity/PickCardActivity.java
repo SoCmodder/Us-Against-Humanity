@@ -9,17 +9,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListActivity;
-import com.actionbarsherlock.app.SherlockListFragment;
 import com.cs.usagainsthumanity.Adapters.CardAdapter;
 import com.cs.usagainsthumanity.Objects.CardObj;
-import com.cs.usagainsthumanity.Objects.Game;
-import com.cs.usagainsthumanity.Objects.Player;
-import com.cs.usagainsthumanity.Objects.Submitted;
 import com.savagelook.android.UrlJsonAsyncTask;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
@@ -78,7 +73,6 @@ public class PickCardActivity extends SherlockListActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         PickCardTask createGameTask = new PickCardTask(PickCardActivity.this);
                         createGameTask.setMessageLoading("Submitting Cards...");
-                        //createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
                         createGameTask.execute(SERVER_URL + "/" + cards.get(position).getId() + "?auth_token=" + mPreferences.getString("AuthToken", ""));
                     }
                 });
