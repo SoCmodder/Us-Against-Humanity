@@ -3,6 +3,7 @@ package com.cs.usagainsthumanity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -323,19 +324,12 @@ public class ViewGameFragment extends SherlockListFragment {
 
         @Override
         protected void onPostExecute(JSONObject json) {
-            try {
-                if (json.getBoolean("success")) {
-                    // everything is ok
-                    Toast.makeText(getSherlockActivity(), "Success", Toast.LENGTH_SHORT).show();
-                    getSherlockActivity().finish();
-                }
-            } catch (Exception e) {
-                // something went wrong: show a Toast
-                // with the exception message
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-            } finally {
-                super.onPostExecute(json);
-            }
+            super.onPostExecute(json);
+            Intent derp = new Intent(getSherlockActivity(), GameActivity.class);
+            derp.putExtra("gameID", game_id);
+            startActivity(derp);
+            getSherlockActivity().finish();
+
         }
     }
 

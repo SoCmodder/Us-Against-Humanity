@@ -145,6 +145,8 @@ public class GameActivity extends SlidingFragmentActivity {
             try {
                 JSONObject data = json.getJSONObject("data");
                 JSONObject game = data.getJSONObject("game");
+                JSONObject innergame = game.getJSONObject("game");
+
                 JSONObject hand = data.getJSONObject("hand");
                 JSONObject blackCard = data.getJSONObject("black_card");
                 JSONArray score = data.getJSONArray("score");
@@ -177,6 +179,12 @@ public class GameActivity extends SlidingFragmentActivity {
                     viewScoreFragment.setArguments(scoreBundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, viewGameFragment).commit();
                     getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame2, viewScoreFragment).commit();
+                    if(innergame.getInt("state") == 2){
+                        Intent intent = new Intent(GameActivity.this, ViewGameInfoActivity.class);
+                        intent.putExtra("game", gameObj);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),
