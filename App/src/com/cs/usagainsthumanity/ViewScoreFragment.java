@@ -1,11 +1,13 @@
 package com.cs.usagainsthumanity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.cs.usagainsthumanity.Adapters.ScoreAdapter;
 import com.cs.usagainsthumanity.Objects.Player;
@@ -31,6 +33,22 @@ public class ViewScoreFragment extends SherlockListFragment {
 
         setListAdapter(new ScoreAdapter(getSherlockActivity().getApplicationContext(), R.layout.score_list_item, playerList));
 
+
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Player player = (Player) getListView().getItemAtPosition(position);
+                Intent intent = new Intent(getSherlockActivity(), UserInfoActivity.class);
+                intent.putExtra("user_id", player.getId());
+                startActivity(intent);
+            }
+        });
+
     }
 }

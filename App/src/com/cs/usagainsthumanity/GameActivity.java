@@ -146,7 +146,7 @@ public class GameActivity extends SlidingFragmentActivity {
                     }
                     for(int i=0; i<score.length(); i++){
                         Player p = new Player(score.getJSONObject(i).getString("name"),
-                                score.getJSONObject(i).getInt("score"));
+                                score.getJSONObject(i).getInt("score"), score.getJSONObject(i).getInt("user_id"));
                         playerList.add(p);
                     }
                     gameObj = new Game(game);

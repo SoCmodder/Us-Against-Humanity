@@ -16,7 +16,7 @@ public class Player implements Serializable{
     String name;
     Integer score;
 
-    public Player(String name, Integer score){
+    public Player(String name, Integer score, Integer id){
         this.id = id;
         this.name = name;
         this.score = score;
