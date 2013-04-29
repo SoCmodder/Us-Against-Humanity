@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="activated" parent="android:Theme.Light">
+
+    <item name="android:listViewStyle">@style/ListViewactivated</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewactivated.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemactivated</item>
+
+  </style>
+
+</resources>
