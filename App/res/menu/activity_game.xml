@@ -10,11 +10,6 @@
           android:title="Refresh"
           android:icon="@drawable/ic_action_refresh"
           android:showAsAction="ifRoom"/>
-    <item android:id="@+id/leave"
-          android:orderInCategory="3"
-          android:title="Leave Game"
-          android:icon="@drawable/ic_action_leave"
-          android:showAsAction="ifRoom"/>
     <item android:id="@+id/settings"
           android:orderInCategory="4"
           android:title="@string/settings"

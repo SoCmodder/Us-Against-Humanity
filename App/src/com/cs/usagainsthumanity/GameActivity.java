@@ -118,13 +118,6 @@ public class GameActivity extends SlidingFragmentActivity {
                 startActivity(derp);
                 finish();
                 return true;
-            case R.id.leave:
-                RemoveUserTask createGameTask = new RemoveUserTask(GameActivity.this);
-                createGameTask.setMessageLoading("Submitting Cards...");
-                //createGameTask.setAuthToken(mPreferences.getString("AuthToken", ""));
-                createGameTask.execute(HAND_URL + game_id + "/users" + "?auth_token=" + mPreferences.getString("AuthToken", ""));
-
-                return true;
             case R.id.settings:
                 Intent sIntent = new Intent(GameActivity.this, SettingsActivity.class);
                 startActivityForResult(sIntent, 0);
