@@ -59,6 +59,7 @@ public class GameActivity extends SlidingFragmentActivity {
         sm.setShadowDrawable(R.drawable.shadow);
         sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         sm.setFadeDegree(0.35f);
+        sm.setMode(SlidingMenu.LEFT_RIGHT);
         sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
         card_texts = new ArrayList<String>();
@@ -78,11 +79,12 @@ public class GameActivity extends SlidingFragmentActivity {
 
         viewScoreFragment = new ViewScoreFragment();
 
-        getSlidingMenu().setMode(SlidingMenu.LEFT);
-        getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
         setContentView(R.layout.menu_frame);
         setBehindContentView(R.layout.menu_frame2);
+        getSlidingMenu().setSecondaryMenu(R.layout.menu_frame_two);
+
+
 
 
     }
@@ -181,6 +183,14 @@ public class GameActivity extends SlidingFragmentActivity {
                         startActivity(intent);
                         finish();
                     }
+
+                    Bundle arguments = new Bundle();
+                    arguments.putInt(ViewGameHistoryFragment.ARG_ITEM_ID, game_id);
+                    ViewGameHistoryFragment fragment = new ViewGameHistoryFragment();
+                    fragment.setArguments(arguments);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.menu_frame_two, fragment)
+                            .commit();
                 }
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),
