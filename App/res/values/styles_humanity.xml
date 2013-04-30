@@ -35,9 +35,7 @@
 
     </style>
 
-    <style name="activated" parent="Theme.Humanity">
-        <item name="android:background">?android:attr/activatedBackgroundIndicator</item>
-    </style>
+
 
     <style name="ActionBar.Solid.Humanity" parent="@style/Widget.Sherlock.Light.ActionBar.Solid.Inverse">
         <item name="background">@drawable/ab_solid_humanity</item>

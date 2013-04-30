@@ -83,10 +83,6 @@ public class GameActivity extends SlidingFragmentActivity {
         setContentView(R.layout.menu_frame);
         setBehindContentView(R.layout.menu_frame2);
         getSlidingMenu().setSecondaryMenu(R.layout.menu_frame_two);
-
-
-
-
     }
 
     private void loadRound(String url) {
