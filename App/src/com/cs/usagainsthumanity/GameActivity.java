@@ -3,9 +3,11 @@ package com.cs.usagainsthumanity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.animation.Interpolator;
 import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -59,7 +61,7 @@ public class GameActivity extends SlidingFragmentActivity {
         sm.setShadowDrawable(R.drawable.shadow);
         sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
         sm.setFadeDegree(0.35f);
-        sm.setMode(SlidingMenu.LEFT_RIGHT);
+        sm.setMode(SlidingMenu.LEFT);
         sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
         card_texts = new ArrayList<String>();
@@ -82,7 +84,6 @@ public class GameActivity extends SlidingFragmentActivity {
 
         setContentView(R.layout.menu_frame);
         setBehindContentView(R.layout.menu_frame2);
-        getSlidingMenu().setSecondaryMenu(R.layout.menu_frame_two);
     }
 
     private void loadRound(String url) {
@@ -179,14 +180,6 @@ public class GameActivity extends SlidingFragmentActivity {
                         startActivity(intent);
                         finish();
                     }
-
-                    Bundle arguments = new Bundle();
-                    arguments.putInt(ViewGameHistoryFragment.ARG_ITEM_ID, game_id);
-                    ViewGameHistoryFragment fragment = new ViewGameHistoryFragment();
-                    fragment.setArguments(arguments);
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.menu_frame_two, fragment)
-                            .commit();
                 }
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(),

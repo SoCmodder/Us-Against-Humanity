@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ import com.cs.usagainsthumanity.Adapters.SubmittedAdapter;
 import com.cs.usagainsthumanity.Objects.CardObj;
 import com.cs.usagainsthumanity.Objects.Submitted;
 import com.savagelook.android.UrlJsonAsyncTask;
+import com.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPut;
@@ -72,15 +75,12 @@ public class ViewGameFragment extends SherlockListFragment {
         TextView blackText = (TextView) blackView.findViewById(R.id.text);
         blackText.setText(getArguments().getString("blackCardText"));
         getListView().addHeaderView(blackView);
-        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-
-
         card_texts = getArguments().getStringArrayList("card_texts");
         card_ids = getArguments().getIntegerArrayList("card_ids");
         game_id = getArguments().getInt("gameID");
         is_czar = getArguments().getBoolean("is_czar");
         if(is_czar){
+            getListView().setChoiceMode(ListView.CHOICE_MODE_NONE);
             ArrayList<Submitted> subs = (ArrayList<Submitted>) getArguments().getSerializable("submitted");
             if(!subs.isEmpty()){
                 Collections.shuffle(subs);
@@ -112,6 +112,7 @@ public class ViewGameFragment extends SherlockListFragment {
                 });
             }
         }else{
+            getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             ArrayList<CardObj> cardObjs = new ArrayList<CardObj>();
             for(int i = 0; i < card_texts.size(); i++){
                 cardObjs.add(new CardObj(card_ids.get(i), card_texts.get(i)));
@@ -326,5 +327,6 @@ public class ViewGameFragment extends SherlockListFragment {
 
         }
     }
+
 
 }

@@ -107,7 +107,7 @@ public class HomeActivity extends SherlockListActivity {
             Intent intent = new Intent(HomeActivity.this, WelcomeActivity.class);
             startActivityForResult(intent, 0);
         }
-
+        stopService(new Intent(this, NotificationService.class));
         if(mPreferences.getBoolean("notifications", false)){
             startService(new Intent(this, NotificationService.class));
         }else {
