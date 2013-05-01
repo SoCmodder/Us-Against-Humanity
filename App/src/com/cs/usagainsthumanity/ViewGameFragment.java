@@ -15,6 +15,7 @@ import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
@@ -36,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -62,6 +64,7 @@ public class ViewGameFragment extends SherlockListFragment {
     private int[] cardIDS;
     private static final String CREATE_GAME_URL = Data.serverUrl + "games";
     ActionMode mMode = null;
+    private int numWhite;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
@@ -78,6 +81,7 @@ public class ViewGameFragment extends SherlockListFragment {
         card_ids = getArguments().getIntegerArrayList("card_ids");
         game_id = getArguments().getInt("gameID");
         is_czar = getArguments().getBoolean("is_czar");
+        numWhite = getArguments().getInt("blackCardNum");
         if(is_czar){
             getListView().setChoiceMode(ListView.CHOICE_MODE_NONE);
             ArrayList<Submitted> subs = (ArrayList<Submitted>) getArguments().getSerializable("submitted");
@@ -136,6 +140,7 @@ public class ViewGameFragment extends SherlockListFragment {
                         }
                     }else{
                         if(mMode!= null){
+                            //selected.clear();
                             mMode.finish();
                         }
                     }
@@ -165,7 +170,14 @@ public class ViewGameFragment extends SherlockListFragment {
 
         // Called when the user exits the action mode
         public void onDestroyActionMode(ActionMode mode) {
-            if(selected.size() > 0){
+            SparseBooleanArray derp = getListView().getCheckedItemPositions();
+            selected.clear();
+            for(int i = 1; i < getListView().getAdapter().getCount(); i++){
+                if (derp.get(i)){
+                    selected.add(i - 1);
+                }
+            }
+            if(selected.size() == numWhite && !selected.isEmpty()){
                 AlertDialog alertDialog = new AlertDialog.Builder(getSherlockActivity())
                         .setTitle("Submit Selected Cards?")
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -193,6 +205,9 @@ public class ViewGameFragment extends SherlockListFragment {
                         .create();
                 alertDialog.show();
 
+            }
+            else if (!selected.isEmpty()){
+                Toast.makeText(getSherlockActivity().getApplicationContext(), "Please select the right number of cards, you twat.", Toast.LENGTH_LONG).show();
             }
             mMode = null;
         }
