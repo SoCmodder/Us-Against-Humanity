@@ -167,7 +167,8 @@ public class CreateGameActivity extends SherlockActivity {
                     startActivity(intent);
                     finish();
                 }
-                Toast.makeText(context, json.getString("info"), Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, json.getString("info"), Toast.LENGTH_LONG).show();
+
             } catch (Exception e) {
                 // something went wrong: show a Toast
                 // with the exception message
