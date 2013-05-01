@@ -81,8 +81,15 @@ public class CreateGameActivity extends SherlockActivity {
         //isPrivate = privacy.isChecked();
         if(ptsToWin<1 || ptsToWin==null){
             winningPts.setError("Please enter a value of 1 or more.");
-        }else if(maxPlayers<3 || maxPlayers==null){
-            maximumPlayers.setError("Minimum of 3 players");
+        }
+        else if(ptsToWin > 10){
+            winningPts.setError("Maximum of 10.");
+        }
+        else if(maxPlayers<3 || maxPlayers==null){
+            maximumPlayers.setError("Minimum of 3 players.");
+        }
+        else if(maxPlayers > 8){
+            maximumPlayers.setError("Maximum of 8 players.");
         }
         else{
             CreateGameTask createGameTask = new CreateGameTask(CreateGameActivity.this);
