@@ -19,6 +19,9 @@ public class Game implements Serializable{
     int pointsToWin;
     int slots;
     boolean isPrivate;
+    boolean isCzar;
+    boolean allSubmit;
+    boolean haveSubmit;
     String hostname;
     List<Player> playerList;
     int state = 0;
@@ -42,6 +45,9 @@ public class Game implements Serializable{
 			slots = game.getInt("slots");
 			isPrivate = false;
 			state = game.getInt("state");
+            allSubmit = jsonObject.getBoolean("all_submit");
+            haveSubmit = jsonObject.getBoolean("havesubmit");
+            isCzar = jsonObject.getBoolean("is_czar");
 			JSONArray players = jsonObject.getJSONArray("players");
 			int length = players.length();
 			playerList = new ArrayList<Player>(length);
@@ -82,4 +88,28 @@ public class Game implements Serializable{
 	public int getState() {
 		return state;
 	}
+
+    public boolean isCzar() {
+        return isCzar;
+    }
+
+    public void setCzar(boolean czar) {
+        isCzar = czar;
+    }
+
+    public boolean isAllSubmit() {
+        return allSubmit;
+    }
+
+    public void setAllSubmit(boolean allSubmit) {
+        this.allSubmit = allSubmit;
+    }
+
+    public boolean isHaveSubmit() {
+        return haveSubmit;
+    }
+
+    public void setHaveSubmit(boolean haveSubmit) {
+        this.haveSubmit = haveSubmit;
+    }
 }

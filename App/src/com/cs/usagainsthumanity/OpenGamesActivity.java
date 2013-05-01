@@ -123,12 +123,6 @@ public class OpenGamesActivity extends SherlockListActivity {
                         //pass that info to the next activity
                         //profit
                         final Game game = (Game) getListView().getItemAtPosition(position);
-                        if(game.getPlayerList().size()+1 < game.getSlots()){
-                            Intent gameInfo = new Intent(OpenGamesActivity.this, ViewGameInfoActivity.class);
-                            gameInfo.putExtra("game", game);
-                            startActivity(gameInfo);
-                            finish();
-                        }
                         TextView textView = new TextView(OpenGamesActivity.this);
                         textView.setText("Would you like to join " + game.getHostName() + "\'s game?");
                         AlertDialog alertDialog = new AlertDialog.Builder(OpenGamesActivity.this)

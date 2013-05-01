@@ -18,27 +18,31 @@
         android:id="@+id/state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="TextView" />
+        android:text="TextView" android:layout_alignLeft="@+id/host" android:layout_below="@+id/host"/>
 
     <TextView
         android:id="@+id/slots"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/host"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignLeft="@+id/host" android:layout_below="@+id/state"/>
 
     <TextView
         android:id="@+id/ptw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/slots"
-        android:layout_alignBottom="@+id/slots"
-        android:layout_alignParentRight="true"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" android:layout_alignLeft="@+id/host"
+        android:layout_below="@+id/slots"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AlertImg" android:layout_alignParentRight="true" android:layout_alignTop="@+id/host"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/AlertText" android:layout_alignParentRight="true" android:layout_alignBottom="@+id/ptw"/>
 
 </RelativeLayout>

@@ -174,7 +174,7 @@ public class GameActivity extends SlidingFragmentActivity {
                     viewScoreFragment.setArguments(scoreBundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, viewGameFragment).commit();
                     getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame2, viewScoreFragment).commit();
-                    if(innergame.getInt("state") == 2){
+                    if(innergame.getInt("state") == 2 || innergame.getInt("state") == 0){
                         Intent intent = new Intent(GameActivity.this, ViewGameInfoActivity.class);
                         intent.putExtra("game", gameObj);
                         startActivity(intent);
