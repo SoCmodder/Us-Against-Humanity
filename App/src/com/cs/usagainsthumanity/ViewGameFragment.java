@@ -15,7 +15,6 @@ import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
@@ -260,13 +259,14 @@ public class ViewGameFragment extends SherlockListFragment {
             try {
                 if (json.getBoolean("success")) {
                     // everything is ok
-                    Toast.makeText(getSherlockActivity(), "Success", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getSherlockActivity(), "Success", Toast.LENGTH_SHORT).show();
                     getSherlockActivity().finish();
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 // something went wrong: show a Toast
                 // with the exception message
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             } finally {
                 super.onPostExecute(json);
             }

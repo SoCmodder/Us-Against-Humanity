@@ -21,9 +21,7 @@ import com.cs.usagainsthumanity.Objects.Game;
 import com.savagelook.android.UrlJsonAsyncTask;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
@@ -125,6 +123,12 @@ public class OpenGamesActivity extends SherlockListActivity {
                         //pass that info to the next activity
                         //profit
                         final Game game = (Game) getListView().getItemAtPosition(position);
+                        if(game.getPlayerList().size()+1 < game.getSlots()){
+                            Intent gameInfo = new Intent(OpenGamesActivity.this, ViewGameInfoActivity.class);
+                            gameInfo.putExtra("game", game);
+                            startActivity(gameInfo);
+                            finish();
+                        }
                         TextView textView = new TextView(OpenGamesActivity.this);
                         textView.setText("Would you like to join " + game.getHostName() + "\'s game?");
                         AlertDialog alertDialog = new AlertDialog.Builder(OpenGamesActivity.this)

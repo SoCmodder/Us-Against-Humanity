@@ -182,8 +182,9 @@ public class GameActivity extends SlidingFragmentActivity {
                     }
                 }
             } catch (Exception e) {
-                Toast.makeText(context, e.getMessage(),
-                        Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+                /*Toast.makeText(context, e.getMessage(),
+                        Toast.LENGTH_LONG).show(); */
             } finally {
                 super.onPostExecute(json);
             }
