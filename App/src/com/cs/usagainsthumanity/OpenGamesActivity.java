@@ -213,6 +213,7 @@ public class OpenGamesActivity extends SherlockListActivity {
                     // launch the HomeActivity and close this one
                     Intent intent = new Intent(OpenGamesActivity.this, GameActivity.class);
                     intent.putExtra("gameID", gameId);
+                    intent.putExtra("created", 1);
                     startActivity(intent);
                     finish();
                 }
