@@ -8,10 +8,12 @@ class Game < ActiveRecord::Base
   has_many :blackcardindeck
   has_many :blackcardwon
   has_many :gamelasts
+  has_many :notifications
 
   attr_accessible :points_to_win, :private, :slots
 
   validates_presence_of :points_to_win, :slots
+  validates_inclusion_of :slots, :in => 3..18, :message => "must be between 3 and 18"
 
   default_scope order('state DESC')
 
@@ -28,7 +30,7 @@ class Game < ActiveRecord::Base
         self.blackcardindeck.create(:blackcard_id => card)
       end
       self.gameusers.each do |gameuser|
-        hand = self.whitecardindeck.all.sample(7)
+        hand = self.whitecardindeck.all.sample(10)
         hand.each do |card|
           self.whitecardinhand.create(:gameuser_id => gameuser.id, :whitecard_id => card.whitecard_id)
           card.destroy
@@ -41,7 +43,7 @@ class Game < ActiveRecord::Base
   end
 
   def next!
-  	if self.user_turn+1 == :slots
+  	if self.user_turn+1 == self.slots
   		update_column(:user_turn,0)
   	else
   		update_column(:user_turn, self.user_turn+1)
@@ -53,8 +55,10 @@ class Game < ActiveRecord::Base
     self.gameusers.find_by_user_id(@user_id).destroy
     if state == 1
       update_column(:slots, self.slots - 1)
-      if @user_id == self.user_id || self.slots == 1
+      if @user_id == self.user_id || self.slots == 2
         update_column(:state, 2)
+        @gameusers = self.gameusers.order("score DESC")
+        update_column(:winner, @gameusers[0].user_id)
       end
     end
   end       

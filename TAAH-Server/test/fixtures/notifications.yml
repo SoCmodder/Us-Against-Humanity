@@ -2,8 +2,12 @@
 
 one:
   user_id: 1
-  whitecard_id: 1
+  message: MyString
+  game_id: 1
+  status: 1
 
 two:
   user_id: 1
-  whitecard_id: 1
+  message: MyString
+  game_id: 1
+  status: 1

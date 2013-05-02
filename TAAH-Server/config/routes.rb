@@ -17,23 +17,39 @@ TAAHServer::Application.routes.draw do
       put 'tasks/:id/open' => 'tasks#open', :as => 'open_task'
       put 'tasks/:id/complete' => 'tasks#complete', :as => 'complete_task'
 
+
+
       #User paths
       #Returns all user information
-      get 'users/:id' => 'users#find', :as => 'find_user' #Tested-complete
+      get 'users/:id' => 'users#find' #Tested-complete
+      
+
+
       #Returns the user_id
       get 'users' => 'users#email' #Tested-complete
+      #Returns details about the current user
+      get 'who' => 'users#who'
+      #Gets all users notifications
+      get 'notifications' => 'users#notifications'
       #Gets the user's stats
-      #get 'users/:id/stats' => "users#stats", :as => 'stat_user'
+      get 'users/:id/stats' => 'users#stats'
+      put 'whitecard/:id' => 'users#setwhite'
+      get 'whitecard' => 'users#getwhite'
+      
+
 
       #Game paths
       #Creates game
       post 'games' => 'games#create' #Tested-complete
-      
-      get 'games' => 'games#find'
+
+      get 'games' => 'games#find', :as => 'find_game'
+
+      get 'games/:id/round' => 'games#round'
+
       #Add current user to game
       put 'games/:id' => 'games#adduser', :as => 'adduser_game' #Tested-complete
       #Remove user from game
-      delete 'games/:id/users/:user_id' =>  'games#removeuser', :as => 'deleteuser_game' #Tested-complete
+      delete 'games/:id/users' =>  'games#removeuser' #Tested-complete
       #Plays card(s) from user's hand
       put 'games/:id/whitecard' => 'games#playwhite'  #Tested-complete
       #Gets all submitted cards

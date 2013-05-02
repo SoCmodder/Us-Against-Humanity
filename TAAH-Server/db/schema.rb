@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130324184332) do
+ActiveRecord::Schema.define(:version => 20130429011416) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -89,12 +89,12 @@ ActiveRecord::Schema.define(:version => 20130324184332) do
     t.integer  "slots"
     t.integer  "points_to_win"
     t.boolean  "private"
-    t.integer  "state"
+    t.integer  "state",         :default => 0
     t.integer  "user_turn"
     t.integer  "winner"
     t.integer  "current_black"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "gameusers", :force => true do |t|
@@ -103,6 +103,15 @@ ActiveRecord::Schema.define(:version => 20130324184332) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
     t.integer  "score",      :default => 0
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "message"
+    t.integer  "game_id"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "tasks", :force => true do |t|
@@ -141,9 +150,7 @@ ActiveRecord::Schema.define(:version => 20130324184332) do
 
   create_table "userstats", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "gamesplayed"
-    t.integer  "gameswon"
-    t.integer  "blackcard_id"
+    t.integer  "whitecard_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

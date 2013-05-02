@@ -1,3 +1,5 @@
 class Userstat < ActiveRecord::Base
-  attr_accessible :blackcard_id, :gamesplayed, :gameswon, :user_id
+	belongs_to :user
+
+  attr_accessible :user_id, :whitecard_id
 end
