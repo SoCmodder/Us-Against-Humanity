@@ -19,4 +19,5 @@
 
 <resources>
     <color name="pressed_humanity">#CC33B5E5</color>
+    <color name="transparent">#cc000000</color>
 </resources>

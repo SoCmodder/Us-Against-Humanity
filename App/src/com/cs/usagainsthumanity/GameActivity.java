@@ -75,8 +75,6 @@ public class GameActivity extends SlidingFragmentActivity {
         scoreBundle.putInt("gameID", game_id);
 
         viewGameFragment = new ViewGameFragment();
-
-
         viewScoreFragment = new ViewScoreFragment();
 
 
@@ -252,6 +250,4 @@ public class GameActivity extends SlidingFragmentActivity {
             }
         }
     }
-
-
 }

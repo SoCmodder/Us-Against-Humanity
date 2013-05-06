@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/game_tutorial_layout">
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="#FFFFFF"
+              android:id="@+id/tutorial_textview"
+              android:textSize="30dp"
+              android:paddingLeft="15dp"
+              android:paddingTop="50dp"
+              android:text="@string/game_tutorial_text"/>
+    <ImageView android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/white_arrow"
+               android:id="@+id/tutorial_image"
+               android:minHeight="100dp"
+               android:minWidth="100dp"
+               android:contentDescription="arrow"
+               android:layout_centerInParent="true"/>
+    <Button android:id="@+id/dismissal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="19dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Got it!"
+            android:textColor="#FFFFFF"/>
+
+</RelativeLayout>

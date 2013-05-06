@@ -5,13 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
-import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,7 +23,6 @@ import com.cs.usagainsthumanity.Adapters.SubmittedAdapter;
 import com.cs.usagainsthumanity.Objects.CardObj;
 import com.cs.usagainsthumanity.Objects.Submitted;
 import com.savagelook.android.UrlJsonAsyncTask;
-import com.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPut;
@@ -37,7 +34,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -149,6 +145,7 @@ public class ViewGameFragment extends SherlockListFragment {
             };
             getListView().setOnItemClickListener(OILCL);
         }
+        showTutorial();
     }
 
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
@@ -339,9 +336,24 @@ public class ViewGameFragment extends SherlockListFragment {
             derp.putExtra("gameID", game_id);
             startActivity(derp);
             getSherlockActivity().finish();
-
         }
     }
 
+    public void showTutorial(){
+        if(hasRun()){
+            Intent tutorial = new Intent(getSherlockActivity(), ViewTutorialActivity.class);
+            startActivity(tutorial);
+        }
+    }
 
+    private boolean hasRun(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+        boolean ranBefore = preferences.getBoolean("RanBefore", false);
+        if(!ranBefore){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("RanBefore", true);
+            editor.commit();
+        }
+        return ranBefore;
+    }
 }
