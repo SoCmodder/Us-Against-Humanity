@@ -340,7 +340,7 @@ public class ViewGameFragment extends SherlockListFragment {
     }
 
     public void showTutorial(){
-        if(hasRun()){
+        if(!hasRun()){
             Intent tutorial = new Intent(getSherlockActivity(), ViewTutorialActivity.class);
             startActivity(tutorial);
         }
