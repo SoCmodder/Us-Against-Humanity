@@ -145,7 +145,6 @@ public class ViewGameFragment extends SherlockListFragment {
             };
             getListView().setOnItemClickListener(OILCL);
         }
-        showTutorial();
     }
 
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
@@ -337,23 +336,5 @@ public class ViewGameFragment extends SherlockListFragment {
             startActivity(derp);
             getSherlockActivity().finish();
         }
-    }
-
-    public void showTutorial(){
-        if(!hasRun()){
-            Intent tutorial = new Intent(getSherlockActivity(), ViewTutorialActivity.class);
-            startActivity(tutorial);
-        }
-    }
-
-    private boolean hasRun(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
-        boolean ranBefore = preferences.getBoolean("RanBefore", false);
-        if(!ranBefore){
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean("RanBefore", true);
-            editor.commit();
-        }
-        return ranBefore;
     }
 }

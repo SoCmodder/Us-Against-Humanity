@@ -82,6 +82,20 @@ public class GameActivity extends SlidingFragmentActivity {
         setBehindContentView(R.layout.menu_frame2);
     }
 
+    @Override
+    public void onPostCreate(Bundle savedInstanceState){
+        super.onPostCreate(savedInstanceState);
+        showTutorial();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(!hasRun()){
+            toggle();
+        }
+    }
+
     private void loadRound(String url) {
         GetTasksTask getTasksTask = new GetTasksTask(GameActivity.this);
         getTasksTask.setMessageLoading("Loading Hand...");
@@ -249,5 +263,24 @@ public class GameActivity extends SlidingFragmentActivity {
                 super.onPostExecute(json);
             }
         }
+    }
+
+    public void showTutorial(){
+        if(hasRun()){
+            Intent tutorial = new Intent(GameActivity.this, ViewTutorialActivity.class);
+            tutorial.putExtra("tutorial", "gameplay");
+            startActivity(tutorial);
+        }
+    }
+
+    private boolean hasRun(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean ranBefore = preferences.getBoolean("RanBefore", false);
+        if(!ranBefore){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("RanBefore", true);
+            editor.commit();
+        }
+        return ranBefore;
     }
 }
