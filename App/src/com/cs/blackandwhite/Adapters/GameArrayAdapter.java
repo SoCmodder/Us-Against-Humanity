@@ -1,7 +1,5 @@
 package com.cs.blackandwhite.Adapters;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.cs.blackandwhite.Objects.Game;
 import com.cs.blackandwhite.R;
+
+import java.util.List;
 
 public class GameArrayAdapter extends BaseAdapter {
 
@@ -60,12 +59,15 @@ public class GameArrayAdapter extends BaseAdapter {
             if(game.getState() == 1){
                 if(game.isCzar() && game.isAllSubmit()){
                     alertImg.setImageResource(R.drawable.all_cards);
+                    alertImg.setVisibility(View.VISIBLE);
                     alertText.setText("All Cards Submitted");
                 }else if((!game.isCzar()) && game.isHaveSubmit()){
                     alertImg.setImageResource(R.drawable.card_submitted);
+                    alertImg.setVisibility(View.VISIBLE);
                     alertText.setText("You have played");
                 }else if(!game.isCzar()){
                     alertImg.setImageResource(R.drawable.have_submit);
+                    alertImg.setVisibility(View.VISIBLE);
                     alertText.setText("You have not played");
 
                 }else {
