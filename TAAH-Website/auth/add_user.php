@@ -1,11 +1,16 @@
 <?php
   session_start();//Start a session so we can have global variables
+  $root = $_SERVER['DOCUMENT_ROOT'];
+  include_once $root . '/php/gamefunctions.php';
   $gameID = $_POST['game_id'];
   $auth_token = $_SESSION['auth_token'];
+  // $serverURL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/";
+  // $serverURL = "http://r01sjbkcc.device.mst.edu:3000/api/v1/";
+  $serverURL = $_SESSION['serverURL'];
   //Check if curl is installed
   if(!function_exists("curl_init")) die("cURL extension is not installed");
   //The URL for the server + sessions
-  $url = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games/$gameID";
+  $url = $serverURL . "games/$gameID";
   //Create a curl object and set what needs to be set
   $curl = curl_init($url);
   // Set query data here with the URL
@@ -19,23 +24,34 @@
   $json_response = curl_exec($curl);
   //Grab the status of the GET
   $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-  //If the status is not 200, print out a lot of information of what went wrong
-  // if ( $status != 200 ) {
       // die("Error: call to URL $url failed with status $status, response $json_response, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl));
-  // }
   //Close the curl instance
   curl_close($curl);
   echo "Put user json response " . $json_response ."<br>";
   if($status == 200) { //We got a success response from the server
-    //Grab the JSON response from the curl request
-    //Put user json response {"success":true,"info":"Game User created!","data":{"gameuser":{"id":34,"game_id":4,"user_id":5}}}
     $response = json_decode($json_response, true);
     $_SESSION['game_current'] = $response['data']['gameuser']['game_id'];
-    header("Location: playgame.php");//Only go here if the game has started!...
+    setInGameData();
+    if($_SESSION['game_current_state'] == 1) {
+      header("Location: game/game.php");//Only go here if the game has started!...
+    }
+    else {
+     header("Location: lobby.php");
+    }
+    
   }
   if($status == 405) {
     $_SESSION['game_current'] = $gameID;
-    header("location: game/game.php");
+    setInGameData();
+    if($_SESSION['game_current_state'] == 1) {
+      header("Location: game/game.php");//Only go here if the game has started!...
+    }
+    else {
+     header("Location: lobby.php");
+    }
+  }
+  else {
+    header("location /error/error.php");
   }
   //return the array for the function
   return $return;

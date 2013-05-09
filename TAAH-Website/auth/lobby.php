@@ -7,6 +7,8 @@
       session_start();
       $joinedGames = getJoinedGames($_SESSION['auth_token']);
       $openGames = getOpenGames($_SESSION['auth_token']);
+      // print_r($openGames);
+      // echo $_SESSION['auth_token'];
       // echo print_r($openGames);
       $createGameURL = "create_game.php";
       $joinGameURL = "add_user.php";
@@ -59,12 +61,12 @@
                 <th>Room Creator</th>
                 <th>Slots Open</th>
                 <th>Points to Win</th>
-                <th>Public/Private</th>
+                <th>Game Status</th>
                 <th>Play</th>
               </tr>
             </thead>            <?php              for($i=0;$i<sizeOf($joinedGames['data']['games']);$i++) {                echo "<tr id='link" . $i . "'>";                  echo "<td>" . getRoomCreator($joinedGames,$i) . "</td>";                  echo "<td>" . getNumberPlayers($joinedGames,$i) . "/" . getNumberSlots($joinedGames,$i) . "</td>";
                   echo "<td>" . getWinningScore($joinedGames,$i) . "/" . getPointsToWin($joinedGames,$i) . "</td>";
-                  echo "<td>" . getPublicPrivate($joinedGames,$i) . "</td>";
+                  echo "<td>" . getState($joinedGames,$i) . "</td>";
                   echo "<td>";
                   echo "<form class=\"form\" style=\"padding:0; margin:0\" method=\"POST\" action=\"$joinGameURL\">"; //Needs to redirect from the joinGame php file to the game screen
                   echo "<input type=\"hidden\" name=\"game_id\" value=\"" . getGameID($joinedGames,$i) . "\">"; 
@@ -88,7 +90,7 @@
                 <th>Room Creator</th>
                 <th>Slots Open</th>
                 <th>Points to Win</th>
-                <th>Public/Private</th>
+                <th>Game Status</th>
                 <th>Join</th>
               </tr>
             </thead>
@@ -98,7 +100,7 @@
                 echo "<td>" . getRoomCreator($openGames,$i) . "</td>";
                 echo "<td>" . getNumberPlayers($openGames,$i) . "/" . getNumberSlots($openGames,$i) . "</td>";
                 echo "<td>" . getWinningScore($openGames,$i) . "/" . getPointsToWin($openGames,$i) . "</td>";
-                echo "<td>" . getPublicPrivate($openGames,$i) . "</td>";
+                echo "<td>" . getState($openGames,$i) . "</td>";
                 echo "<td>";
                 echo "<form class=\"form\" style=\"padding:0; margin:0\" method=\"POST\" action=\"$joinGameURL\">"; //Needs to redirect from the joinGame php file to the game screen
                 echo "<input type=\"hidden\" name=\"game_id\" value=\"" . getGameID($openGames,$i) . "\">"; 
@@ -149,16 +151,6 @@
                     }
                     ?>
                   </select>
-                </div>
-              </div>
-          
-              <div class="control-group">
-                <!-- Private -->
-                <div class="controls">
-                  <label class="checkbox">
-                    <input type="checkbox" name="checkbox" value="">
-                    Private Game?
-                  </label>
                 </div>
               </div>
               

@@ -22,7 +22,7 @@
       </button>
       <?php
         if(isSet($_SESSION['auth_token'])) {
-          echo "<a class=\"brand\" href=\"$lobbyURL\">App Against Humanity</a>";
+          echo "<a class=\"brand\" href=\"$lobbyURL\">App Against Humanity <small class=\"text-error\">Web Pre-Beta</small></a>";
         }
         else {
           echo "<a class=\"brand\" href=\"$indexURL\">App Against Humanity</a>";

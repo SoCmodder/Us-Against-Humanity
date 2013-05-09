@@ -1,0 +1,10 @@
+-Change submitted white cards that czar sees to a black card with the white card entered as RED text
+-Make the refresh function check some sort of time value that will push the user out to the menu when not active for > some time.
+
+-Make the logout(destroy) function go back to index if it couldn't auth(aka, got timed out and has no auth token to sign out with)
+
+-Need to add a status (played/ready to choose/ect) in the lobby
+-Size that damned table so the button doesn't have space after it, fuck.
+-Maybe remove the games I'm playing table if the user isn't actually playing a game...
+
+-Make a page for submitting card ideas. Likely will be able to just embed the google form thing inside...Look for an API?

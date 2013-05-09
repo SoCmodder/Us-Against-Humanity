@@ -1,0 +1,63 @@
+if(<?php if($_SESSION['num_white'] == 1) { echo playCard($gameID,$_SESSION['white_one']);} 
+                 elseif($_SESSION['num_white'] == 2) {echo playCard($gameID,$_SESSION['white_one'],$_SESSION['white_two']);}?> == "true") {
+            console.log("it was true...");
+          }
+        else {
+            console.log("bad shit, man");
+          }
+          
+          
+          
+          
+          
+           // variable to hold request
+  var request;
+  // bind to the submit event of our form
+  $('[id^=play-card]').submit(function(event){
+    console.log("The button was pressed");
+    // prevent default posting of form
+    event.preventDefault();
+    // abort any pending request
+    if (request) {
+        request.abort();
+    }
+    // setup some local variables
+    var $form = $(this);
+    // let's select and cache all the fields
+    var $inputs = $form.find("input, select, button");
+    // serialize the data in the form
+    var serializedData = $form.serialize();
+
+    // let's disable the inputs for the duration of the ajax request
+    $inputs.prop("disabled", true);
+
+    // fire off the request to /form.php
+    var request = $.ajax({
+        url: "game.php",
+        type: "post",
+        data: serializedData
+    });
+
+    // callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+        // log a message to the console
+        console.log("Hooray, it worked!");
+        reloadScores();
+    });
+
+    // callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // log the error to the console
+        console.error(
+            "The following error occured: "+
+            textStatus, errorThrown
+        );
+    });
+
+    // callback handler that will be called regardless
+    // if the request failed or succeeded
+        request.always(function () {
+        // reenable the inputs
+        $inputs.prop("disabled", false);
+    });
+  });

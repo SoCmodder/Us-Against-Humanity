@@ -1,16 +1,14 @@
 <?php
   session_start();//Start a session so we can have global variables
   $auth_token = $_SESSION['auth_token'];
+  // $serverURL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/";
+  // $serverURL = "http://r01sjbkcc.device.mst.edu:3000/api/v1/";
+  $serverURL = $_SESSION['serverURL'];
   //Check if curl is installed
   if(!function_exists("curl_init")) die("cURL extension is not installed");
   //The URL for the server + sessions
-  $url = "http://r06sjbkcc.device.mst.edu:3000/api/v1/games";
+  $url = $serverURL . "games";
   $private = "false";
-  if(isSet($_POST['checkbox'])) {
-    $private = "true";
-  } else {
-    $private = "false";
-  }
   //Make an array of the POSTed email and password
   $data = array("game" => array("points_to_win" => $_POST["points_to_win"], "slots" => $_POST["slots"], "private" => $private)); 
   //Turn the array into a json object
@@ -33,9 +31,14 @@
   }
   //Close the curl instance
   curl_close($curl);
-  echo "Put user json response " . $json_response ."<br>";
+  // echo "Put user json response " . $json_response ."<br>";
   //Grab the JSON response from the curl request as an array
   $return = json_decode($json_response, true);
-  //return the array for the function
-  return $return;
+  if($status == 200) {
+    $_SESSION['game_current'] = $response['data']['game']['id'];
+    header("location: lobby.php");
+  }
+  else {
+    header("location /error/error.php");
+  }
 ?>

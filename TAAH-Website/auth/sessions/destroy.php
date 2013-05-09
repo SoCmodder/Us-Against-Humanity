@@ -1,10 +1,12 @@
 <?php
   session_start();//Start a session so we can have global variables
   $auth_token = $_SESSION['auth_token'];
+  // $serverURL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/";
+  $serverURL = "http://r01sjbkcc.device.mst.edu:3000/api/v1/";
   //Check if curl is installed
   if(!function_exists("curl_init")) die("cURL extension is not installed");
   //The URL for the server + sessions
-  $url = "http://r06sjbkcc.device.mst.edu:3000/api/v1/sessions?auth_token=" . $auth_token;
+  $url = $serverURL . "sessions?auth_token=" . $auth_token;
   //Create a curl object and set what needs to be set
   $curl = curl_init($url);
   curl_setopt($curl, CURLOPT_HEADER, false);

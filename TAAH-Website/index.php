@@ -7,13 +7,13 @@
   else {
     $_SESSION['val_login'] = true;
   }
-  $signInURL = "/signin.php";
-  $signUpURL = "/register.php";
+  $signInURL = "signin.php";
+  $signUpURL = "register.php";
 ?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Sign in</title>
+    <title>App Against Humanity</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -197,12 +197,6 @@
       // }
     // -->
     </script>
-    <script type="text/javascript"> // <![CDATA[
-	// if ( (navigator.userAgent.indexOf('Android') != -1) ) {
-		// document.location = "http://www.yoururladdress.com/yourpage.html";
-	// } // ]]>
-    </script>
-
   <script type="text/javascript">
     // <![CDATA[
       var mobileReject = (/iphone|ipad|ipod|blackberry|mini|windowssce|palm/i.test(navigator.userAgent.toLowerCase()));

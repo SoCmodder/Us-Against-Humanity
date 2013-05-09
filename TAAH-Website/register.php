@@ -1,9 +1,13 @@
 <?php
   session_start();
+  // $serverURL = "http://r06sjbkcc.device.mst.edu:3000/api/v1/";
+  // $serverURL = "http://r01sjbkcc.device.mst.edu:3000/api/v1/";
+  $serverURL = "http://r01sjbkcc.device.mst.edu:3000/api/v1/";
+  $_SESSION['serverURL'] = $serverURL;
   //Check if curl is installed
   if(!function_exists("curl_init")) die("cURL extension is not installed");
   //The URL for the server + sessions
-  $url = "http://r06sjbkcc.device.mst.edu:3000/api/v1/registrations";
+  $url = $serverURL . "registrations";
   //Make an array of the POSTed email and password
   $data = array("user" => array("name" => $_POST["username"], "email" => $_POST["email"], "password" => $_POST["password"])); 
   //Turn the array into a json object
