@@ -61,14 +61,17 @@ public class GameArrayAdapter extends BaseAdapter {
                     alertImg.setImageResource(R.drawable.all_cards);
                     alertImg.setVisibility(View.VISIBLE);
                     alertText.setText("All Cards Submitted");
+                    alertText.setVisibility(View.VISIBLE);
                 }else if((!game.isCzar()) && game.isHaveSubmit()){
                     alertImg.setImageResource(R.drawable.card_submitted);
                     alertImg.setVisibility(View.VISIBLE);
                     alertText.setText("You have played");
+                    alertText.setVisibility(View.VISIBLE);
                 }else if(!game.isCzar()){
                     alertImg.setImageResource(R.drawable.have_submit);
                     alertImg.setVisibility(View.VISIBLE);
                     alertText.setText("You have not played");
+                    alertText.setVisibility(View.VISIBLE);
 
                 }else {
                     alertImg.setVisibility(View.INVISIBLE);

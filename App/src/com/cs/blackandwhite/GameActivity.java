@@ -258,7 +258,7 @@ public class GameActivity extends SlidingFragmentActivity {
                 if (json.getBoolean("success")) {
                     // everything is ok
                     Toast.makeText(GameActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                    GameActivity.this.finish();
+                    finish();
                 }
             } catch (Exception e) {
                 // something went wrong: show a Toast

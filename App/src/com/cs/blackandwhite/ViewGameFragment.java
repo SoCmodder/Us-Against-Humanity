@@ -102,7 +102,6 @@ public class ViewGameFragment extends SherlockListFragment {
                                         WinCardTask createGameTask = new WinCardTask(getSherlockActivity());
                                         createGameTask.setMessageLoading("Submitting Cards...");
                                         createGameTask.execute(CREATE_GAME_URL + "/" + game_id + "/winningcard" + "?auth_token=" + mPreferences.getString("AuthToken", ""));
-
                                     }
                                 })
                                 .create();
@@ -195,7 +194,6 @@ public class ViewGameFragment extends SherlockListFragment {
                                 createGameTask.setMessageLoading("Submitting Cards...");
                                 String url = CREATE_GAME_URL + "/" + game_id + "/whitecard" + "?auth_token=" + mPreferences.getString("AuthToken", "");
                                 createGameTask.execute(url);
-
                             }
                         })
                         .create();
