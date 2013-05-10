@@ -139,8 +139,7 @@ public class HomeActivity extends SherlockListActivity {
                 }
                 getListView().setAdapter(new GameArrayAdapter(HomeActivity.this, tasksTitles));
             } catch (Exception e) {
-                Toast.makeText(context, e.getMessage(),
-                        Toast.LENGTH_LONG).show();
+                e.printStackTrace();
             } finally {
                 super.onPostExecute(json);
             }
