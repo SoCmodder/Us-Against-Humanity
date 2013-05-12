@@ -1,11 +1,11 @@
 package com.cs.blackandwhite;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.actionbarsherlock.app.SherlockActivity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +13,7 @@ import com.actionbarsherlock.app.SherlockActivity;
  * Date: 5/6/13
  * Time: 12:44 AM
  */
-public class ViewTutorialActivity extends SherlockActivity {
+public class ViewTutorialActivity extends Activity {
     Integer counter;
     TextView text;
     ImageView image;

@@ -45,7 +45,6 @@ public class GameActivity extends SlidingFragmentActivity {
     Bundle scoreBundle;
     ViewGameFragment viewGameFragment;
     ViewScoreFragment viewScoreFragment;
-    JSONObject innergame;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -153,7 +152,7 @@ public class GameActivity extends SlidingFragmentActivity {
             try {
                 JSONObject data = json.getJSONObject("data");
                 JSONObject game = data.getJSONObject("game");
-                innergame = game.getJSONObject("game");
+                JSONObject innergame = game.getJSONObject("game");
 
                 JSONObject hand = data.getJSONObject("hand");
                 JSONObject blackCard = data.getJSONObject("black_card");
@@ -187,15 +186,9 @@ public class GameActivity extends SlidingFragmentActivity {
                     viewScoreFragment.setArguments(scoreBundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, viewGameFragment).commit();
                     getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame2, viewScoreFragment).commit();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if(!hasRunToggle()){
-                    toggle();
-                }
-                try {
-                    super.onPostExecute(json);
+                    if(!hasRunToggle()){
+                        toggle();
+                    }
                     if(innergame.getInt("state") == 2 || innergame.getInt("state") == 0){
                         Intent intent = new Intent(GameActivity.this, ViewGameInfoActivity.class);
                         intent.putExtra("game", gameObj);
@@ -203,9 +196,10 @@ public class GameActivity extends SlidingFragmentActivity {
                         finish();
                     }
                 }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                super.onPostExecute(json);
             }
         }
     }
