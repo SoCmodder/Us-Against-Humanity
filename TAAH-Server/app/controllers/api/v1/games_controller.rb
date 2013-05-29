@@ -333,9 +333,6 @@ class Api::V1::GamesController < ApplicationController
           end
         else
           @game.next!
-          if(@game.user_turn == @game.slots)
-            @game.update_attribute(:user_turn, 0)
-          end
           @gameusers = @game.gameusers
 
           ActiveRecord::Base.transaction do
@@ -458,6 +455,13 @@ class Api::V1::GamesController < ApplicationController
       @wcids = @ids.map(&:whitecard_id)
       @card = Whitecard.find(@wcids).group_by(&:id)
       @text = @wcids.map{ |i| @card[i].first }.map(&:text)
+      @submitCard = Struct.new(:gameuser_id, :whitetext)
+      @submitCardArray = [];
+      @subids = @game.whitecardinplay.find_all_by_gameuser_id(@gameuser.id)
+      @subwcids = @subids.map(&:whitecard_id)
+      @subtext = Whitecard.find(:all, :conditions => { :id => @subwcids } ).map(&:text)
+      @temp = @submitCard.new(@gameuser.id, @subtext)
+      @submitCardArray.push(@temp)
     else
        @numsubmit = @game.whitecardinplay.map(&:gameuser_id).uniq.length
       if @numsubmit == (@game.slots - 1)
