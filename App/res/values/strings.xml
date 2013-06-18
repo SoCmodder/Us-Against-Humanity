@@ -16,6 +16,8 @@
     <string name="view_game_title">Current Game</string>
     <string name="settings">Settings</string>
     <string name="game_tutorial_text">SLIDE TO THE RIGHT TO VIEW THE SCORE</string>
+    <string name="dialog_title">NOTICE!</string>
+    <string name="dialog_message">Hey guys! We just wanted to say sorry about all of the wonky issues that we\'ve been having with the server. We know have it all set up in a dedicated location and we shouldn\'t have to do another wipe. With that being said, unfortunately you\'ll have to make a new account. If you have any suggestions or card ideas, feel free to email me at: socmodder@gmail.com. Thanks for downloading Black and White! Enjoy! - The Black and White Team</string>
 
 
 </resources>

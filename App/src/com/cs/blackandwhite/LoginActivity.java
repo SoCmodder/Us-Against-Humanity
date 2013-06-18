@@ -1,5 +1,6 @@
 package com.cs.blackandwhite;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +35,7 @@ public class LoginActivity extends SherlockActivity {
     private SharedPreferences mPreferences;
     private String mUserEmail;
     private String mUserPassword;
+    private AlertDialog notice;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -99,6 +98,8 @@ public class HomeActivity extends SherlockListActivity {
     @Override
     public void onResume() {
         super.onResume();
+
+        //Remove the shared preferences if they just updated so that they can create a new account.
 
         if (mPreferences.contains("AuthToken")) {
             loadTasksFromAPI(TASKS_URL);

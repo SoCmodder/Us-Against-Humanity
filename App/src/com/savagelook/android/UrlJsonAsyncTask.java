@@ -1,16 +1,15 @@
 package com.savagelook.android;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 public class UrlJsonAsyncTask extends AsyncTask<String, Void, JSONObject> {
 	private static final String TAG = "UrlJsonAsyncTask";
@@ -50,6 +49,7 @@ public class UrlJsonAsyncTask extends AsyncTask<String, Void, JSONObject> {
 		this.jsonSuccess = JSON_SUCCESS;
 		this.jsonInfo = JSON_INFO;
 		this.authToken = AUTH_TOKEN;
+        setConnectionParams(5000, 20000, 10000);
 	} 
 	
 	@Override
