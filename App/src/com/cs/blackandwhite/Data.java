@@ -24,7 +24,7 @@ import java.util.Map;
 public class Data {
 	public static String userId;
 	public static String auth_token = null;
-    public static String serverUrl = "http://24.182.146.42:3000/api/v1/";
+    public static String serverUrl = "http://24.182.229.122:3000/api/v1/";
 
 	public static Map<String, Object> postRequest(String path, Map<String,Object> params) throws JSONException, ClientProtocolException, IOException
 	{
